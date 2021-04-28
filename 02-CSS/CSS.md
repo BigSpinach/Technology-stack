@@ -484,9 +484,9 @@ li:after{
 ### 2.5 css的盒子模型
 
 width  height
-padding
-border
-margin
+		padding
+		border
+		margin
 
 #### 2.5.1 传统css盒子模型
 
