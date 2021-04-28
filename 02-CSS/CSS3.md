@@ -27,15 +27,11 @@
 
 ### 1.2 基础语法
 
-![1556509355629](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556509355629.png)
-
 
 
 
 
 ### 1.3 命名规范
-
-![1556509374813](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556509374813.png)
 
 
 
@@ -64,8 +60,6 @@
 
 #### 1.4.3 导入式
 
-![1556509802589](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556509802589.png)
-
 ```html
 <style>
 /*通过 @import url(xxx.css)的方式导入*/
@@ -80,13 +74,9 @@
 
 #### 1.4.4 link和import的区别
 
-![1556509909318](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556509909318.png)
-
 
 
 ## 2. CSS选择器
-
-![1556510081676](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556510081676.png)
 
 
 
@@ -171,57 +161,57 @@ input[type='text']{
 
 ### 2.8 伪类选择器
 
-![1556511150887](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556511150887.png)
-
-![1556511155642](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556511155642.png)
 
 
 
 
+### 2.9 常见的伪类选择器
 
 
 
-### 2.9 css3新增的伪类选择器
+#### 2.9.1 `:first-child` 、`:last-child`
 
 
 
-#### 2.9.1 `:not`
-
-![1556511170402](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556511170402.png)
-
-#### 2.9.2  :last-child
-
-#### 2.9.3  :nth-child(number)
-
-#### 2.2.9.4 :only-child 只有一个子元素的元素
+#### 2.9.2 `:first-of-type`、`las-of-type`
 
 
 
-#### 2.2.9.5 :nth-last-child(n) 倒数第几个元素
+#### 2.9.3  `:nth-child(n)`、`nth-of-type(n)`、`nth-last-of-type(n)`
 
 
 
-#### 2.2.9.6 :first-of-type 同级别的第一个元素
+#### 2.2.9.4 `:only-child`、`:only-of-type`
 
-#### 2.2.9.7 :last-of-type 同级别的最后一个元素
 
-#### 2.2.9.8 :only-of-type 只有一个兄弟（独苗）的元素
 
-#### 2.2.9.9 :nth-of-type(n)  第n个同级兄弟元素
+#### 2.2.9.5 `:not()`
 
-#### 2.2.9.10 :nth-last-of-type(n)  倒数第n个同级兄弟元素
 
-#### 2.2.9.11 :empty 空内容的元素
 
-#### 2.2.9.12 :checked 被选中 主要用在input的表单元素
+#### 2.2.9.6 `:empty`
+
+
+
+#### 2.2.9.7 `:hover`
+
+
+
+#### 2.2.9.8  `:checked `
+
+被选中 主要用在input的表单元素
+
+#### 2.2.9.9 `:hover`,`:link`,`:visited`,`:avtive`
+
+a元素相关的伪类
+
+#### 
 
 
 
 
 
 ### 2.10 伪元素选择器
-
-![1556511485718](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556511485718.png)
 
 #### 2.10 .1   :first-line  第一行起作用
 #### 2.10 .2  :first-letter  第一个文字内容
@@ -238,11 +228,13 @@ li:after{
 }
 ```
 
+#### 2.10.5 :selected
+
+
+
 ## 3. css的核心规则
 
 ### 3.1 权重
-
-![1556511792550](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1556511792550.png)
 
 
 
