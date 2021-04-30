@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div.box {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      text-align: center;/*只能设置水平居中，垂直方向内联元素不能设置高度*/
+      line-height: 100px;/*文字一般在行高的中间位置写，居中效果只需要设定行高等于容器的高即可*/
+      font-size: 10px;
+    }
+
+    /*1.内联元素不支持设置宽度和高度*/
+    .span1 {
+      width: 200px;
+      height: 50px;
+      /*设置了宽高，实际宽高由内容宽高决定*/
+      background-color: aqua;
+    }
+
+    /*2.内联元素可以设置padding，
+        但是垂直方向的padding不会影响页面的布局(会影响视觉效果)*/
+    .span2 {
+      background-color: yellowgreen;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 500px;
+      padding-bottom: 200px;
+    }
+
+    /*3.内联元素可以设置border，
+        但是垂直方向的border不会影响页面的布局*/
+    .span3 {
+      background-color: slategrey;
+      border: 30px red solid;
+    }
+
+    /*4.内联元素支持水平方向的外边距，不支持垂直方向的
+        水平方向 外边距实际大小相加
+        垂直方向没有实际效果
+    */
+    .span4{
+      background-color: navajowhite;
+      margin: 50px;
+    }
+    .span5{
+      background-color: blue;
+      margin: 50px;
+      
+    }
+  </style>
+</head>
+
+<body>
+  <span class="span1">内联元素不支持设置宽度和高度，实际宽高由内容宽高决定</span>
+  <br>
+  <hr>
+  <!-- <span class="span2">内联元素可以设置padding，垂直方向不影响布局（仅仅影响视觉效果）</span> -->
+
+  <hr>
+  <span class="span3">内联元素可以设置border，
+    但是垂直方向的border不会影响页面的布局</span>
+  <div class="box"><span>100*100px</span></div>
+
+<hr>
+
+  <span class="span4">XXX</span><span class="span5">YYYY</span>
+  
+  <div class="box"></div>
+
+</body>
+
+</html>

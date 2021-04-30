@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BFC</title>
+  <style>
+    ul,ol{
+      list-style: none;
+    }
+    div{
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      
+    }
+
+    span{
+      line-height: 200px;
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <h3>BFC是css元素的一个隐藏属性</h3>
+  <p><b>开启BFC特点</b><br>
+    <ul>
+      <li>1.开启bfc的元素不会被浮动元素覆盖</li>
+      <li>2.开启BFC的元素子元素的外边距不会传递给父元素【外边距传递问题】</li>
+      <li>3.开启BFC的元素可以包含浮动的元素</li>
+    </ul>
+  </p>
+
+  <div><span>不浮动的元素</span></div>
+
+
+  <p></p>
+</body>
+</html>

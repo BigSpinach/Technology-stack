@@ -1,4 +1,4 @@
-# CSS
+# *CSS
 
 
 
@@ -28,9 +28,18 @@
 
 #### 1.2.2 元素分类
 
-行内元素
+`行内元素`
 
-块级元素
+1. 自左向右水平排列，如果一行中不足以容纳所有的元素则切换到下一行继续自作向右水平排列（和我们书写习惯一样）
+2. 默认高度和宽度都被内容撑开   
+
+`块级元素`
+
+1. 自上向下进行排列（独占一行）
+2.  默认宽度和元素一样
+3.  默认高度被内容撑开
+
+
 
 #### 1.2.3 元素之间的转换
 
@@ -303,13 +312,13 @@ h1>p{
   </style>
   ```
 
-#### 2.9 常见的伪类选择器
+#### 2.2.9 常见的伪类选择器
 
-##### 2.9.1 `:first-child` 、`:last-child`
+##### 2.2.9.1 `:first-child` 、`:last-child`
 
-#####  2.9.2 `:first-of-type`、`las-of-type`
+#####  2.2.9.2 `:first-of-type`、`las-of-type`
 
-#####  2.9.3 `:nth-child(n)`、`nth-of-type(n)`、`nth-last-of-type(n)`
+#####  2.2.9.3 `:nth-child(n)`、`nth-of-type(n)`、`nth-last-of-type(n)`
 
 #####  2.2.9.4 `:only-child`、`:only-of-type`
 
@@ -329,7 +338,7 @@ h1>p{
 
  a元素相关的伪类
 
-### 2.10 伪元素
+#### 2.2.10 伪元素
 
 + :first-letter        向为本的第一个字母添加特殊样式
 + :first-line          向文本的首行添加特殊样式
@@ -347,9 +356,11 @@ li:after{
 }
 ```
 
+### 2.3 css权重、尺寸大小、颜色
 
 
-## 2.3 权重
+
+#### 2.3.1 css权重
 
 权重的基本规则
 
@@ -369,6 +380,79 @@ li:after{
 设定高权重
 
 **！important 1000;**
+
+
+
+#### 2.3.2 尺寸大小
+
+【像素px】
+
+css 不是 物理像素
+
+
+
+【百分比】
+
+相对于父级（父级包含块）尺寸设定百分比
+
+
+
+#### 2.3.3 颜色
+
+【常用颜色单词】
+
+```css
+color:red;
+color:yellow;
+color:blue;
+color:pink;
+color:greay;
+...
+```
+
+
+
+【RGB值,RGBA】
+
+范围0-255
+
+rgb（Red， Green ，Blue）
+
+```	css
+background-color:rgb(0,0,0);
+background-color:rgb(1%,100%,0);
+
+rgba(0,0,0,0.2);//最后为透明度 范围0~1
+```
+
+
+
+
+
+【#xxxxxx】
+
+十六进制的rgb值  ,范围00-ff
+
+```css
+background-color:#666666;
+```
+
+
+
+【hsl(),hsla()】
+
+​		h 表示色相 0 - 360
+​                s 表示饱和度 0% - 100% （值越大色越正，值越小色越灰）
+​                l 表示亮度 0% - 100% 
+​				a 表示透明度
+
+
+
+```css
+background-color:hsl(0,10%,10%);
+```
+
+
 
 
 ### 2.4 css的属性继承
@@ -506,13 +590,49 @@ width  height
 
 边框会影响盒子的大小
 
-+ 边框设置时需要设置 ` border-width`  `border-style` `border-color`,缺少则失效
++ 边框设置时  `border-style`必须设置，boder-color，border-width浏览器会给出默认值（建议还是设置，浏览器给出的值出人意料）
+
+```css
+.box{
+      width: 300px;
+      height: 300px;
+      color:yellow;
+      background-color: aqua;
+      margin: 50px;
+      padding: 10px;
+      border:  solid ; /*不指定宽度，边框也会有一个默认宽度 一般3px*/
+      /*不指定颜色，不指定border会默认使用字体颜色*/
+    }
+```
+
+
+
+
 
 
 
 ##### 2.5.1.3 `margin`
 
-不影响盒子大小
+不影响盒子大小（影响盒子的占位大小和位置）
+
+
+
+当前盒子和其他盒子之间的距离称为外边距
+
+1.  外边距不会影响盒子的可见框的大小，
+   但是会影响盒子实际占地的大小，影响盒子的位置
+2. 由于在浏览器中默认情况下，元素是靠左靠上排列的，
+     所以我们设置上左外边距时，会移动元素自身
+     而设置下和右外边距时，会移动其他元素
+3. 外边距可以使负值，如果是负值则元素会向相反方向移动
+
+
+
+
+
+
+
+
 
 
 
@@ -539,7 +659,7 @@ width  height
 
   
 
-  > ![1567653151226](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1567653151226.png)
+  
 
 - margin的兼容处理
 
@@ -614,7 +734,7 @@ width  height
 ##### 2.5.1.4 css盒子模型的计算
 
 元素实际宽度 = width+padding+border
-元素实际高度 = height+padding+border
+		元素实际高度 = height+padding+border
 
 > 注意：border生效 需要三个条件，单一设置不生效
 
@@ -644,9 +764,87 @@ IE 盒子模型其实就是 box-sizing:border-box
 
 
 
-####  2.5.5 其他
+####  2.5.5 行内元素的盒模型
+
+1. 内联元素不支持设置宽度和高度
+
+   ```HTML
+   <span class="span1">XXXX</span>
+   <style>
+       .span1 {
+         width: 200px;
+         height: 50px;
+         /*设置了宽高，实际宽高由内容宽高决定*/
+         background-color: aqua;
+       }
+   </style>
+   ```
+
+   
+
+2. 内联元素可以设置padding, 但是垂直方向的padding不会影响页面的布局(会影响视觉效果)
+
+```html
+<span class="span2">XXXX</span>
+<style>
+    .span2 {
+      background-color: yellowgreen;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 500px;
+      padding-bottom: 200px;
+    }
+</style>
+```
 
 
+
+3.内联元素可以设置border，但是垂直方向的border不会影响页面的布局
+
+```html
+<span class="span3">XXXX</span>
+<div class="box"><span>100*100px</span></div>
+<style>
+  .box{
+   		width: 100px;
+      height: 100px;
+      background-color: pink;
+  }
+	.span3 {
+      background-color: slategrey;
+      border: 30px red solid;
+    }
+</style>
+```
+
+
+
+4.内联元素支持水平方向的外边距，不支持垂直方向的
+
+​    水平方向 外边距实际大小相加
+
+​    垂直方向没有实际效果
+
+```html
+<span class="span4">XXX</span>
+<span class="span5">YYYY</span>  
+<div class="box"></div>
+<style>
+  .box{
+   		width: 100px;
+      height: 100px;
+      background-color: pink;
+  }
+	.span4{
+      background-color: navajowhite;
+      margin: 50px;
+    }
+  .span5{
+      background-color: blue;
+      margin: 50px;
+    }
+</style>
+```
 
 
 
@@ -785,6 +983,16 @@ CSS3新增的属性
 
 ### 2.7 overflow:hidden的三个作用
 
+overflow:hidden
+
+overflow:auto
+
+overflow:scorll
+
+
+
+
+
 #### 2.7.1 内容溢出隐藏
 
 ```css
@@ -868,7 +1076,7 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 #### 2.8.2 文档流和脱离文档流
 
 + 文档流：指的是元素排版布局的过程中，元素会自动从左至右，从上往下的流式排列。并最终窗体自上而下分成一行行，并在每行中从左至右的顺序排放元素；
-+ 每个`非浮动`块级元素都独占一行，浮动元素则按规定浮在行的一段。若当前行内容不下，则另起新行再浮动
++ 每个`非浮动`块级元素都独占一行，浮动元素则按规定浮在行的一段。若当前行内容容不下，则另起新行再浮动
 + 内联元素也不会独占一行；几乎所有元素（包括块级，内联和列表元素）均可生成子行，用于摆放子元素
 + 标准文档流等级：分为两个等级，块级元素和行内元素
 + 脱离文档流：文档流内的正常元素识别不到这个元素了（脱离了文档流元素相当于平行漂浮在文档流之上）
@@ -882,6 +1090,39 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 + 给父元素设置背景颜色不起作用
 + 给父元素设置border属性不起作用
 + 给父元素设置padding属性不起作用
+
+
+
+【影响：造成高度塌陷】
+
+高度塌陷，块元素的高度默认情况下是被子元素撑开的，
+                如果子元素浮动，将会完全脱离文档流，脱离文档流子元素无法撑起父元素高度，
+                将会导致父元素高度丢失，父元素一旦丢失页面的其他元素位置也会移动，导致布局的混乱
+
+BFC（Block Format Context）块级格式化环境
+                - BFC是元素的一个隐藏的属性，一旦元素开了BFC它将会开启一个独立的布局的区域
+                                - BFC是元素的一个隐这个布局区域将会具有一些特殊的性质：
+                    1.开启了BFC的元素子元素的垂直外边距不会传递给父元素
+                    2.开启了BFC的元素不会被浮动的元素所覆盖
+                    3.开启了BFC的元素可以包含浮动的子元素
+
+   - BFC无法直接开启，需要通过一些属性来开启BFC
+         1.设置元素浮动可以开启BFC
+         2.将元素设置为行内块元素
+         3.可以将元素的overflow设置为一个非visible的值
+   -  我们可以通过overflow:hidden来开启元素的bfc，从而解决高度塌陷的went
+
+​         
+
+问题引入：
+
+```html
+
+```
+
+
+
+
 
 
 
@@ -916,7 +1157,7 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
   
   <style>
     .warp:after{
-      display:block;/*确保是块级元素*/
+      display:block;/*确保是块级元素*/display:table;
       clear:both;
       content:"";/*必须写：设置伪元素:befor和:after 天生自带的属性*/  
       
@@ -977,7 +1218,7 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 
 ### 2.9 定位`position`
 
-取值 ：left、right、top、bottom
+取值：static、relative、absolute、fixed
 
 
 
@@ -1074,13 +1315,90 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 
 
 
+
+
+### 2.12 文档流
+
+
+
+#### 2.12.1 块元素在文档流中的特点  
+
+ 	1. 自上向下进行排列（独占一行）
+ 	2. 默认宽度是父元素的全部
+ 	3. 默认高度被内容撑开
+
+
+
+#### 2.12.2 行内元素（内联元素）
+
+1. 自左向右水平排列，如果一行中不足以容纳所有的元素则切换到下一行继续自作向右水平排列（和我们书写习惯一样）
+2. 默认高度和宽度都被内容撑开   
+
+
+
+行元素的盒模型
+
++ 行内元素不支持设置宽度和高度  
++ 行内元素支持水平方向的内边距、边框、外边距。  
+  + 可以设置垂直方向的内边距、边框、外边距，但是不会影响布局  
+
+
+
+
+
+###  2.13 display
+
+display
+
+指定元素所生产的框的类型
+
++ inline 行内元素
++ block 块元素
++ inline-block 行内块元素
+  (既有行内元素的特点，不独占一行又有块元素的特点，可以设置宽高)
++ none 元素不在页面中显示
+
+   
+
+### 2.14 visibility
+
+visibility 设置元素显示的状态
+
++ 默认值visiable
++ hidden 不显示元素，但是元素依然占据位置
+
 ## 3 实战
 
 ### 3.1 布局
 
+子元素在父元素的位置是父元素的内容区
+ 子元素在父元素中的水平方向的布局，必须满足如下等式
+        margin-left + border-left + padding-left + width + padding-right + border-right + margin-right = 父元素的width
 
 
-#### 3.1.1 行布局
+
+
+
+在水平方向，有三个值可以设置auto
+            分别是 margin-left width margin-right
+            设置为auto以后，浏览器会自动计算该属性的值
+
++ 如果七个值的和相加不等于父元素的宽度，则属于过度约束，
+          则浏览器会自动调整右外边距的值
++ 如果将margin-left 或 margin-right 的一侧设置为auto，
+      则侧会设置尽量大的值
++ 如果left和right都设置auto，则会将两侧外边距设置相等的值，
+          从而导致子元素在父元素中水平居中
+
+
+
+
+
+
+
+#### 3.1.1 行布局(水平布局)
+
+
 
 1. 水平居中布局效果
 
@@ -1231,7 +1549,7 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 
 
 
-####  3.1.2 列布局
+####  3.1.2 列布局（垂直布局）
 
 1. 列布局之**定宽**两列布局
 
