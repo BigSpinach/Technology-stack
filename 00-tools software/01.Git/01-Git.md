@@ -337,11 +337,272 @@ writed code...
 
 
 
-####  
+
+
+#### 4.2.3 分支详解
+
+分支的产生原因：
+
+​		协同工作时，每个人的工作内容可能不一样，此时采用个自的工作分支工作。
+
+​		【描述】: ABC三个人协同完成一个大型任务，大任务分成3个小功能实现 a,b,c,此时ABC三人只需自己完成自己的小功能即可，创建各自的分支，以互不影响。
 
 
 
-## 5. ` .gitignore`
+【使用分支遇到的问题及其解决方案】
+
++ 【问题】：还未提交的修改内容以及新添加的文件，留在索引区域或工作树的情况下**切换到其他的分支时**，**修改内容会从原来的分支移动到目标分支。**
+
+  
+
++ 【解决方案】：采用临时存储区域 stash
+
+  ​	**stash** 是临时保存文件修改内容的区域
+
+  ​	可以暂时保存工作区的一些没有提交的修改内容，再处理完其他（分支）的事情后，然后再来把stash临时区域的内容用用到想用的地方（原先分支/其他分支）。
+  
+  ```
+  //创建临时存区域
+  git stash
+  //把临时区域的内容拿回来
+  git stash pop
+  ```
+  
+  
+
+
+
+
+
+
+
+HEAD
+
+*HEAD指向的是现在使用中的分支的最后一次更新。通常默认指向master分支的最后一次更新。通过移动HEAD，就可以变更使用的分支。*
+
+
+
+
+
+
+
+创建分支 branch
+
+```
+git branch dev
+```
+
+
+
+切换分支 checkout
+
+```
+git checkout dev
+```
+
+
+
+分支合并 merge/rebase
+
+使用**merge**可以合并多个历史记录的流程。并保持修改内容的历史记录
+
+> 具体流程：
+>       				1. 创建分支dev后，
+>       				2. master分支不受影响继续向后走（HEAD指针一直跟随master的动向）
+>       				3. dev分支子自己的分支上执行了1次/多次 提交，最终确定，请求合并到master
+>       				4. 此时只需执行一次合并，将dev和master合并，HEAD指针指向master合并后的位置
+
+
+
+rebase 合并
+
+历史记录简单，是在原有提交的基础上将差异内容反映进去。
+因此，可能导致原本的提交内容无法正常运行。
+
+> 具体流程：
+>
+> 1. 创建dev分支
+> 2. master分支不受影响继续向后走（HEAD指针一直跟随merge的动向）
+> 3. dev分支子自己的分支上执行了1次/多次 提交，最终确定，请求合并到master上
+> 4. rebeas dev时，master的HEAD不变（此时dev和master分支冲突可能较多，手动解决冲突后再合并），
+> 5. rebase dev之后， master的HEAD指向 dev
+>
+> 注：
+>
+> rebase的时候，修改冲突后的提交不是使用commit命令，而是执行rebase命令指定 --continue选项。若要取消rebase，指定 --abort选项
+>
+> ```
+> $ git add myfile.txt
+> $ git rebase --continue
+> Applying: 添加pull的说明
+> ```
+
+
+
+
+
+
+
+
+
+````javascript
+// 分支切换
+git checkout master
+//分支合并
+git merge dev
+````
+
+
+
+删除分支
+
+```
+git branch -d dev
+```
+
+
+
+#### 4.2.4 其他分支介绍
+
+
+
+
+
+Git的分支操作模组
+
+![image-20210522172759119](https://github.com/BigSpinach/FigureBed.git/Typora/imgs/data-image-20210522172759119.png)
+
+
+
+
+
+
+
+主分支：master和develop
+
+特性分支：topic
+
+release分支
+
+hotFix分支
+
+
+
+
+
+
+
+## 5. 远端数据库
+
+`pull`
+
+把远程数据库拉取到本地
+
+```
+$ git pull origin master
+```
+
+
+
+
+
+`fetch`
+
+```
+//在当前master分支下，执行
+$  git fetch origin master
+//会将远程库拉取到本地一个没有名字的分支上，这个分支可以从名为 FETCH-HEDA 退出
+```
+
+如果想合并 这个分支，再执行一次 merge 即可（或者直接pull）
+
+
+
+pull=fetch+merge
+
+
+
+
+
+`push`
+
+提交到远程库
+
+```
+$ git push origin master
+```
+
+
+
+
+
+
+
+## 6. 标签
+
+【标签的目的】：方便地参考提交而给它标上易懂的名称。
+
+
+
+1. 添加轻标签
+
+   ```
+   git add newFile.txt
+   git commit -m "add newFile.txt文件"
+   //给HEAD 指针位置添加标签
+   git tag newTag
+   
+   
+   //查看标签
+   git tag//执行此命令会显示当前指针位置的所有标签
+   	newTag
+   ```
+
+查看包含标签的历史记录
+
+```
+git log --decorate
+
+commit e79a3s5d1as3e3e0e6e4a5b4a84672a2ba19 (HEAD, tag: newTag, master)
+Author: yourname <yourname@yourmail.com>
+Date:   Sat May 22 2021 22:22:36 GMT+0800 
+
+    add newFile.txt文件
+```
+
+
+
+
+
+2. 添加注释标签—-注释[annotation]
+
+-a 是进入描述标签界面
+
+-am 是直接进入并添加注释
+
+```
+git tag -am "添加注释标签" annotationTag
+
+
+git tag -n
+//显示标签的列表和注释
+newTag						add newFile.txt文件
+annotationTag     添加注释标签
+```
+
+
+
+3. 删除标签
+
+   ```
+   git tag -d newTag
+   ```
+
+   
+
+
+
+## 7. ` .gitignore`
 
     # dependencies
     /node_modules
@@ -364,5 +625,4 @@ writed code...
     yarn-error.log*
     
     .idea
-
 
