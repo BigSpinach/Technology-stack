@@ -1,4 +1,4 @@
-# *CSS
+#  CSS
 
 
 
@@ -340,7 +340,7 @@ h1>p{
 
 #### 2.2.10 伪元素
 
-+ :first-letter        向为本的第一个字母添加特殊样式
++ :first-letter        向文本的第一个字母添加特殊样式
 + :first-line          向文本的首行添加特殊样式
 + :before             在元素之间添加内容
 + :after                在元素之后添加内容
@@ -469,7 +469,7 @@ background-color:hsl(0,10%,10%);
   + white-space： 空白符的处理
   + unicode-bidi: 设置文本方向
 
-+ 盒子你是的属性
++ 盒子相关的属性
 
 + 背景属性
 
