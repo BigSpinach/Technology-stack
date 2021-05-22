@@ -131,17 +131,34 @@ HTML5的变化
 
 ### 全局属性
 
-
-
-contentEditable
+![image-20210522234748520](imgs/image-20210522234748520.png)
 
 designMode：整个页面是否可编辑（只能在js脚本里被修改on、off）
 
-hidden
+```javascript
+//都能实现页面可编辑效果
+window.document.designMode="off";
+document.body.contentEditable=true;
+```
 
-spellcheck 输入文本检查
 
-tabindex 通过按 tab键 切换控件（可以让没有焦点的元素获得焦点）
+
+
+
++ **accesskey**
+
+  ```html
+  <div>
+      <a href="https://www.baidu.com" accesskey="b">百度</a>
+      <a href="https://www.taobao.com" accesskey="a">阿里</a>
+      <a href="https://www.qq.com" accesskey="t">腾讯</a>    
+      <p>快捷键(alt+b)可以跳转到百度；快捷键(alt+a)可以跳转到阿里；快捷键(alt+t)可以跳转到腾讯</p>
+  </div>
+  ```
+
+
+
++ tabindex 通过按 tab键 切换控件（可以让没有焦点的元素获得焦点）
 
 ```html
 <a href="#" tabindex="1">1</a>
@@ -151,6 +168,55 @@ tabindex 通过按 tab键 切换控件（可以让没有焦点的元素获得焦
   <li>3</li>
 </ul>
 ```
+
++ **title**
+
++ **style**
+
++ **lang**
+
++ id
+
++ dir 文字的方向
+
+  ```html
+  默认值 auto---跟书写习惯一致
+  可选值 ltr/rtl
+  ```
+
+  
+
++ class
+
+  ---------------
+
+  HTML5新增
+
+  ----------------
+
+  
+
++ contentEditable
+
+  ```html
+  <p contenteditable="true">这是一个可编辑的段落。</p>
+  ```
+
+  
+
++ **contextmenu**(没有浏览器支持)
+
++ **data-***
+
++ **draggable(IE8-不支持)**
+
++ **dropzone(所有浏览器都不支持)**
+
++ hidden**(IE7-不支持)**
+
++ **spellcheck(IE9-不支持)**
+
++ **translate(所有浏览器都不支持)**
 
 
 
@@ -449,7 +515,7 @@ function fn(){
 
 
 
-###2.5 demo
+### 2.5 demo
 
 [demo-age]
 
