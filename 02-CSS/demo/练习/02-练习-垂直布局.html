@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02-垂直布局</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .img-list{
+      width: 190px;
+      height: 470px;
+      /*查看ul的位置*/
+      background-color: red;
+      /* overflow: hidden; */
+    }
+
+    .img-list li{
+      
+      /* li的width没设置，默认为 width:auto; 跟li的父级包含块一样宽*/
+      margin-bottom: 10px;
+      /* overflow: hidden; */
+      /* 父元素高度由子元素撑开，加不加溢出隐藏都一样 */
+    }
+
+    /*调整img的宽高*/
+    .img-list img{
+      width: 100%;
+      /* 不能指定img的高度为百分比的值，由于父级包含块还要找子元素的宽高来确定自己多高 */
+      /* height:100%; */
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="img-list">
+    <li><a href="#"><img src="imgs/1.jpg"></a></li>
+    <li><a href="#"><img src="imgs/2.jpg"></a></li>
+    <li><a href="#"><img src="imgs/3.jpg"></a></li>
+    <li><a href="#"><img src="imgs/q.jpg"></a></li>
+  </ul>
+
+</body>
+
+</html>

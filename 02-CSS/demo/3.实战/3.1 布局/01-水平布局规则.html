@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>01-水平布局规则</title>
+  <style>
+    div {
+      width: 500px;
+      height: 200px;
+      background-color: aquamarine;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+  <div id="box1">
+    <p style=" width:100px; height:30px; font-size: 20px; background-color: brown;">7值之和<b>小于</b>父容器的内容宽度</p>
+  </div><br>
+  <div id="box2">
+    <p style=" width:520px; height:30px; font-size: 20px; background-color: brown;">7值之和<b>大于</b>父容器的内容宽度</p>
+  </div><br>
+  <div id="box3">
+    <p style=" width:auto; height:30px; font-size: 20px; background-color: brown;">宽度自适应auto(与父容器内容宽度一致)</p>
+  </div><br>
+  <div id="box4">
+    <p style=" width:auto;margin-left: 50px; height:30px; font-size: 20px; background-color: brown;">
+      width为auto，指定margin-left的值
+    </p>
+  </div><br>
+  <div id="box5">
+    <p style=" margin-left: auto;margin-right: 0;width:200px; height:30px; font-size: 20px; background-color: brown;">
+      margin-left为auto,margin-right=0，width固定
+    </p>
+    <p style=" margin-right: 0;width:200px; height:30px; font-size: 20px; background-color: brown;">
+      width固定 margin-right为0，此时不设置margin-left,margin-right不生效（或者单一设置margin-right也不生效）
+    </p>
+  </div><br>
+  <div id="box6">
+    <p style="margin: auto; width:200px; height:30px; font-size: 20px; background-color: brown;">
+      margin左右都auto
+    </p>
+  </div><br>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01-二级菜单</title>
+  <style>
+    /* 默认显示一级菜单，隐藏二级菜单 */
+    .outer{
+      display: block;
+    }
+    .inner{
+      display: none;
+    }
+
+    /* 鼠标移入一级菜单的哪个元素，打开对应的元素的二级菜单 */
+    /* .outer > li>a:hover + .inner {
+      display: block;
+    } */
+    .outer > li:hover > .inner{
+      display: block;
+    }
+
+    /* 
+      思考：为什么给a绑定 hover 实现的效果有bug
+      answer：因为a元素的位置（鼠标移出a元素，绑定失效）
+    */
+
+
+  </style>
+</head>
+
+<body>
+  <ul class="outer">
+    <li>
+      <a href="#">文件</a>
+      <ul class="inner">
+        <li>打开</li>
+        <li>复制</li>
+        <li>删除</li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">文件</a>
+      <ul class="inner">
+        <li>打开</li>
+        <li>复制</li>
+        <li>删除</li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">文件</a>
+      <ul class="inner">
+        <li>打开</li>
+        <li>复制</li>
+        <li>删除</li>
+      </ul>
+    </li>
+
+
+  </ul>
+</body>
+
+</html>
