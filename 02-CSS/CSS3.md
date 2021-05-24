@@ -562,7 +562,7 @@ transition:all 0 ease 0;
 
 
 
-### 4.4 border-radius
+### 4.4 边框圆角[border-radius]
 
 语法
 
@@ -582,7 +582,51 @@ border-bottom-left-radius:1px|1px;
 
 
 
-### 4.5 linear-gradient
+### 4.5 轮廓[outline]
+
+
+
+轮廓(outline)不占空间，设置轮廓不会影响元素的布局
+
+语法：
+
+```css
+/*outline:outline-style outline-color outline-width outline-offset*/
+/*outline:轮廓样式[必须设置] 轮廓颜色 轮廓宽度 轮廓偏移量*/
+outline:1px solid #ddd;
+```
+
+
+
+### 4.6 阴影
+
+阴影不会影响页面的布局
+
+#### 4.6.1 box-shadow
+
+[box-shadow]
+
+语法：
+
+```css
+box-shadow: h-shadow v-shadow      blur   spread   color   inset;
+/*      水平位置[必须] 垂直位置[必须]  模糊距离 阴影的尺寸        将外部阴影 (outset) 改为内部阴影【固定值】。                              */
+```
+
+
+
+#### 4.6.2 text-shadow
+
+语法：
+
+```css
+text-shadow: h-shadow    v-shadow    blur     color;
+/*        水平位置[必须]  垂直位置[必须]  模糊的距离            */
+```
+
+
+
+### 4.6 linear-gradient
 
 + linear-gradient（[<起点>|| <角度>，]？<点>，<点>，...）
 + 只能用在背景上
@@ -600,16 +644,13 @@ border-bottom-left-radius:1px|1px;
 
 
 
-### 4.6  radial-gradient 
-
- ![1569404439632](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1569404439632.png)
 
 
 
-### 4.7 box-shadow 盒子阴影
 
-![1569404625391](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1569404625391.png)
 
-### 4.8 text-shadow 文本阴影
 
-![1569404832223](C:\Users\82113\AppData\Roaming\Typora\typora-user-images\1569404832223.png)
+
+
+### 4.7 radial-gradient 
+

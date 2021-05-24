@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05-简易横向导航</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /*设定导航nav的宽*/
+    .nav{
+      width: 800px;
+      background-color: brown;
+      margin: 50px auto;
+    }
+
+    /*设置浮动，li水平排列*/
+    .nav li{
+      float: left;
+      /*不能直接给li设置字体样式，继承（权重1）给子元素a的时候不会生效（a元素有自己的默认样式，权重为10）*/
+      /* color: cornsilk; */
+
+      /*设置每个li之间的间距*/
+      margin-left: 10px;
+    }
+
+    /*设置导航菜单的字体样式*/
+    .nav li a {
+      color: #626675;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    /*设置鼠标移入效果*/
+    .nav li a:hover{
+      color: red;
+    }
+
+  </style>
+</head>
+<body>
+  <ul class="nav">
+    <li><a href="#">网页</a></li>
+    <li><a href="#">资讯</a></li>
+    <li><a href="#">视频</a></li>
+    <li><a href="#">图片</a></li>
+    <li><a href="#">知道</a></li>
+    <li><a href="#">文库</a></li>
+    <li><a href="#">贴吧</a></li>
+    <li><a href="#">地图</a></li>
+    <li><a href="#">采购</a></li>
+    <li><a href="#">更多...</a></li>
+  </ul>
+</body>
+</html>

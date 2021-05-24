@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07-浮动之简单布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /*公共样式提取*/
+    .public {
+      margin: 0 auto;
+      width: 1000px;
+    }
+
+    .f {
+      float: left;
+    }
+
+    .r {
+      float: right;
+      ;
+    }
+
+
+    /*1.头部区域样式*/
+    header {
+      background-color: salmon;
+      height: 100px;
+    }
+
+
+    /*2.主体内容区域样式*/
+    main.public {
+      background-color: green;
+      height: 550px;
+      margin: 10px auto;
+    }
+
+    /*2.1 导航栏*/
+    nav {
+      background-color: yellow;
+      width: 200px;
+      height: 100%;
+
+    }
+
+    /*2.2 内容区*/
+    section {
+      background-color: red;
+      width: 630px;
+      height: 100%;
+      margin: 0 10px;
+    }
+
+    /* 2.2.1内容上半区 */
+    section .content-top {
+      height: 50%;
+      background-color:#fff;
+    }
+
+    /* 2.2.2内容下半区 */
+    section .content-bottom {
+      height: 50%;
+      background-color:#666;
+    }
+
+    /*2.2.2.1左侧内容*/
+    /* 2.2.2.2中间内容 */
+    /* 2.2.2.3右侧内容 */
+    section .content-bottom div{
+      width: 30%;
+      height: 100%;
+      border: 1px solid #888;
+    }
+
+    section .content-bottom div:nth-child(2){
+      margin: 0 4%;
+    }
+
+    /*2.3 侧边栏*/
+    aside {
+      background-color: pink;
+      width: 150px;
+      height: 100%;
+    }
+
+
+
+    /*3.底部区域样式*/
+    footer {
+      background-color: blueviolet;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1.头部 -->
+  <header class="public"></header>
+  <!-- 2.主体内容区 -->
+  <main class="public">
+    <!-- 2.1导航部分 -->
+    <nav class="f"></nav>
+    <!-- 2.2内容区域 -->
+    <section class="f">
+      <!-- 2.2.1内容上半区 -->
+      <div class="content-top">上半区内容</div>
+      <!-- 2.2.2内容下半区 -->
+      <div class="content-bottom">
+        <!-- 2.2.2.1左侧内容 -->
+        <div class="f">左</div>
+        <!-- 2.2.2.2中间内容 -->
+        <div class="f">中</div>
+        <!-- 2.2.2.3右侧内容 -->
+        <div class="f">右</div>
+      </div>
+
+    </section>
+    <!-- 2.3侧边栏 -->
+    <aside class="f"></aside>
+
+  </main>
+  <!-- 3.底部 -->
+  <footer class="public"></footer>
+
+</body>
+
+</html>

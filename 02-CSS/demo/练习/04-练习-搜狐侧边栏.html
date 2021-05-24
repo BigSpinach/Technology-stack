@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04-搜狐侧边栏</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* .block-content{
+      margin: 50px auto;
+     
+    } */
+
+    .block-content {
+      width: 300px;
+      height: 449px;
+      margin: 50px auto;
+    }
+
+    /*设定列表li的高度
+      + 第一个  300*24
+      + 第二个  高度由内容决定 135
+      + 第三个  300*58
+    */
+    .block-content ul li {
+      padding: 6px 15px;
+      height: 48px;
+      line-height: 22px;
+      font-size: 14px;
+      color: #666666;
+      background-color: #f9f9f9;
+      border-bottom: 2px solid blanchedalmond;
+    }
+
+    /*第一个li*/
+    .block-content ul li:first-child {
+      /* background-color: red; */
+      height: 24px;
+      padding: 0;
+    }
+
+    /*第二个li*/
+    .block-content ul li:nth-child(2) {
+      padding: 0;
+      height: 135px;
+      font-size: 18px;
+      color: gray;
+      background-color: #f9f9f9;
+      /* overflow: hidden; */
+    }
+
+    /*第二个li中的文本信息*/
+    .block-content ul li:nth-child(2) span {
+      display: block;
+      /* background-color: slateblue; */
+      margin-top: -50px;
+      color: blue;
+      font-weight: 400;
+      height: 40px;
+      opacity: 1;
+      bottom: 7px;
+      line-height: 20px;
+      font-size: 18px;
+      
+      text-overflow: ellipsis;
+
+      /*多行文本出现...的方式*/
+      /*主要应用于手机移动端*/
+      display: -webkit-box;
+      /*弹性盒子模型*/
+      -webkit-box-orient: vertical;
+        /*规定元素的排列方式：垂直排列*/
+        /*去掉效果也生效*/
+      -webkit-line-clamp:2;
+      /* 文字的行数*/
+      overflow: hidden;
+    }
+
+    .block-content ul li a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="block-content">
+    <ul>
+      <li>
+        <span><a href="">搜狐精选</a></span>
+        <span><a href="">换一换</a></span>
+      </li>
+      <li>
+        <a href="#">
+          <img src="imgs/今日最热点.jpeg">
+        </a>
+        <span>【最热点】袁隆平遗体告别式、救6名选手牧羊人发声、某知名房地产老板被杀</span>
+      </li>
+      <li><a href="#">专访搜狗王小川：自然交互、知识计算是搜狗两大核心理念</a></li>
+      <li><a href="#">外媒：英国首相约翰逊将于明年夏天与未婚妻西蒙兹结婚</a></li>
+      <li><a href="#">红色百宝 奋斗百年丨第63集：新中国“第一股”长啥样，戳进来看看！</a></li>
+      <li><a href="#">华为再次重申“不造车”：没有投资任何车企，与北汽、长安、广汽系合作伙伴</a></li>
+      <li><a href="#">1年新开9万家奶茶店 有多少能活过1年？丨研报</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
