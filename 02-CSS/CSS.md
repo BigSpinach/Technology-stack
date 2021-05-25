@@ -1267,7 +1267,7 @@ clear原理：浏览器给设置了clear的元素加上了一个上外边框（m
 
 
 
-设置clear的元素硬具备的特点
+设置了clear的元素所具备的特点
 
 + 元素是块级元素
 + 元素不能带有浮动属性
@@ -1280,25 +1280,66 @@ clear原理：浏览器给设置了clear的元素加上了一个上外边框（m
 
 ### 2.9 定位`position`
 
-取值：static、relative、absolute、fixed
+取值：static[默认值]、relative、absolute、fixed
 
 
 
 #### 2.9.1 `position:absolute`
 
-> `position : absolute`绝对定位的特点
->
-> + 脱离文档流
-> + 可以设置参照物，参照物必须是其父级元素（直系父级），如果直接父级元素没有，就会一直向上查找，直到找到最外层的根元素为止；
-> + 有宽高的情况下：
->   + `top`和`bottom`同时有值，`top`生效
->   + `left`和`right`同时有值，`left`生效
-> + 没有宽高的情况下：
->   + `top`和`bottom`同时有值，会将这个盒子拉大，上下值都起作用
->   + 左右同理
-> + 可以设置层级关系`z-index`属性
-> + 相对参照我只要是定位元素就可以（绝对定位，相对定位，固定定位）
->   优先选择相对定位（绝对定位和固定定位都会脱离文档流，不占位）
+
+
+`position : absolute`绝对定位的特点
+
++ 开启绝对定位的元素，会脱离文档流
++ 开启绝对定位的元素，会改变元素的性质（脱离文档流）
++ 开启绝对定位的元素，如果不设置偏移量，元素不发生变化
++ 开启绝对定位的元素，相对于离它最近的定位父级包含块元素定位
++ html是初始包含块
++ 开启绝对定位的元素，会提升元素的层级
+
+
+
+**tips**
+
+  >包含块：对于绝对定位的元素来说，包含块就是离他最近的开启了定位的元素
+
+ 
+
+浏览器处理布局的等式
+
+水平方向布局等式
+
+> margin-left + border-left + padding-left + width +  padding-right  +  border-right + margin-right  =包含块的宽度
+
+垂直方向布局等式
+
+> left+… + width+…+right =包含块的宽度
+
+绝对定位元素的水平方向布局等式
+
+> margin-top+ border-top+ padding-top+ width + padding-bottom+ border-bottom+ margin-bottom =包含块的高度
+
+绝对定位元素的垂直方向布局等式
+
+> left+… + width+…+right =包含块的高度
+
+
+
+其中可以设置为 auto的值： left  margin-left  width  margin-right  right
+
+利用浏览器处理auto值的机制（浏览器自动调节左右外边距的机制）
+
+可以实现水平 、垂直方向的居中效果
+
+```css
+/*常用代码片段*/
+position:absolute;
+left:0;
+right:0;
+top:0;
+bottom:0;
+margin:auto;/*默认为auto*/
+```
 
 
 
@@ -1308,12 +1349,16 @@ clear原理：浏览器给设置了clear的元素加上了一个上外边框（m
 
 `position:relative`相对定位的特点
 
-> 1. 不会脱离文档流
-> 2. 可以设置上下左右四个方位，但是同时设置，只听左和上
-> 3. 参照物：自己本身
-> 4. `z-index`改变层级关系（依赖定位元素，如果不是定位元素不起作用）
-> 5. 任何元素都可以设置相对定位属性
-> 6. 相对定位元素位移发生变化，但元素原来的位置不会被占用，其他元素还是正常识别这个元素原来的位置
++ 开启相对定位，元素不会发生任何变化
++ 开启相对定位，元素不会脱离文档流
++ 开启相对定位，元素是相对于元素本身在文档流中的位置定位的，可以设置四个方向的位移,元素原来的位置不会被占用（没有脱离文档流）
++ 开启相对定位，会使元素提升一个层级（z-index，遮盖其他元素）
++ 开启相对定位，不会改变元素的性质（行、块级不变）
++ 任何元素都可以设置相对定位属性
+
+
+
+
 
 #### 2.9.3 `position:fixed`
 
@@ -1326,20 +1371,45 @@ clear原理：浏览器给设置了clear的元素加上了一个上外边框（m
 
 
 
-### 2.10 `z-index`
+
+
+#### 2.9.4  `z-index`层级
 
  `z-index`属性的特点
+
+**z-index属性有作用必须跟定位一起使用**
 
 > 1. 默认是书写顺序在后的定位元素覆盖在顺序前的定位元素
 >2. 可以使用z-index属性修改定位元素的层级关系
 > 3. 所有定位元素的z-index默认值都是一样的
 >4. z-index值支持负数，没有单位，默认值为0
-> 5. 一般都是同级元素进行层级比较
+> 5. 一般都是同级元素进行层级比较（ 父元素的层级再高，也不会盖住子元素）
 >6. z-index属性不会继承
 
 
 
-**z-index属性有作用必须跟定位一起使用**
+
+
+
+
+### 2.10 rgba和opacity
+
+```css
+/*设置当前元素box1的背景颜色透明度*/
+.box1{
+  /*...样式*/
+  rgba（255,255,255,0.1）;
+}
+
+/*设置的是box2这个元素整体的透明度*/
+.box2{
+  /*...样式*/
+  opacity:0.1;
+}
+
+```
+
+
 
 
 
@@ -1469,6 +1539,155 @@ BFC(block fromat context)块级格式化环境[上下文]
 
 
 一般使用 overflow:hidden 来开启元素的BFC
+
+
+
+
+
+###  2.16 字体和文本属性
+
+
+
++ 衬线字体（serif）
+
+  + ```css
+    font-family:serif;
+    ```
+
++ 无衬线字体（sans-serif）
+
+  + ```css
+    font-family:sans-serif;
+    ```
+
++ 等宽字体（monospace）
+
+  + ```css
+    font-family:monospace;
+    ```
+
+  + 
+
++ 草书字体（cursive）
+
+  + ```css
+    font-family:cursive;
+    ```
+
+  + 
+
++ 装饰字体（fantasy）
+
+  + ```css
+    font-family:fantasy;
+    ```
+
+
+
+一般使用
+
+```css
+/*可以同时指定多个字体*/
+font-family:微软雅黑,楷体 ;
+```
+
+
+
+
+
+font-face的使用(外部字体的使用)
+
+```html
+
+<style>
+  /*使用本地字体*/
+  @font-face{
+    /*font-family:'我使用的字体的别名（xxxooo.ttf）';*/
+    font-family:'xxxooo'
+      src:url('./font/xxxooo.ttf')
+  }
+  
+  .box{
+    /*...*/
+    font-family:xxxooo;
+  }
+</style>
+```
+
+
+
+
+
+图标字体
+
+来历：字体是矢量图，放大不会失真。
+
+然后就…
+
+
+
+font awesome-国外的
+
+iconfont——–国内阿里
+
+
+
++ 行高：line-height
+
+基线（base-line），文本显示默认在行高中居中
+
+行高可以设置为像素，也可以设置为 字体 大小 的倍数 （默认行高是字体大小的 1.33倍）
+
+```css
+font-size:20px;
+line-height:1.33;/*默认是 20*1.33px*/
+
+/*行高像素设置*/
+line-height:20px;
+```
+
+
+
+```css
+/*font-weight:100-900;*/
+/*
+	font-weight:
+默认值：normal-----相当于400
+			bold------相当于700
+*/
+font-weight:bold;
+```
+
+
+
+```css
+/*font-style*/
+font-style:italic;
+font-style:normal;
+```
+
+
+
+```css
+/*font-variant  字体变形*/
+font-variant :small-caps;/*小型大写字母*/
+
+```
+
+
+
+字体样式简写
+
+```css
+/*font:font-weight font-style font-variant font-size  font-family */
+/*font:[加粗 斜体 变形] 大小/行高 字体族;*/
+
+font :  bold 10px italic small-caps "楷体",;
+```
+
+
+
+### 2.17 
 
 
 

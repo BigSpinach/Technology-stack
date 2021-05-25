@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>09-绝对定位</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /*
+      绝对定位的特点
+        1.元素脱离文档流
+        2.绝对定位元素会相对于它的定位包含块进行定位
+        3.绝对定位会使元素提升一个层级
+    */
+
+    /*
+      水平方向布局等式
+      margin-left + border-left + padding-left  + width + margin-right + border-right + padding-right =包含块的宽度
+
+      其中可以设置为 auto的值 ：  margin-left width margin-right
+      浏览器在处理这些auto值的时候有自己的一套规则
+      具体是：
+          -  width优先级最高： width:auto(默认值)----------与父级包含块一样宽
+          -  再处理margin-left:auto，（如果margin-right有值，先设定margin-right的值，剩余部分的值给 margin-left）
+          -  如果margin-left 和 margin-right都为auto  则一边一半，实现居中效果  
+
+
+
+    绝对定位元素的水平方向布局等式
+    left + margin-left + border-left + padding-left  + width + margin-right + border-right + padding-right + right =包含块的宽度  
+
+    其中可以设置为 auto的值 ： left margin-left width margin-right right
+    我们可以利用浏览器处理margin 为auto的机制，实现水平居中 效果
+    position：absolute;
+    left:0;
+    right:0;
+    再加上设置margin为 auto
+    margin：0 auto;
+    */
+
+    /*
+      垂直方向布局等式
+
+      绝对定位元素的垂直方向布局等式
+
+      垂直居中 
+      position：absolute;
+      top:0;
+      bottom:0;
+      再加上设置margin为 auto
+      margin：auto 0 ;
+    */
+
+    /*
+      最终实现水平垂直居中
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      margin:auto;/*默认就是auto，不用写*/
+    */
+
+    .outer {
+      width: 500px;
+      height: 500px;
+      background-color: #bfa;
+    }
+
+    .inner{
+      width: 200px;
+      height: 200px;
+      background-color: rgb(71, 16, 16);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <div class="inner"></div>
+  </div>
+</body>
+
+</html>

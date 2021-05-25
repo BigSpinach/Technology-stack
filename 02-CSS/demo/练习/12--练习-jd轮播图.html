@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12-jd轮播图</title>
+  <style>
+    /*清除默认样式*/
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    /*公共样式*/
+    .l {
+      float: left;
+    }
+    .r{
+      float:right;
+    }
+
+    /*1.轮播图样式*/
+    .slideshow{
+      width: 830px; ;
+      height: 482px;
+      margin: 50px auto;/*方便测试*/
+      background-color: blueviolet;
+      /*设置定位，方便里边的元素相对于自己这个包含块定位*/
+      position: relative;
+    }
+
+    /*1.1设置轮播图片的样式*/
+    .slideshow .img-list li{
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    /* 测试，通过改变层级，显示不同的图片 */
+    /* .slideshow .img-list li:first-child{
+      z-index: 1;
+    } */
+
+    /*1.2轮播图的小点点样式设置*/
+
+    .slideshow .dotBox{
+      position: absolute;
+      /*设置 小圆点盒子的偏移量*/
+      left: 260px;
+      bottom: 50px;
+    }
+
+    .slideshow .dotBox a {
+      width: 15px;
+      height: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      /*设置小圆点之间的间距*/
+      margin: 0 10px;
+    }
+
+    .slideshow .dotBox a:hover{
+      background-color: yellow;
+    }
+
+    /* 1.3轮播图左右切换按钮样式设置 */
+    .slideshow .iconfont-l{
+      width: 15px;
+      height: 32px;
+      background-color: greenyellow;
+      position: absolute;
+      /* left: 241px; */
+      left: 0;
+      top: 225px;
+
+    }
+
+    .slideshow .iconfont-r{
+      width: 15px;
+      height: 32px;
+      background-color: red;
+      position: absolute;
+      right: 0;
+      top: 225px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <!-- 1.轮播图容器 -->
+  <div class="slideshow">
+    <!-- 1.1轮播图图片列表 -->
+    <ul class="img-list">
+      <li><a href="#"><img src="imgs/jd/1.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/2.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/3.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/4.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/5.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/6.jpg"></a></li>
+      <li><a href="#"><img src="imgs/jd/7.png"></a></li>
+      <li><a href="#"><img src="imgs/jd/8.jpg"></a></li>
+    </ul>
+
+    <!-- 1.2轮播图列切换小点   -->
+    <div class="dotBox">
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+      <a href="#" class="l"></a>
+    </div>
+
+    <!-- 1.3轮播图左右切换按钮 -->
+    <a href="#"> <div class="iconfont-l">&lt;</div></a>
+    <a href="#"><div class="iconfont-r">&gt;</div></a>
+   
+    
+
+  </div>
+</body>
+
+</html>

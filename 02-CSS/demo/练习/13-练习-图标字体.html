@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13-图标字体</title>
+
+  <!-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet"> -->
+  <!-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+  <style>
+    .mystyle {
+      color: hotpink;
+      font-size: 100px;
+    }
+
+
+
+    /*通过伪类给使用图标字体*/
+    ul {
+      list-style: none;
+      width: 600px;
+      margin: 100px auto;
+    }
+
+    ul li::before {
+      /*使用 图标字体 对应的 Unicode 值,注意使用过转义字符转义unicode*/
+      content: '\f2bc';
+      /*在源码【图标库的css源码】里找到对应的字体名称*/
+      font-family: 'FontAwesome';
+      font-size: 30px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>font awesome</div>
+  <i class="fa fa-free-code-camp mystyle" aria-hidden="true"></i>
+
+  <h4>通过伪类的方式使用图标字体</h4>
+  <ul>
+    <li>山不在高，有仙则名。</li>
+    <li>水不在深，有龙则灵。</li>
+    <li>斯是陋室，惟吾德馨。</li>
+    <li>苔痕上阶绿，草色入帘青。</li>
+    <li>谈笑有鸿儒，往来无白丁。</li>
+    <li>可以调素琴，阅金经。</li>
+    <li>无丝竹之乱耳，无案牍之劳形。</li>
+    <li>南阳诸葛庐，西蜀子云亭。</li>
+    <li>孔子云：何陋之有？</li>
+  </ul>
+</body>
+
+</html>
