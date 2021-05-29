@@ -109,7 +109,7 @@
 
 
 
-## 2 CSS 基础及其实战
+## 2 CSS 基础
 
 **css简介**
 
@@ -390,6 +390,34 @@ css 不是 物理像素
 【百分比】
 
 相对于父级（父级包含块）尺寸设定百分比
+
+
+
+【em】
+
+参考当前元素自己的字体大小
+
+```css
+.box{
+  font-size:100px;
+*/lem= 1 font-size*/
+}
+
+```
+
+
+
+【rem】
+
+参考根元素html的字体大小
+
+```css
+html{
+  font-size:100px;
+	*/lem= 1 font-size*/
+}
+
+```
 
 
 
@@ -981,6 +1009,8 @@ IE 盒子模型其实就是 box-sizing:border-box
 
 #### 2.6.7 background-clip
 
+设置背景显示的区域【ie8不兼容】
+
 >  背景图片的裁剪
 >
 > 1. context-box;从内容区域之外开始裁剪（从内容区域之外裁剪，裁剪掉的是内边距和边框线）
@@ -1001,7 +1031,7 @@ IE 盒子模型其实就是 box-sizing:border-box
 
 #### 2.6.9 背景图的复合属性 background
 
-> background:background-color background-img background-repeat background-posotion background-attachment
+> background : background-color background-img background-repeat background-posotion background-attachment
 
 
 
@@ -1015,7 +1045,70 @@ CSS3新增的属性
 
 
 
+#### 2.6.10 雪碧图（css sprite）
 
+**现象**：
+
+按钮使用图片做背景，当按钮在link——>hover——>active三个状态时，图片会出现闪烁的情况
+
+```css
+btn:link{
+  backrgound:url('xxx.jpg');
+}
+btn:hover{
+  backrgound:url('yyy.jpg');
+}
+btn:active{
+  backrgound:url('zzz.jpg');
+}
+```
+
+
+
+**产生原因**：
+
+浏览器加载资源的方式：懒加载！
+
+浏览器先加载当前页面，后加载页面中引入的外部资源（css、js等），没有使用到的资源不加载（只有当使用到某个资源的时候才会去加载[请求+响应]）
+
+所以，在请求和响应的过程中会有时间差，从而导致闪烁的出现。
+
+所以说，从link到hover状态时，浏览器会再次向服务器发送请求，然后再响应给浏览器页面…
+
+
+
+**解决方案**：
+
+使用CSS Sprite(css精灵/雪碧图)的方式，让浏览器一上来就加载尽可能使用到的图片资源
+
+然后使用背景定位的方式更改对应状态的图片。
+
+```css
+btn:link{
+  backrgound:url('雪碧图.jpg');
+}
+btn:hover{
+	background-position:-100px 0;
+}
+btn:active{
+  background-position:-200px -300px;
+}
+```
+
+
+
+CSS Sprite的优点：
+
+1. 减少请求次数
+2. 总占内存小于所有小图片的和
+
+
+
+**雪碧图的制作**
+
+​	腾讯前端团队： http://alloyteam.github.io/
+
+​	
 
 ### 2.7 overflow:hidden的三个作用
 
@@ -1415,36 +1508,6 @@ margin:auto;/*默认为auto*/
 
 
 
-### 2.11 基线对齐 vertical-align
-
-定义
-
-> vertical-align 属性设置元素的垂直对齐方式。
-
-
-
-值
-
-> baseline			默认。元素放置在父元素的基线上。
->
-> sub				 垂直对齐文本的下标。
->
-> super			   垂直对齐文本的上标
->
-> text-top			把元素的顶端与行中最高元素的顶端对齐
->
-> middle			  把元素的顶端与父元素字体的顶端对齐
->
-> bottom
->
-> text-bottom
->
-> length
->
-> %
->
-> inherit
-
 
 
 
@@ -1544,7 +1607,7 @@ BFC(block fromat context)块级格式化环境[上下文]
 
 
 
-###  2.16 字体和文本属性
+###  2.16 字体相关属性
 
 
 
@@ -1646,6 +1709,23 @@ line-height:1.33;/*默认是 20*1.33px*/
 line-height:20px;
 ```
 
+【tip】
+
+> 行内元素的背景颜色始终为 行高的1，33倍。
+>
+> ```css
+> /*通过修改行高，背景颜色依旧占据1.33倍的行高*/
+> span{
+>   font-size:50px;
+>   background-color:red;
+> 	line-height:1;
+> }
+> 
+> 
+> ```
+>
+> 
+
 
 
 ```css
@@ -1687,7 +1767,100 @@ font :  bold 10px italic small-caps "楷体",;
 
 
 
-### 2.17 
+### 2.17  文本属性
+
+
+
+`text-aline`水平对齐对齐方式
+
+取值
+
++ left-默认值
++ right
++ center
++ justify–两端对齐
+
+
+
+`vertical-aline` 垂直对齐方式
+
++ baseline  默认值，和基线对齐（下基线之上写）
++ top  和父元素顶部对齐（上基线）
++ bottom 和父元素的底部对齐（下基线之下）
++ super
++ suber
++ middle  居中对齐
++ 10px|10%
+
+使用场景
+
+```html
+<div>
+  </img>
+</div>
+<style>
+	/*图片默认按照字体的极限对齐*/
+  div{
+     font-size:0;/*消除基线*/
+    /*弊端：写的字没了*/
+  }
+  
+  /*常用*/
+  img{
+		/*设置图片的对齐方式*/
+    vertical-aline:bottom;
+  }
+</style>
+
+```
+
+
+
+
+
+`text-decoration`
+
+值
+
++ underline 默认值
++ none
++ overline
++ green wavy underline  绿色波浪线
+
+
+
+`text-indent` 首行缩进
+
+取值
+
++ 10px
+
+
+
+`white-space` 如何处理空格
+
++ normal  默认值
++ nowrap  不换行
++ pre   保留文本格式
+
+
+
+文本溢出处理方式
+
+```css
+white-space:nowrap;/*不换行*/
+overflow:hidden;/*溢出隐藏*/
+text-overflow:ellipsis;/*溢出部分显示为...*/
+
+```
+
+`letter-spacing` 两个字符之间的距离
+
++ letter-spacing ：10px;
+
+`word-spacing` 两个单词之间的距离
+
++ word-spacing:2em;
 
 
 
