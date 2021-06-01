@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>京东导航</title>
+  <link rel="stylesheet" href="iconfont.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    body {
+      font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+      color: #666;
+    }
+
+
+    /* 1.顶部最大容器 top-bar*/
+    .top-bar {
+      height: 30px;
+      background-color: #e3e4e5;
+      border-bottom: 1px solid #ddd;
+      /*设置最小宽度，防止小屏幕/缩小屏幕时变形*/
+      min-width: 1190px;
+    }
+
+    /*1.1 内部定宽容器*/
+    .w {
+      width: 1190px;
+      /* background-color: red; */
+      margin: 0 auto;
+      /*高度由内容撑开*/
+    }
+
+    .inner {
+      line-height: 30px;
+      /* height: 30px; */
+    }
+
+    /*文字字体样式*/
+    .inner a {
+      font: 12px/1.5 'Microsoft YaHei', 'Heiti SC', tahoma, arial, 'Hiragino Sans GB', '\5B8B\4F53', sans-serif;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .inner a:hover {
+      color: red;
+    }
+
+    /*1.1.1  top-bar 左侧部分*/
+    .top-bar .inner .city {
+      float: left;
+      position: relative;
+    }
+
+    .inner .city .up {
+      height: 29px;
+      border: 1px transparent solid;
+      border-bottom: none;
+      padding: 0 10px 0 5px;
+      position: relative;
+      z-index: 20;
+      line-height: 30px;
+    }
+
+    /*下拉城市列表弹框*/
+    .inner .city .down {
+      display: none;
+      width: 200px;
+      height: 300px;
+      border: 1px rgb(204, 204, 204) solid;
+      box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
+      position: absolute;
+      /*默认位置就在up的下边，相对于city定位*/
+      top: 30px;
+      /* z-index: 5;       */
+    }
+
+    .inner .city li:hover .up a {
+      color: red;
+
+    }
+
+    .inner .city li:hover .up {
+      /* border-style: solid; */
+      padding-bottom: 1px;
+      background-color: white;
+      border-color: rgb(204, 204, 204);
+    }
+
+
+    .inner .city li:hover .down {
+      display: block;
+      
+    }
+
+
+
+
+    /*1.1.2  top-bar 右侧部分*/
+    .top-bar .inner .shortcut {
+      float: right;
+    }
+
+    /*1.1.2.1 内容li左浮动*/
+    .top-bar .inner .shortcut li {
+      float: left;
+    }
+
+    /*设置红色字体*/
+    .top-bar .inner .shortcut .free a {
+      color: #f10215;
+    }
+
+    /* .free{
+      color: #f10215;
+    } */
+
+    /*设置图标字体*/
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /*定位图标为红色*/
+    .city .up i {
+      color: #f10215;
+    }
+
+    /*设置文字中间的间隔*/
+    .line {
+      /* display: block; */
+      float: left;
+      width: 1px;
+      height: 10px;
+      margin: 10px;
+      background-color: #999;
+    }
+
+    /*免费注册*/
+    .free {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="w inner">
+      <!--           左侧菜单-->
+      <ul class="city">
+        <li>
+          <div class="up">
+
+            <i class="iconfont free">&#xe692;</i>
+            <a href="#">北京</a>
+          </div>
+
+          <div class="down">
+            城市列表
+          </div>
+        </li>
+      </ul>
+
+      <!--           右侧菜单-->
+      <ul class="shortcut">
+        <li><a href="#">你好，请登录</a></li>
+        <li class="free"><a href="#">免费注册</a></li>
+        <span class="line"></span>
+        <li><a href="#">我的订单</a></li>
+        <span class="line"></span>
+
+        <li><a href="#">我的京东</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">京东会员</a></li>
+        <span class="line"></span>
+
+        <li class="com"><a href="#">企业采购</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">客户服务</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">网站导航</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">手机京东</a></li>
+      </ul>
+
+
+    </div>
+  </div>
+</body>
+
+</html>

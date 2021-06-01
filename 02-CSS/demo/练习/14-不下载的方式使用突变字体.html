@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 第一步：在 HTML 页面为字体增加 preload，提升字体加载速度： -->
+  <link rel="preload" href="'//at.alicdn.com/t/font_2581558_i4u3gog0ov.woff2?t=1622440398666" as="font" type="font/woff2"
+    crossorigin="anonymous">
+
+  <style>
+    /* 第二步：拷贝项目下面生成的 @font-face */
+
+    @font-face {
+      font-family: 'iconfont';
+      /* Project id 2581558 */
+      src: url('//at.alicdn.com/t/font_2581558_i4u3gog0ov.woff2?t=1622440398666') format('woff2'),
+        url('//at.alicdn.com/t/font_2581558_i4u3gog0ov.woff?t=1622440398666') format('woff'),
+        url('//at.alicdn.com/t/font_2581558_i4u3gog0ov.ttf?t=1622440398666') format('truetype');
+    }
+
+    /* 第三步：定义使用 iconfont 的样式 */
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 50px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- 第四步：挑选相应图标并获取字体编码，应用于页面 -->
+  <span class="iconfont">&#xe603;</span>
+</body>
+
+</html>

@@ -1110,13 +1110,33 @@ CSS Sprite的优点：
 
 ​	
 
-### 2.7 overflow:hidden的三个作用
+### 2.7 BFC
 
-overflow:hidden
 
-overflow:auto
 
-overflow:scorll
+BFC(block fromat context)块级格式化环境[上下文]
+
+定义： BFC 是元素的一个隐藏属性，一旦元素开启BFC，这个元素将拥有一个 **独立的布局区域**
+
+特点： 
+
+1. 开启BFC的元素的子元素的垂直外边距不会传递给它
+2. 开启BFC的元素不会被浮动的元素覆盖
+3. 开启BFC的元素可以包含浮动的元素
+
+
+
+如何开启：
+
++ 设置元素浮动 float
++ 将元素设置为行内块  display:inline-block
++ 将元素的overflow的默认值修改为其他值（一般overflow:hidden）
+
+
+
+一般使用 overflow:hidden 来开启元素的BFC
+
+
 
 
 
@@ -1215,7 +1235,7 @@ float的值：`left`、`right`、`none`、`inherit(继承父元素的float的值
 
 #### 2.8.2 文档流和脱离文档流
 
-+ 行元素边块元素
++ 行元素变块元素
 + 块元素宽高由内容决定，并且不会独占一行
 
 
@@ -1504,7 +1524,24 @@ margin:auto;/*默认为auto*/
 
 
 
+### 2.11 display
 
+display
+
+指定元素所生产的框的类型
+
+常用值
+
++ inline 行内元素
+
++ block 块元素
+
++ inline-block 行内块元素
+  (既有行内元素的特点，不独占一行又有块元素的特点，可以设置宽高)
+
++ none 元素不在页面中显示
+
+   
 
 
 
@@ -1552,62 +1589,15 @@ margin:auto;/*默认为auto*/
 
 
 
-###  2.13 display
-
-display
-
-指定元素所生产的框的类型
-
-常用值
-
-+ inline 行内元素
-+ block 块元素
-+ inline-block 行内块元素
-  (既有行内元素的特点，不独占一行又有块元素的特点，可以设置宽高)
-+ none 元素不在页面中显示
-
-   
-
-### 2.14 visibility
-
-visibility 设置元素显示的状态
-
-+ 默认值visiable
-+ hidden 不显示元素，但是元素依然占据位置
 
 
 
 
 
-### 2.15 BFC
-
-BFC(block fromat context)块级格式化环境[上下文]
-
-定义： BFC 是元素的一个隐藏属性，一旦元素开启BFC，这个元素将拥有一个 **独立的布局区域**
-
-特点： 
-
-1. 开启BFC的元素的子元素的垂直外边距不会传递给它
-2. 开启BFC的元素不会被浮动的元素覆盖
-3. 开启BFC的元素可以包含浮动的元素
 
 
 
-如何开启：
-
-+ 设置元素浮动 float
-+ 将元素设置为行内块  display:inline-block
-+ 将元素的overflow的默认值修改为其他值（一般overflow:hidden）
-
-
-
-一般使用 overflow:hidden 来开启元素的BFC
-
-
-
-
-
-###  2.16 字体相关属性
+###  2.13 字体相关属性
 
 
 
@@ -1767,7 +1757,7 @@ font :  bold 10px italic small-caps "楷体",;
 
 
 
-### 2.17  文本属性
+### 2.14  文本属性
 
 
 

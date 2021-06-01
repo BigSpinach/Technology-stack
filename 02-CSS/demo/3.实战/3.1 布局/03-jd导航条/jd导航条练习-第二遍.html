@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jd导航条</title>
+  <!-- 引入 图标字体 -->
+  <link rel="stylesheet" href="iconfont.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /*1.页面顶部导航条 top-bar整体样式*/
+    .top-bar {
+      min-width: 1190px;
+      height: 30px;
+      background-color: #e3e4e5;
+      border-bottom: 1px solid #ddd;
+
+      /*整体字体样式*/
+      font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+      
+    }
+
+    .top-bar a{
+      text-decoration: none;
+      color: #666; 
+      font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    }
+
+    /*内部定宽容器*/
+    .w {
+      width: 1190px;
+      margin: 0 auto;
+    }
+
+    .inner {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    /*1.1 top-bar左侧部分 city部分*/
+    .inner .city{
+      float: left;
+      position: relative;
+    }
+
+    /*特殊处理红色图标字体*/
+    .inner .city .free{
+      color: #f10215;
+    }
+
+    /*1.1.1 默认显示的城市区域*/
+    .inner .city .up{
+      position: relative;
+      z-index: 20;
+      border:1px solid transparent;
+      height: 29px;
+      border-bottom: none;
+      padding: 0 10px 0 5px;
+    }
+
+    /*鼠标移入city区域，背景变色，下边框显示 文字变红*/
+    .inner .city:hover .up{
+      /* border-bottom: 1px  white solid; */
+      padding-bottom: 1px;
+      background-color:white;
+      border-color: rgb(204, 204, 204);
+    }
+    .inner .city:hover .up a{
+      color: red;
+    }
+
+
+    /*1.1.2 下拉城市列表区域*/
+    .inner .city .down{
+      position: absolute;
+      top:30px;
+      display: none;
+      width: 200px;
+      height: 300px;
+      border: 1px rgb(204, 204, 204) solid;
+      box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    /*鼠标移入 city区域，下拉城市列表显示*/
+    .inner .city:hover .down{
+      display: block;
+    }
+
+
+
+
+
+    /*1.2 top-bar右侧部分 shortcut部分*/
+    .inner .shortcut{
+      float: right;
+    }
+
+    .inner .shortcut li{
+      float: left;
+    }
+
+    /*1.2.1 处理文字中间的间隔线*/
+    .inner .shortcut .line{
+      float: left;
+      width: 1px;
+      height: 10px;
+      background-color: #999;
+      margin: 10px;
+    }
+
+    /*1.2.2 红色字体*/
+    .inner .shortcut .free a,.inner .shortcut .com a{
+      color: #f10215;
+    }
+    /*1.2.3 免费注册字体间隔*/
+    .inner .shortcut .free{
+      padding-left: 10px;
+    }
+
+    /*1.2.4 图标字体*/
+    .iconfont{
+      font-size: 14px;
+      font-family: "iconfont" !important;
+    }
+
+    /*1.2.5 鼠标移入li 字体变红*/
+    .inner .shortcut li:hover a{
+      color: #f10215;
+    }
+
+
+
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. 页面顶部top-bar -->
+  <div class="top-bar">
+    <!-- 内部定宽容器 -->
+    <div class="w inner">
+      <!-- 1.1左侧city部分 -->
+      <div class="city">
+        <!-- 1.1.1 默认显示的城市块 -->
+        <div class="up">
+          <a href="#">
+            <i class="iconfont free">&#xe692;</i>
+            北京
+          </a>
+        </div>
+
+        <!-- 1.1.2 下拉城市列表 -->
+        <div class="down">下拉城市列表</div>
+       
+      </div>
+
+      <!-- 1.2右侧shortcut部分 -->
+      <ul class="shortcut">
+        <li><a href="#">你好，请登录</a></li>
+        <li class="free"><a href="#">免费注册</a></li>
+        <span class="line"></span>
+        <li><a href="#">我的订单</a></li>
+        <span class="line"></span>
+
+        <li><a href="#">我的京东</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">京东会员</a></li>
+        <span class="line"></span>
+
+        <li class="com"><a href="#">企业采购</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">客户服务</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">网站导航</a>
+          <i class="iconfont">&#xe603;</i>
+        </li>
+        <span class="line"></span>
+
+        <li><a href="#">手机京东</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

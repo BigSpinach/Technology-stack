@@ -4,9 +4,65 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>06-模仿W3School</title>
+  <title>06-模仿W3School之导航</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /*设定导航条*/
+    .nav{
+      width: 1000px;
+      /*高度由内容撑开*/
+      margin: 20px auto;
+      background-color: #E8E7E3;
+    }
+    
+    .navmenu li{
+      float: left;
+      
+    }
+    /*设置浮动，子元素脱离文档流，父元素高度塌陷*/
+    .nav::after{
+      display: block;
+      content: '';
+      overflow: hidden;
+      clear: both;
+    }
+
+    /*设定导航元素的宽高*/
+    .navmenu li a {
+      /*宽度由内容撑开*/
+      display: block;
+      height: 48px;
+      padding: 0 20px;
+      text-decoration: none;
+      line-height: 48px;
+      color:#333;
+      font-size: 21px;
+    }
+
+    .navmenu li a:hover{
+      background-color: black;
+      color: white;
+    }
+
+  </style>
 </head>
 <body>
+  <div class="nav">
+    <ul class="navmenu">
+      <li><a href="#">HTML/CSS</a></li>
+      <li><a href="#">Browser Side</a></li>
+      <li><a href="#">Server Side</a></li>
+      <li><a href="#">Programming</a></li>
+      <li><a href="#">XML</a></li>
+      <li><a href="#">Web Building</a></li>
+      <li><a href="#">Reference</a></li>
+    </ul>
+  </div>
   
 </body>
 </html>
