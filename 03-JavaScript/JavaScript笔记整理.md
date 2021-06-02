@@ -19,8 +19,7 @@
   - import (ES6) 基于ES6的模块规范导出需要的信息
   - class (ES6) 基于ES6创建类
 
-
-####1.1.2 变量的命名规范
+#### 1.1.2 变量的命名规范
 	1. 严格区分大小写
 
 2. 遵循驼峰命名法：按照数字、字母、下划线或者$来命名（数字不能做为名字的开头），命名的时候基于英文单词拼接成一个完整的名字（第一个单词字母小写，其余每一个有意义单词的首字母都大写）
@@ -280,7 +279,7 @@ for (let i in iterable) {
   console.log(i); // logs 0, 1, 2, "foo", "arrCustom", "objCustom"
 }
 /*
-	此循环仅以原始插入顺序记录iterable 对象的可枚举属性。它不记录数组元素3, 5, 7 或hello，因为这些不是枚举属性。但是它记录了数组索引以及arrCustom和objCustom
+	此循环仅以原始插入顺序记录iterable 对象的可枚举属性。它不记录数组元素3, 5, 7 或hello，因为这些不是枚举属性（是属性值）。但是它记录了数组索引以及arrCustom和objCustom
 */
 
 
@@ -589,11 +588,11 @@ obj1==obj2 =>true
 
 不同情况的比较，都是把其它值转换为数字，然后再进行比较的
 
-> null==undefined：true
-> null===undefined：false
-> null&&undefined和其它值都不相等
+> null == undefined：true
+> 		null === undefined：false
+> 		null&&undefined和其它值都不相等
 >
-> NaN==NaN：false
+> NaN == NaN：false
 
 
 ```javascript
