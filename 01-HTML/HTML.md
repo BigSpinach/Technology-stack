@@ -143,12 +143,14 @@ HTML历史上有如下版本： [5]
 HTML中head元素
 
 ```
+<!-- 元信息的容器-->
 <head>
 	<!--定义了文档的信息-->
 	<title>文档的标题</title>
-	<base>页面链接标签的默认链接地址</base>
-	<link rel="" href="" type="">
+	<base>页面链接标签的默认链接地址，不建议使用</base>
+	<!--元信息通用标签-->
 	<meta>
+	<link rel="" href="" type="">
 	<script></scrpit>
 	<style></style>
 </head>
@@ -257,4 +259,62 @@ HTML中head元素
 
 - 表格用来表示一些格式化的数据
 - 在网页中 ，使用table创建表格
+
+
+
+## 9 表单
+
+> 表单用来将用户的数据提交给服务器  
+
+
+
++ 表单元素 form
+
+  + 属性 action  提交路径
+
++ 表单项 input
+
+  + 文本框 type="text"
+
+  + 密码框 type="password"
+
+  + 提交按钮 type="submit"
+
+  + 单选按钮 type="radio"
+
+  + 多选按钮 type="checkbox"
+
+  + 重置按钮 type="reset"
+
+  + 普通按钮 type="button"
+
+  +  
+
+  + 颜色选择框  type="color"
+
+  + 文件库 type="file"
+
+  + 隐藏的文本框 type="hidden"
+
+  +  
+
+  + 电子邮件type="email"
+
+  + 日期type="date"
+
+    
+
+
+
+
+
+```html
+<form action="提交服务器地址">
+  
+  
+  
+</form>
+```
+
+
 

@@ -2370,3 +2370,128 @@ p{
 
 
 
+## 4 CSS语法
+
+
+
+
+
+### 4.1 at-rule 规则
+
+> at-rule由一个 @ 关键字和后续的一个区块组成，如果没有区块，则以分号结束
+
++ @charset 
+
+  > charset用于提示CSS文件使用的字符编码方式，它如果被使用，必须出现在最前面
+  >
+  > 这个规则只在给出语 法解析阶段前使用，并不影响页面上的展示效果。
+  >
+  > ```css
+  > @charset "utf-8";
+  > ```
+  >
+  > 
+
++ @import 
+
+  ```css
+  @import "reset.css";
+  @import url("base.css");
+  ```
+
+  
+
++ @media
+
+  ```css
+  @media print {
+    body{ font-size:10px;}
+  }
+  ```
+
+  
+
++ @page
+  page用于分页媒体访问网页时的表现设置，页面是一种特殊的盒模型结构，除了页面本身，还可以设置它 周围的盒。
+
+  ```css
+  @page { 
+    size: 8.5in 11in; margin: 10%;
+  	@top-left { content: "Hamlet";} 
+    @top-right { content: "Page " counter(page);} 
+  }
+  ```
+
+  
+
++ counter-style
+  counter-style产生一种数据，用于定义列表项的表现。
+
+  ```css
+  @counter-style triangle { 
+    system: cyclic; 
+    symbols: ‣; 
+    suffix: " ";
+  }
+  ```
+
+  
+
++ keyframes
+  keyframes产生一种数据，用于定义动画关键帧。
+
+  ```css
+  @keyframes diagonal-slide {
+  	from { 
+      left: 0; 
+      top: 0;
+  	}
+  	to { 
+      left: 100px; 
+      top: 100px;
+  	} 
+  }
+  
+  ```
+
+  
+
++ fontface
+
+  ```css
+  @font-face { 
+    font-family: Gentium; 		   		      src:url(http://example.com/fonts/Gentium.woff);
+  }
+  ```
+
+  
+
++ supports
+
+  support检查环境的特性，它与media比较类似
+
+  
+
++ namespace
+
+  用于跟XML命名空间配合的一个规则，表示内部的CSS选择器全都带上特定命名空间。
+
+  
+
++ @viewport
+  用于设置视口的一些特性，不过兼容性目前不是很好，多数时候被html的meta代替。
+
++ 
+
+
+
+### 4.2 qualified rule 规则
+
+#### 4.2.1 选择器
+
+#### 4.2.2 声明列表
+
+
+
+
+
