@@ -1,0 +1,65 @@
+/* 首页样式表 */
+/* 设置顶部工具条bar-wrapper */
+.bar-wrapper{
+    height: 40px;
+    background-color: #333;
+    color: #b0b0b0;
+}
+
+/* 设置导航条内部容器 */
+.top-bar{
+    width: 1226px;
+    /* height: 40px; */
+    height: 100%;
+    /* background-color: aqua; */
+    margin: 0 auto;
+}
+
+/* 设置左侧导航div */
+.top-bar .link-bar{
+    /* background-color: red; */
+    line-height: 40px;
+}
+
+/* 设置登陆信息 */
+.top-bar .info-bar{
+    /* background-color: green; */
+    line-height: 40px; 
+}
+
+/* 设置购物车 */
+.top-bar .cart-bar{
+    /* background-color: blue; */
+    line-height: 40px;
+}
+
+/* 设置购物车a链接的样式 */
+.top-bar .cart-bar a{
+    display: block;
+    width: 120px;
+    background-color: #424242;
+}
+
+/*设置a链接的样式*/
+.top-bar a{
+    display: inline-block;
+    height: 40px;
+    /* background-color: greenyellow; */
+    text-decoration: none;
+    font-size: 12px;
+    color: #b0b0b0;
+}
+
+/* 设置鼠标移入效果 */
+.top-bar a:hover{
+    color: #fff;
+}
+
+/*设置a链接之间的间隔线的样式*/
+.top-bar .link-bar .line{
+    color:#424242;
+    padding: 0 10px;
+    margin-left: 15px;
+}
+
+
