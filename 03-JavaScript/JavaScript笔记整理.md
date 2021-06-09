@@ -1,5 +1,7 @@
 [TOC]
 
+
+
 ---------
 
 # JavaScript笔记整理
@@ -88,7 +90,6 @@ JavaScript 是一种**弱类型**或者说**动态**语言。这意味着你不�
   
   + Null   `typeof instance === "object"`
   
-    
 - 引用数据类型
   + 对象object ` typeof instance === "object"`
      - 普通对象
@@ -1836,9 +1837,9 @@ var max=arr.reduce(function (x, y){ return (x>y)?x:y});	//求出最大值为6
 ##### 2.7.2.1 数组去重
 `方案一: 基于双重for循环`
 
-> 1.依次拿出数组中的每一项（排除最后一项：最后一项后面没有需要比较的内容）
-> 2.和当前拿出项后面的每一项依次比较
-> 3.如果发现有重复的，我们把找到的这个重复项在原有数组中删除掉（splice）
+> 1. 依次拿出数组中的每一项（排除最后一项：最后一项后面没有需要比较的内容）
+> 2. 和当前拿出项后面的每一项依次比较
+> 3. 如果发现有重复的，我们把找到的这个重复项在原有数组中删除掉（splice）
 
 ```javascript
 var ary = [1, 2, 3, 2, 2, 3, 4, 3, 4, 5];
@@ -1908,6 +1909,8 @@ for (var i = 0; i < ary.length; i++) {
 }
 ```
 
+
+
 ```javascript
 Array.prototype.myUnique = function myUnique(){
 	let obj={};
@@ -1931,9 +1934,9 @@ console.log(arr.myUnique());//[ 1, 23, 4, 5, 6, 63, 2, 3, 45 ]
 
 `方案三：使用indexOf()` 不兼容IE6~8
 
-> 1.遍历当前数组
-> 2.用数组的每一项和它后边剩余的数组做对比， 利用`indexOf` 方法判断数组后边是否还有相同的项
-> 3.有就删除（没有就进行下一次循环）
+> 1. 遍历当前数组
+> 2.  用数组的每一项和它后边剩余的数组做对比， 利用`indexOf` 方法判断数组后边是否还有相同的项
+> 3. 有就删除（没有就进行下一次循环）
 
 ```javascript
 	let ary = [1,23,4,5,6,7,2,12,3,5,6];
@@ -1949,8 +1952,8 @@ console.log(arr.myUnique());//[ 1, 23, 4, 5, 6, 63, 2, 3, 45 ]
 ```
 
 `方案四： 相邻比较`
-> 1.先对数组进行排序
-> 2.对排序后 的数组进项相邻元素比较，如果相同，删除一个
+> 1. 先对数组进行排序
+> 2. 对排序后 的数组进项相邻元素比较，如果相同，删除一个
 
 ```javascript
 Array.prototype.myUnique = function myUnique(){
@@ -1976,6 +1979,7 @@ console.log(arr.myUnique());//[ 1, 2, 4, 5, 6, 3, 63 ]
 ```
 
 `方案五：基于ES6的set数据结构`
+
 ```javascript
 Array.prototype.myUnique = function myUnique(){
 	return  Array.from(new Set([...this]));
@@ -1986,6 +1990,7 @@ console.log(arr.myUnique());//[ 1, 2, 4, 5, 6, 3, 63 ]
 ```
 
 `方案六 forEach方法去重`
+
 ```
 Array.prototype.distinct=function (){
 	var a=[],obj={},temp=this;
@@ -2335,8 +2340,9 @@ console.log(getNumberWithRecursion(1));
 
 ----------------------
 
-##4. DOM
+## 4.DOM
 **DOM**（文档对象模型(Document Object Model)）
+
 > 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可扩展标志语言的标准编程接口。在网页上，组织页面（或文档）的对象被组织在一个树形结构中，用来表示文档中对象的标准模型就称为DOM。Document Object Model的历史可以追溯至1990年代后期微软与Netscape的“浏览器大战”，双方为了在JavaScript与JScript一决生死，于是大规模的赋予浏览器强大的功能。微软在网页技术上加入了不少专属事物，既有VBScript、ActiveX、以及微软自家的DHTML格式等，使不少网页使用非微软平台及浏览器无法正常显示。DOM即是当时蕴酿出来的杰作。
 
 **DOM的分级**
@@ -2351,20 +2357,24 @@ console.log(getNumberWithRecursion(1));
  + 3级DOM通过引入统一方式载入和保存文档和文档验证方法对DOM进行进一步扩展，DOM3包含一个名为“DOM载入与保存”的新模块，DOM核心扩展后可支持XML1.0的所有内容，包括XML Infoset、 XPath、和XML Base。
 
 **`O级别DOM`**
+
 > 当阅读与DOM有关的材料时，可能会遇到参考0级DOM的情况。`需要注意的是并没有标准被称为0级DOM`，它仅是DOM历史上一个参考点（0级DOM被认为是在Internet Explorer 4.0 与Netscape Navigator4.0支持的最早的DHTML）。
 
 **优点和缺点**
+
 > DOM的优势主要表现在：易用性强，使用DOM时，将把所有的XML文档信息都存于内存中，并且遍历简单，支持XPath，增强了易用性。
 >
 > DOM的缺点主要表现在：效率低，解析速度慢，内存占用量过高，对于大文件来说几乎不可能使用。另外效率低还表现在大量的消耗时间，因为使用DOM进行解析时，将为文档的每个element、attribute、processing-instruction和comment都创建一个对象，这样在DOM机制中所运用的大量对象的创建和销毁无疑会影响其效率。
 
 **DOM树(文档树)**
+
 >  当浏览器加载HTML页面的时候，首先就是DOM结构的计算，计算出来的DOM结构就是DOM树（把页面中的HTML标签像树桩结构一样，分析出之间的层级关系）
 >
 >  DOM树描述了标签和标签之间的关系（节点间的关系），我们只要知道任何一个标签，都可以依据DOM中提供的属性和方法，获取到页面中任意一个标签或者节点
 
-###4.1 JS中获取DOM元素的方法
+### 4.1 JS中获取DOM元素的方法
 **`getElementById`**
+
 > 通过元素的ID获取指定的元素对象，使用的时候都是 `document.getElementById('')` 此处的document是限定了获取元素的范围，我们把它称之为“上下文(context)”
 >
 > 在JS中，默认会把元素的ID设置为变量（不需要在即获取设置），而且ID重复，获取的结果就是一个集合，包含所有ID项，不重复就是一个元素对象（类似于ById获取的结果）
@@ -2374,13 +2384,14 @@ console.log(getNumberWithRecursion(1));
   3. 在IE6~7浏览器中，会把表单元素(input...)的name属性值当做ID来使用（建议：以后使用表单元素的时候，不要让name和id的值有冲突）
 
 **`getElementsByTagName`**
+
 > `[context].getElementsByTagName`在指定的上下文中，根据标签名获取到一组元素集合（HTMLCollection）
 1. 获取的元素集合是一个类数组（不能直接的使数组中的方法）
 2. 它会把当前上下文中，子子孙孙（后代）层级内的标签都获取到（获取的不仅仅是儿子级的）
 3. 基于这个方法获取到的结果永远都是一个集合（不管里面是否有内容，也不管有几项，它是一个容器或者集合），如果想操作集合中具体的某一项，需要基于索引获取到才可以
 
-
 **`getElementsByClassName`**-不兼容IE6~8
+
 > `[context].getElementsByClassName()`在指定的上下文中，基于元素的样式类名（class='xxx'）获取到一组元素集合
 >
   1. 真实项目中，我们经常是基于样式类来给元素设置样式，所以在JS中，我们也会经常基于样式类来获取元素，但是此方法在IE6~8下不兼容
@@ -2405,21 +2416,22 @@ Node.prototype.queryElementsByClassName = function queryElementsByClassName() {
 };	
 ```
 
-
 **`getElementsByName`**
+
 > `document.getElementsByName()`它的上下文也只能是document，在整个文档中，基于元素的name属性值获取一组节点集合（也是一个类数组）
 >
   1. 在IE浏览器中（IE9及以下版本），只对表单元素的name属性起作用（正常来说：我们项目中只会给表单元素设置name，给非表单元素设置name，其实是一个不太符合规范的操作）
   2. 上下文也只能是document
 
-
 **`querySelector`**   ---->不兼容IE6~8 ------>没有DOM映射
+
 > `[context].querySelector()` 在指定的上下文中基于选择器（类似于CSS选择器）获取到指定的元素对象（获取的是一个元素，哪怕选择器匹配了多个，我们只获取第一个）
 
 **`querySelectorAll`**---->不兼容IE6~8 ------>没有DOM映射
 > 在querySelector的基础上，获取到选择器匹配到的所有元素，结果是一个节点集合（NodeList）
 
 `获取浏览器一屏幕的宽度和高度（兼容所有的浏览器）`
+
 ```javascript
 //=>需求：获取浏览器一屏幕的宽度和高度（兼容所有的浏览器）
 document.documentElement.clientWidth || document.body.clientWidth
@@ -2427,8 +2439,8 @@ document.documentElement.clientWidth || document.body.clientWidth
 document.documentElement.clientHeight || document.body.clientHeight
 ```
 
-
 `获取当前页面中所有ID为HAHA的和元素（兼容所有的浏览器）`
+
 ```javascript
 //=>不能使用querySelectorAll
 /*
@@ -2506,11 +2518,13 @@ nodeValue：null
 > - 所有：包含元素节点、文本节点等
 
 **`children`**
+
 > 获取当前元素所有的元素子节点
 >
 > 在IE6~8中会把注释节点也当做元素节点获取到，所以兼容性不好
 
 **`previousSibling`**
+
 > 获取当前节点的上一个哥哥节点（获取的哥哥可能是元素也可能是文本等）
 >
 > previousElementSibling：获取上一个哥哥元素节点（不兼容IE6~8）
@@ -2588,6 +2602,7 @@ function prev(curEle) {
 #### 4.2.3 DOM的增删改
 
 **`createElement（）、createAttibute（）、createTextNode（）、	createFragment`**
+
 > 创建一个元素标签(元素对象)
 > `document.createElement([标签名])`
 
@@ -2606,6 +2621,7 @@ function prev(curEle) {
 > `[curEle].cloneNode(true)`：深克隆，当前标签及其里面的内容都一起克隆了
 
 **`removeChild`**
+
 > 在指定容器中删除某一个元素
 >
 > `[container].removeChild([curEle])`
@@ -2627,8 +2643,8 @@ oBox.getAttribute('myColor'); //=>获取
 oBox.removeAttribute('myColor'); //=>删除
 
 上下两种机制属于独立的运作体制，不能互相混淆使用
-- 第一种是基于对象键值对操作方式，修改当前元素对象的堆内存空间来完成
-- 第二种是直接修改页面中HTML标签的结构来完成（此种办法设置的自定义属性可以在结构上呈现出来）
+- 第一种是基于对象键值对操作方式，修改当前元素对象的堆内存空间来完成（基于js）
+- 第二种是直接修改页面中HTML标签的结构来完成（此种办法设置的自定义属性可以在结构上呈现出来）（基于dom）
 
 基于setAttribute设置的自定义属性值都是字符串
 ```
@@ -3233,7 +3249,7 @@ console.log(str);
 
 
 ### 6.1 变量定义、预解释和闭包
-#### 6.1.1 声明变量有5中方式
+#### 6.1.1 声明变量有6中方式
 + var
 + let 
 + const
@@ -3326,6 +3342,7 @@ g=function(){return false;};
 **闭包其实就是利用函数执行形成一个`私有的不销毁作用域`**，从而在这个`不销毁的私有所用域`中搞事情
 
 **JQuery里的变量、函数或其它对象，就是定义在闭包里的。**
+
 ```javascript
 (function () {
     function jQuery() {
@@ -3339,6 +3356,7 @@ g=function(){return false;};
 // $();
 ```
 **Zepto这种方式：基于RETURN把需要共外面使用的方法暴露出去**
+
 ```javascript
 var Zepto=(function () {
     //...
@@ -3351,8 +3369,8 @@ var Zepto=(function () {
 Zepto.xxx();
 ```
 
-
 `匿名函数中的闭包应用`
+
 ```javascript
 var name = 'BigSpinach';
 var age = 25;
@@ -3367,8 +3385,8 @@ var age = 25;
 ```
 总结1：在这个例子里，定义了两个全局变量name和age，在下面的匿名函数里也定义了变量name和age,但这两组相同的变量互不影响，匿名方法里的变量属于自己的私有的作用域，这个运行的匿名方法就形成了闭包。如果在这个匿名方法想用到全局变量name和age,可以通过传参数的方式传给这个匿名函数
 
-
 `实名函数中的闭包`
+
 ```javascript
 var name = 'BigSpinach';
 var age = 25;
@@ -3401,7 +3419,8 @@ console.log(window.age);//25
 	var age = 25;
 	function selfIntroduction(){//这个函数是私有，外部不能访问。这就形成了一个闭包方法
 		alert("2018年" + name + "已经都" + age + "岁了！");
-	window.selfIntroduction=selfIntroduction;	
+	}
+  window.selfIntroduction=selfIntroduction;	
 })();
 
 //外部访问
@@ -3457,6 +3476,7 @@ for(var i=0; i< oLis.length; i++){
 
 `方案2`
 利用自定义属性值不会反生改变
+
 ```javascript
 	var oBox =document.getElementById('box');
 	var oLis=oBox.getElementsByTagName('li');
@@ -3489,7 +3509,8 @@ for(let i=0; i< oLis.length; i++){
 
 
 
-####6.1.4 关于重名变量和预解释
+#### 6.1.4 关于重名变量和预解释
+
 ```javascript
 function a(x) { 
 	return x * 2;
@@ -3497,6 +3518,10 @@ function a(x) {
 var a;
 console.log(a);
 
+/* 
+第一步  声明
+第二步 赋值（undefined的优先于低于赋值操作，有赋值操作的时候，undefined是不生效的）
+*/
 ```
 【重名的处理】
 > 带VAR和FUNCTION关键字声明相同的名字，这种也算是重名了（其实是一个FN，只是存储值的类型不一样）
@@ -3521,12 +3546,12 @@ console.log(a);
 if (!("a" in window)) {
     var a ="BigSpinach" ;
 }
-alert(a);//
+alert(a);//‘undefined’
 ```
 > 用var关键字声明的变量是预解释的，并且预解释是一种无节操的机制，所以在这段代码执行之前，a已经被声明了，也就是说全局下已经有a这么一个变量了，所以!("a" in window)的结果是false，所以就执行不到 `a ="BigSpinach" ;`
 
+#### 6.1.6 关于闭包和作用域
 
-####6.1.6 关于闭包和作用域
 ```javascript
 function fo(){
 	var i=0;
@@ -3617,6 +3642,7 @@ console.log('a' in window);//返true/false
 >在相同的作用域中，基于LET不能声明相同名字的变量（不管用什么方式在当前作用域下声明了变量，再次使用LET创建都会报错
 
 `ES6的语法检测机制`
+
 > 虽然没有变量提升机制，但是在当前作用域代码自上而下执行之前，浏览器会做一个重复性检测（语法检测）：自上而下查找当前作用域下所有变量，一旦发现有重复的，直接抛出异常，代码也不会在执行了（虽然没有把变量提前声明定义，但是浏览器已经记住了，当前作用域下有哪些变量）
 
 ```javascript
@@ -3703,6 +3729,7 @@ console.log(obj.number);   //
 #### 6.1.9 柯理化函数（闭包的高级应用）
 `柯理化函数其实就是一个函数的预处理的作用`
 【闭包】柯理化函数
+
 > 函数执形成一个私有的作用域，保护里面的私有变量不受外界的干扰，这种保护机制称之为“闭包”
 > 市面上的开发者认为的闭包是：形成一个不销毁的私有作用域（私有栈内存）才是闭包
 
@@ -3746,7 +3773,7 @@ fn(6)(3);
 f(3);
 ```
 
-![Alt text](./1541352405653.png)
+
 
 
 ```javascript
@@ -3778,9 +3805,17 @@ f(5);//=>32
 > 面向对象的思想已经涉及到软件开发的各个方面。如，面向对象的分析（OOA，Object Oriented Analysis），面向对象的设计（OOD，Object Oriented Design）、以及我们经常说的面向对象的编程实现（OOP，Object Oriented Programming）。 [2] 
 
 > 面向对象的分析根据抽象关键的问题域来分解系统。面向对象的设计是一种提供符号设计系统的面向对象的实现过程，它用非常接近实际领域术语的方法把系统构造成“现实世界”的对象。面向对象程序设计可以看作一种在程序中包含各种独立而又互相调用的对象的思想，这与传统的思想刚好相反：传统的程序设计主张将程序看作一系列函数的集合，或者直接就是一系列对电脑下达的指令。面向对象程序设计中的每一个对象都应该能够接受数据、处理数据并将数据传达给其它对象，因此它们都可以被看作一个小型的“机器”，即对象。
-####6.3.1 一个对象的设计模式:单例模式
+>
+> 
+>
+> 
+
+
+#### 6.3.1 一个对象的设计模式:单例模式
+
 【基本单例模式】
 **对象字面量**
+
 ```javascript
 var liukai = {
 	name:"liukai",
@@ -3881,6 +3916,9 @@ for(var i = 0;i<30;i++){
 【缺点】
 > 生产出来的对象单一，没有特殊性
 #### 6.3.3 有区别的批量生成对象：构造函数
+
+
+
 ##### 6.3.3.1 【基于构造函数创建自定义类（constructor）】
 > 1. 在普通函数执行的基础上“new xxx()”，这样就不是普通函数执行了，而是构造函数执行，当前的函数名称之为“类名”，接收的返回结果是当前类的一个实例
 > 2. 自己创建的类名，最好第一个单词首字母大写
@@ -3900,8 +3938,8 @@ var f2 = new Fn("bigspinach",25);
 ```
 #####  6.3.3.2 创建值的两种方式
 【JS中创建值有两种方式】
-> 1.字面量表达式
-> 2.构造函数模式
+> 1. 字面量表达式
+> 2. 构造函数模式
 
 ```javascript
 var obj = {};//=>字面量方式
@@ -4377,7 +4415,50 @@ var b = new B();
 > 在JS中通过相关的属性可以获取(设置)元素的样式信息,这些属性就是盒子模型属性（基本上都是有关于样式的）
 ### 7.1
 
-## 8. 
+
+
+
+
+## 8.  js中常用内置对象
+
+
+
+###  8.1 JSON
+
+```javascript
+dir(window.JSON);
+JSON
+	parse: ƒ parse()
+	stringify: ƒ stringify()
+	Symbol(Symbol.toStringTag): "JSON"
+	__proto__: Object
+```
+
+
+
+常用方法 
+
+parse
+
+stringfy
+
+
+
+
+
+### 8.2 Math
+
+
+
+
+
+
+
+### 8.3 Date
+
+
+
+
 
 ## 9. 
 
