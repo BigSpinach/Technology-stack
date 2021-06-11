@@ -1,0 +1,9 @@
+/*设置容器样式*/
+.textBox{
+  margin: 50px auto;
+  width: 800px;
+}
+/*基于css3 伪类实现隔行变色*/
+.textBox li:nth-child(odd){
+  background-color: aqua;
+}

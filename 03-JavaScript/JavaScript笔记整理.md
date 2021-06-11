@@ -4406,7 +4406,72 @@ var b = new B();
 ```
 
 
-#### 6.3.4 
+
+
+
+
+
+##### 6.3.6 原型重定向
+
+1. 浏览器默认原型机制
+
+   ![image-20210610175618187](imgs/image-20210610175618187.png)
+
+   ```javascript
+   function fn (){}
+   /*
+   	浏览器默认会自动在fn上 增加一个 fn.prototype 属性 ，这个fn.prototype属性中的 constructor 属性☞回当前函数本身
+   */ 
+   ```
+
+   
+
+2. 手动修改原型链
+
+   ```javascript
+   //手动修改原型
+   fn.prototype={a:1,b:2};
+   ```
+
+   ![image-20210610180239220](imgs/image-20210610180239220-1623319364801.png)
+
+3. 由于手动修改 prototype，导致没有constructor，需要手动添加
+
+   ```javascript
+   fn.prototype={
+     a:1,
+     b:2,
+   	constructor:fn
+   };
+   ```
+
+   ![image-20210610180614288](imgs/image-20210610180614288.png)
+
+
+
+
+
+### 6.4 this 
+
+#### 6.4.1 事件绑定中的this
+
+
+
+
+
+#### 6.4.2  自执行函数中的this
+
+
+
+#### 6.4.3  obj.fn() 和 fn() 中的this
+
+
+
+
+
+#### 6.4.4 call  、apply、bind
+
+
 
 
 

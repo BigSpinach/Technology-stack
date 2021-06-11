@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选项卡</title>
+  <link rel="stylesheet" href="css/reset.min.css">
+  <style>
+    /*base css*/
+    .l {
+      float: left;
+    }
+
+    .r {
+      float: right;
+    }
+
+    .clearfix::after,
+    .clearfix::before {
+      display: block;
+      content: "";
+      clear: both;
+      overflow: hidden;
+    }
+
+
+    /*设置选项卡容器的样式*/
+    .tabBox {
+      margin: 50px auto;
+      width: 500px;
+      /* background-color: aqua; */
+    }
+
+    /*设置选项卡按钮的样式*/
+    .tabBox ul li {
+      width: 100px;
+      height: 30px;
+      /* background: brown; */
+      float: left;
+      cursor: pointer;
+      border: 1px solid #666;
+      line-height: 30px;
+      text-align: center;
+      position: relative;
+      top: 1px;
+    }
+
+    .tabBox ul li.active {
+      background: #fff;
+      border-bottom: 1px transparent solid;
+    }
+
+    /*设置选项卡鼠标移入效果*/
+    .tabBox ul li:hover {
+      color: white;
+    }
+
+    /*设置选项卡展示div的样式*/
+
+    .tabBox div {
+      width: 500px;
+      height: 300px;
+      background: chartreuse;
+      border: 1px solid #666;
+      display: none;
+      text-align: center;
+      line-height: 300px;
+    }
+
+    /*点击拥有激活样式*/
+    .tabBox div.active {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="tabBox">
+    <ul class="clearfix">
+      <li class="active">电影</li>
+      <li>音乐</li>
+      <li>图书</li>
+    </ul>
+    <div class="active">电影电影电影电影电影电影电影电影电影</div>
+    <div>music</div>
+    <div>books</div>
+
+  </div>
+
+</body>
+<!-- <script src="js/index.js"></script> -->
+<script src="js/customAttribute.js"></script>
+
+</html>
