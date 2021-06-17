@@ -2649,6 +2649,125 @@ oBox.removeAttribute('myColor'); //=>删除
 基于setAttribute设置的自定义属性值都是字符串
 ```
 
+
+
+
+
+#### 4.2.4 DOM 映射机制
+
+HTML中的元素与js获取的元素存在一一对应的映射关系，修改其中一个，另一个也会发生改变
+
+实际上是（浏览器渲染机制）：每一个DOM元素都存储在一个堆内存中，修改这个堆内存内的内容，浏览器不会重新渲染（重新计算DOM Tree）；只有当往里增加或者删除堆内存的时候，浏览器会重新计算渲染。
+
+
+
+重绘：（修改一些样式属性，自定义属性，等等属性的时候）
+
+重排：DOM回流（修改元素位置的时候发生，浏览器重新计算DOM Tree，耗性能）
+
+
+
+
+
+
+
+### 4.3 DOM盒子模型
+
+使用js获取或者设置元素的样式的属性，盒子模型属性。
+
+
+
+#### 4.3.1 client系列
+
+元素可视区域===内容+padding
+
++ clientWidth：
++ clientHeight:
++ clientLeft: 左边框的宽度
++ clientTop:上边框的宽度
+
+
+
+常用
+
+```javascript
+//获取 一屏 可视区域的宽高
+let w = document.documentElement.clientWidth||documnet.body.clientWidth;
+```
+
+
+
+#### 4.3.2 offset系列
+
+偏移量？ 页面布局 的宽高 === 内容+padding+ border
+
+
+
++ offsetWidth
+
++ offsetHeight
+
++ offsetParent：
+  改变父级参照物，即，使当前元素拥有`z-index`属性，当前元素便作为下级元素的父级参照物（一般设置float 或者position）
+
+  同一平面内，默认所有元素的父级参照物都是 body，body的父级参照物是null
+
++ offsetLeft: 
+
++ offsetTop: 距离父级参照物的上偏移量（当前元素的外边框位置—-父级参照物元素的内边框）
+
+
+
+
+
+#### 4.3.3 scroll系列
+
+HTML页面的真实高度 === 页面内容真实高度（包含溢出部分）+padding
+
+是一个约等于的值，此值不准确
+
+
+
++ scrollWidth
++ scrollHeight
++ scrollLeft
++ scrollTop: 滚动条卷动的高度，取值范围0~（真实页面高度-屏幕的高度）
+
+
+
+注意：只有`scrollLeft`和`scrollTop`是可读写属性，其他属性都是**只读**
+
+
+
+常用
+
+```javascript
+//获取 HTML 页面的 宽高
+let w_HTML = document.documenElement.scrollHeight || document.body.scrollHeight ;
+```
+
+
+
+
+
+#### 4.3.4 `window.getComputedStyle()`
+
+ window.getComputedStyle([ele],[伪类，一般写null])；
+
+获取某元素ele 被浏览器计算后的样式属性。 
+
+
+
+[ele].style.xxx:只能获取行内应样式
+
+
+
+IE6~8 使用 [ele].currentStyle()
+
+
+
+
+
 --------------
 
 ## 5. RegExp
@@ -3938,7 +4057,7 @@ var f2 = new Fn("bigspinach",25);
 ```
 #####  6.3.3.2 创建值的两种方式
 【JS中创建值有两种方式】
-> 1. 字面量表达式
+> 1. 字面量表达式(对象初始化器)
 > 2. 构造函数模式
 
 ```javascript
@@ -4049,6 +4168,17 @@ Fn.prototype.getY();//=>this:Fn.prototype  =>console.log(Fn.prototype.y); =>unde
 ```
 
 #### 6.3.5 js中的继承
+
+> JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（**prototype** ）。该原型对象也有一个自己的原型对象( __proto__ ) ，层层向上直到一个对象的原型对象为 `null`。根据定义，`null` 没有原型，并作为这个**原型链**中的最后一个环节。
+
+基于原型链的继承
+
+
+
+
+
+
+
 ##### 6.3.5.1 原型继承
 ```javascript
 //第一种：原型链继承
@@ -4409,9 +4539,7 @@ var b = new B();
 
 
 
-
-
-##### 6.3.6 原型重定向
+#### 6.3.6 原型重定向
 
 1. 浏览器默认原型机制
 
@@ -4451,7 +4579,169 @@ var b = new B();
 
 
 
+#### 6.3.7 [4 个用于拓展原型链的方法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#总结：4_个用于拓展原型链的方法)
+
+
+
+##### 6.3.7.1 New-initialization
+
+```javascript
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+var proto = new foo;
+proto.bar_prop = "bar val";
+
+
+function bar(){};
+bar.prototype = proto;
+var inst = new bar;
+
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+```
+
+优点：支持目前以及所有可想象到的浏览器(IE5.5都可以使用)。 这种方法非常快，非常符合标准，并且充分利用JIT优化。
+
+缺点：为使用此方法，必须对相关函数初始化。 在初始化过程中，构造函数可以存储每个对象必须生成的唯一信息。但是，这种唯一信息只生成一次，可能会带来潜在的问题。此外，构造函数的初始化，可能会将不需要的方法放在对象上。然而，如果你只在自己的代码中使用，你也清楚（或有通过注释等写明）各段代码在做什么，这些在大体上都不是问题（事实上，通常是有益处的）。
+
+
+
+##### 6.3.7.2 Object.create
+
+```javascript
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = Object.create(
+  foo.prototype
+);
+proto.bar_prop = "bar val";
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+Copy to Clipboard
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = Object.create(
+  foo.prototype,
+  {
+    bar_prop: {
+      value: "bar val"
+    }
+  }
+);
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop)
+```
+
+优点：支持当前所有非微软版本或者 IE9 以上版本的浏览器。允许一次性地直接设置 `__proto__` 属性，以便浏览器能更好地优化对象。同时允许通过 `Object.create(null) `来创建一个没有原型的对象。
+
+缺点：不支持 IE8 以下的版本。然而，随着微软不再对系统中运行的旧版本浏览器提供支持，这将不是在大多数应用中的主要问题。 另外，这个慢对象初始化在使用第二个参数的时候有可能成为一个性能黑洞，因为每个对象的描述符属性都有自己的描述对象。当以对象的格式处理成百上千的对象描述的时候，可能会造成严重的性能问题。
+
+
+
+##### 6.3.7.3 Object.setPrototypeOf
+
+```javascript
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = {
+  bar_prop: "bar val"
+};
+Object.setPrototypeOf(
+  proto, foo.prototype
+);
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+Copy to Clipboard
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto;
+proto=Object.setPrototypeOf(
+  { bar_prop: "bar val" },
+  foo.prototype
+);
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop)
+```
+
+优点：支持所有现代浏览器和微软IE9+浏览器。允许动态操作对象的原型，甚至能强制给通过 `Object.create(null) `创建出来的没有原型的对象添加一个原型。
+
+
+
+缺点：这个方式表现并不好，应该被弃用。如果你在生产环境中使用这个方法，那么快速运行 Javascript 就是不可能的，因为许多浏览器优化了原型，尝试在调用实例之前猜测方法在内存中的位置，但是动态设置原型干扰了所有的优化，甚至可能使浏览器为了运行成功，使用完全未经优化的代码进行重编译。 不支持 IE8 及以下的浏览器版本。
+
+
+
+
+
+
+
+
+
+##### 6.3.7.4`__proto__`
+
+
+
+```javascript
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = {
+  bar_prop: "bar val",
+  __proto__: foo.prototype
+};
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+Copy to Clipboard
+var inst = {
+  __proto__: {
+    bar_prop: "bar val",
+    __proto__: {
+      foo_prop: "foo val",
+      __proto__: Object.prototype
+    }
+  }
+};
+console.log(inst.foo_prop);
+console.log(inst.bar_prop)
+```
+
+优点：支持所有现代非微软版本以及 IE11 以上版本的浏览器。将 `__proto__` 设置为非对象的值会静默失败，并不会抛出错误。
+
+缺点： 应该完全将其抛弃因为这个行为完全不具备性能可言。 如果你在生产环境中使用这个方法，那么快速运行 Javascript 就是不可能的，因为许多浏览器优化了原型，尝试在调用实例之前猜测方法在内存中的位置，但是动态设置原型干扰了所有的优化，甚至可能使浏览器为了运行成功，使用完全未经优化的代码进行重编译。不支持 IE10 及以下的浏览器版本。
+
+
+
+
+
 ### 6.4 this 
+
+> JavaScript 有一个特殊的关键字 `this`，它可以在方法中使用以指代当前对象。
 
 #### 6.4.1 事件绑定中的this
 
@@ -4471,13 +4761,88 @@ var b = new B();
 
 #### 6.4.4 call  、apply、bind
 
+call(tagThis,x,y,…)
+
+ *   1.非严格模式下，如果参数不传，或者第一个传递的是null/undefined，THIS都指向WINDOW
+ *   2.在严格模式下，第一个参数是谁，THIS就指向谁（包括null/undefined），不传THIS是undefined
+
+```javascript
+Function.prototypr.call = function (){
+  //第一步：修改this指向
+  //把第一个参数改为this，后续参数改为执行函数的参数列表
+  let parameter_first = arguments[0];
+  let other_parameter = [];
+  /*
+  	获取arguments之后的参数
+  	[...arguments]
+  */
+  for(let i=1;i< arguments.length;i++){
+    other_parameter.push(arguments[i]);
+  }
+  
+  //第二步： 让函数执行，并传递剩余参数
+  this(other_parameter);
+}
+```
+
+```javascript
+//分析
+function fn() {
+     console.log(typeof this);
+     console.log(this + 3);
+    }
+
+ fn.call(1);
+//call(1)执行
+//第一步：修改调用函数 fn中的第一个参数作为this，修改fn中的this=>1
+//第二步：把其他参数 传递给fn作为形参
+//第三步：调用函数 fn();// 一般写 this(),this指的就是fn这个调用者
+
+//根据以上
+//typeof this  即typeof Number(1)-------------js装箱操作
+//this -------js拆箱操作  1
+//1+3       =>4
+```
 
 
 
 
 
-## 7 JS盒子模型
-> 在JS中通过相关的属性可以获取(设置)元素的样式信息,这些属性就是盒子模型属性（基本上都是有关于样式的）
+
+
+apple(tagThis,[,,,]);
+
+
+
+bind(tagThis,x,y);
+
+bind和call语法上基本一致，bind在于先绑定，不会自动执行，需要触发才会执行
+
+
+
+#### 6.4.5 应用
+
+
+
+1. 利用Math.min(),Math.max()函数，获取数组中的最大值和最小值
+
+   ```javascript
+   let arr=[1,2,3,4,5,6,7,5,4,3,3];
+   Math.min.apply(null,arr);
+   
+   //ES6 展开运算符...
+   Math.max(...arr);
+   ```
+
+   
+
+2. 
+
+
+
+
+## 7 
+> 
 ### 7.1
 
 
@@ -4525,7 +4890,97 @@ stringfy
 
 
 
-## 9. 
+## 9. ajax
+
+
+
+
+
+`ajax(Async JavaScript And XML)`
+
+> 异步JavaScript和XML
+
+
+
+ajax核心对象`XMLHttpReqeust`
+
+#### 9.1 ajax起步-发送HTTP请求
+
+1.兼容低版本浏览器创建Ajax对象
+
+```javascript
+// Old compatibility code, no longer needed.
+if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+    httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) { // IE 6 and older
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}
+```
+
+
+
+2.检测处理响应函数 `onreadystatechange`
+
+```javascript
+httpRequest.onreadystatechange = function(){
+    // Process the server response here.
+};
+```
+
+3.发出请求和请求数据
+
+```javascript
+httpRequest.open('GET', 'http://www.example.org/some.file', true);
+							//请求方式    请求地址                         是否异步（默认true）
+httpRequest.send('***');
+```
+
+
+
+
+
+特别的 post请求需要设置一些请求头信息
+
+```javascript
+httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+```
+
+
+
+
+
+#### 9.2 ajax起步-处理服务器响应
+
+
+
+在发送请求时创建的js函数负责处理响应
+
+```javascript
+httpRequest.onreadystatechange =function(){
+  //这个函数用于处理服务器响应
+  
+  //在这里用到检测函数状态的  XMLHTTPRequest.readyState 属性
+  //这个属性用于记录 响应函数的状态
+  //0 (未初始化) or (请求还未初始化)
+	//1 (正在加载) or (已建立服务器链接)
+	//2 (加载成功) or (请求已接受)
+	//3 (交互) or (正在处理请求)
+	//4 (完成) or (请求已完成并且响应已准备好)
+  
+  
+  //httpRequest.status
+  if( httpRequest.readyState==400&&httpRequest.status === 200){
+     //httpRequest.responseText – 服务器以文本字符的形式返回
+    //httpRequest.responseXML – 以 XMLDocument 对象方式返回，之后就可以使用JavaScript来处理
+     }
+}
+```
+
+
+
+
+
+
 
 ## 10 
 

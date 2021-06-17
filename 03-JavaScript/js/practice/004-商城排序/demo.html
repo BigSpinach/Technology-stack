@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排序</title>
+  <link rel="stylesheet" href="./css/reset.min.css">
+  <style>
+    .container{
+      margin: 50px auto;
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <button id="btn">排序</button>
+    <!-- 商品 commodity   -->
+    <ul class="commodities">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </div>
+
+</body>
+<script>
+  //获取要排序的目标元素 lis
+  let commodities = document.getElementsByClassName('commodities')[0];
+  let lis = commodities.getElementsByTagName('li');
+  let btn = document.getElementById('btn');
+  //lis为类数组，需要转化为数组进行操作
+  let lis_arr = [...lis];
+
+
+  //增加标识  flag =up/down 0/1
+  let flag = 0;
+  btn.onclick = function () {
+    //依据标识  将lis_arr进行排序
+    //将排序后的lis_arr追加到页面中
+    if (flag == 0) {
+      lis_arr.sort(function (a, b) {
+        return b.innerHTML - a.innerHTML;
+      });
+      //修改标识
+      flag = 1;
+      console.log('ok');
+    } else { //1或其他
+      lis_arr.sort(function (a, b) {
+        return a.innerHTML - b.innerHTML;
+      });
+      flag = 0;
+    }
+
+    //追加到页面
+    lis_arr.forEach(item => {
+      commodities.appendChild(item);
+    });
+
+  }
+</script>
+
+</html>
