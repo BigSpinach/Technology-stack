@@ -52,6 +52,7 @@ let productModeRender = (function () {
     //循环遍历 linkList 中的每一个 a
     //为每一个a 绑定点击事件
     linkList.forEach((item, index) => {
+      //console.log(this);//window 箭头函数指向上级作用域
       item.flag = -1;
       item.onclick = function () {
         this.flag *= -1;
