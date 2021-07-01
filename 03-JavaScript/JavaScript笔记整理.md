@@ -11,6 +11,7 @@
 ## 1 基础语法
 ### 1.1  变量
 **变量（variable）**
+
 >  它不是具体的值，只是一个用来存储具体值的容器或者代名词，因为它存储的值可以改变，所以称为变量
 
 #### 1.1.1  创建变量的方式
@@ -70,8 +71,6 @@ JavaScript 是一种**弱类型**或者说**动态**语言。这意味着你不�
 
 
 #### 1.2.2 数据类型
-
-
 
 **基本类型（原始类型）**（基本数值、基本数据类型）是一种既非[对象]也无[方法]的数据。
 
@@ -1307,6 +1306,7 @@ var arr=new Array(1,2,3,4);
 ```
 
 **`arr[arr.length]=x`**
+
 ```javascript
 let arr = [1,2,{'sname':"刘凯",'sage':25},["a","b","c"],"xxx"];
 	//末尾增
@@ -1360,6 +1360,7 @@ console.log(arr2);	//0,1,2,3,4,5,6,7,8,1,2,3,22,33,44
 ##### 2.7.1.3 `splice的增删改`
 
 **`splice(n,m,x,...)`**
+
 > 基于 `splice`可以对数组进行很多的操作：删除指定位置的内容、向数组指定位置增加内容、还可以修改指定位置的信息
 
 `删除：ary.splice(n,m)`
@@ -1585,9 +1586,15 @@ alert(result);	//此时会返回的结果是 [6,7];
 ```
 **`map()`**
 
-> 对数组中的每一项运行给定的函数，返回**每次函数调用的结果组成的`数组`**
+> 方法创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。
 ```javascript
+const array1 = [1, 4, 9, 16];
 
+// pass a function to map
+const map1 = array1.map(x => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
 ```
 **`some()`**
 
@@ -1773,7 +1780,7 @@ console.log(arr.myUnique());//[ 1, 2, 4, 5, 6, 3, 63 ]
 
 `方案六 forEach方法去重`
 
-```
+```javascript
 Array.prototype.distinct=function (){
 	var a=[],obj={},temp=this;
 	temp.forEach(function (value, index, temp){
@@ -2586,9 +2593,25 @@ IE6~8 使用 [ele].currentStyle()
 
 #### 4.4.2 window 对象 方法
 
-定时器：setInterval、setTimeout 、clearIntel、clearTimeout
+定时器：setInterval、setTimeout 
 
+清除定时器：clearIntel和clearTimeout
 
+	这两个方法中的任何一个都可以清除用任何方法创建的定时器
+	1. 设置定时器会有一个返回值，这个值是一个数字，属于定时器的编号，代表当前是第几个定时器（不管是基于setTimeout还是setInterval创建定时器，这个编号会累加）
+	2.clearTimeout([序号])/clearInterval([序号])：根据序号清除浏览器中设定的定时器
+
+```javascript
+let count = 0;
+let timer = setInterval(() => {
+    count++;
+    console.log(count);
+    if (count === 5) {
+        //=>清除定时器
+        clearTimeout(timer);
+    }
+}, 1000);
+```
 
 其他方法
 
@@ -2619,6 +2642,343 @@ IE6~8 使用 [ele].currentStyle()
 
 
 ### 4.5 DOM event
+
+#### 4.5.1 事件-元素的行为
+
+概念：元素天生自带的行为
+
+事件绑定：给对应的事件行为绑定对应的方法
+
+```javascript
+[鼠标事件]
+ *    click：点击 (PC端是点击，移动端的click代表单击[移动端使用click会有300MS延迟的问题])
+ *    dblclick：双击
+ *    mouseover：鼠标经过
+ *    mouseout：鼠标移出
+ *    mouseenter：鼠标进入
+ *    mouseleave：鼠标离开
+ *    mousemove：鼠标移动
+ *    mousedown：鼠标按下（鼠标左右键都起作用，它是按下即触发，click是按下抬起才会触发，而且是先把down和up触发，才会触发click）
+ *    mouseup：鼠标抬起
+ *    mousewheel：鼠标滚轮滚动
+ *    ...
+ *
+ *  [键盘事件]
+ *    keydown：键盘按下
+ *    keyup：键盘抬起
+ *    keypress：和keydown类似，只不过keydown返回的是键盘码，keypress返回的是ASCII码值
+ *    input：由于PC端有实体物理键盘，可以监听到键盘的按下和抬起，但是移动端是虚拟的键盘，所以keydown和keyup在大部分手机上都没有，我们使用input事件统一代替他们（内容改变事件）
+ *    ...
+ *
+ *  [表单元素常用的事件]
+ *    focus：获取焦点
+ *    blur：失去焦点
+ *    change：内容改变
+ *    ...
+ *
+ *  [其它常用事件]
+ *    load：加载完成
+ *    unload
+ *    beforeunload
+ *    scroll：滚动条滚动事件
+ *    resize：大小改变事件  window.onresize=function(){} 当浏览器窗口大小发生改变，会触发这个事件，执行对应的事情
+ *    ...
+ *
+ *  [移动端手指事件]
+ *    [touch：单手指操作]
+ *      touchstart：手指按下
+ *      touchmove：手指移动
+ *      touchend：手指离开
+ *      touchcancel：因为意外情况导致手指操作取消
+ *
+ *    [gesture：多手指操作]
+ *      gesturestart：手指按下
+ *      gesturechange：手指改变
+ *      gestureend：手指离开
+ *    ...
+ *
+ *  [H5中的AUDIO/VIDEO音视频事件]
+ *    canplay：可以播放（播放过程中可能出现由于资源没有加载完成，导致的卡顿）
+ *    canplaythrough：资源加载完成，可以正常无障碍播放
+ *    ...
+ */
+```
+
+
+
+#### 4.5.2 事件绑定和事件对象
+
+DOM0级事件绑定
+
+ ```javascript
+ [element].onxxx=function(){}
+ //绑定原理：给元素的某一个私有属性（事件名，例如onclick）的赋值操作
+ //
+ oDiv.onclick=function(){console.log(1)};
+ oDiv.onclick=function(){console.log(2)};
+ //当点击oDIV的时候，只会输出2，以为之前写的赋值函数被下边的替代了
+ ```
+
+MOD2级事件绑定
+
+```javascript
+[element].addEventListener('xxx',handle1,false);
+[element].removeEventListener('xxx',handle1,false);//移除必须实名函数
+
+[element].attachEvent('onxxx',function(){}); //[IE6~8]
+[element].dettachEvent('onxxx',function(){}); //[IE6~8]
+//绑定原理--事件池机制
+/*
+eventTarget.prototype
+	addEventListener
+	removeEventListener
+	dispatchEvent
+*/  
+```
+
+事件对象event
+
+给当前元素的某个事件绑定方法（不管是基于DOM0还是DOM2），都是为了触发元素的相关行为的时候，“不仅把方法执行了，而且浏览器还给方法传递了一个实参信息值 ==>这个值就是事件对象”
+
+```javascript
+document.onclick = function (ev) {
+	console.log(ev);
+  /*
+  MouseEvent]
+      ev.target：事件源（操作的是哪个元素）
+			ev.clientX / ev.clientY ：当前鼠标触发点距离当前窗口左上角的X/Y轴坐标
+			ev.pageX / ev.pageY：当前鼠标触发点距离BODY(第一屏幕)左上角的X/Y轴坐标
+			ev.preventDefault()：阻止默认行为
+			ev.stopPropagation()：阻止事件的冒泡传播
+			ev.type：当前事件类型
+  */
+  
+  document.onkeydown = function (ev) {
+    console.log(ev);
+	};
+  /*
+  //[KeyboardEvent]
+      ev.code：当前按键'keyE'
+      ev.key：当前按键'e'
+      ev.which / ev.keyCode：当前按键的键盘码 69
+       let code = ev.which || ev.keyCode;
+ 
+ 			//=>常用的键盘码 
+       左-上-右-下：37-38-39-40
+      Backspace：8
+      Enter：13
+      Space：32
+       Delete：46
+      
+      Shift：16
+      Alt：18
+      Ctrl：17
+      ESC：27
+      
+       F1~F12：112 ~ 123
+      48~57：数字键
+ */
+}
+```
+
+
+
+IE6~8 没有通过形参传递事件对象
+
+```javascript
+[element].onxxx=function(ev){
+//ev// undefined
+  //IE6~8 使用 window.event
+  ev = window.event;
+  //=>ev.srcElement是获取事件源（标准中使用的是ev.target）
+  console.log(ev.pageX);//=>低版本浏览器的事件对象中不存在pageX/pageY
+  ev.pageX = ev.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+  ev.pageY = ev.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+  ev.which = ev.keyCode;
+  // preventDefault & stopPropagation 这些在低版本下都没有
+	ev.preventDefault = function () {
+      ev.returnValue = false;//=>低版本阻止默认行为
+  };
+ ev.stopPropagation = function () {
+      ev.cancelBubble = true;//=>低版本阻止冒泡传播
+ };
+}
+```
+
+兼容处理
+
+```javascript
+ev = ev || window.event;
+var target = ev.target || ev.srcElement;
+ev.preventDefault ? ev.preventDefault():ev.returnValue = false;
+ev.stopPropagation?ev.stopPropagation():ev.cancelBubble = true;
+```
+
+
+
+#### 4.5.3 阻止默认行为
+
+在HTML结构中阻止
+
+```html
+ <a href="javascript:;">点我~~</a>
+```
+
+在JS中阻止
+
+```javascript
+link.onclick = function (ev) {
+     ev = ev || window.event;
+     ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
+  	//或者 return false
+};
+```
+
+
+
+#### 4.5.4 事件传播机制
+
+ 捕获机制：从最外层元素向内查找，找到事件源为止。查找的目的是为了构建出冒泡传播的路径。
+
+```javascript
+oDiv.onclick = function(ev){
+	console.log(ev.path);
+}
+```
+
+
+
+冒泡传播：触发当前元素的某一个事件（点击事件）行为，不仅当前元素事件行为触发，而且其祖先元素的相关事件行为也会依次被触发，这种机制就是“事件的冒泡传播机制”
+
+默认是从内依次执行到最外层元素
+
+```html
+ <div id="outer" class="clearfix">
+    <div id="inner"></div>
+ </div>
+<script>
+  window.onclick=function(ev){
+    console.log('window');
+  };
+  document.onclick=function(ev){
+    console.log('document');
+  };
+  document.documentElement.onclick=function(ev){
+    console.log('documentElement');
+  };
+  document.body.onclick=function(ev){
+    console.log('body');
+  };
+  outer.onclick=function(ev){
+    console.log('outer');
+  };
+  inner.onclick=function(ev){
+    console.log('inner');
+  };
+</script>
+```
+
+
+
++ xxx.onxxx=function(){}  DOM0事件绑定，
+
+  > 给元素的事件行为绑定方法，这些方法都是在当前元素事件行为的冒泡阶段(或者目标阶段)执行的
+
++  xxx.addEventListener('xxx',function(){},false)  
+
+  > 第三个参数FALSE也是控制绑定的方法在事件传播的冒泡阶段(或者目标阶段)执行；
+  >
+  > 只有第三个参数为TRUE才代表让当前方法在事件传播的捕获阶段触发执行（这种捕获阶段执行没啥实际意义，项目中不用）
+
+
+
+
+
+事件对象的理解？
+
+```javascript
+let target = null;
+document.body.onclick = function (ev) {
+    console.log('body', ev, ev === target);//=>TRUE
+};
+
+outer.onclick = function (ev) {
+    console.log('outer', ev, ev === target);//=>TRUE
+};
+
+inner.onclick=function(ev){
+  //事件对象并不是通过参数ev得到的，是浏览器默认给的，默认arguments[0]就是事件对象
+  //写参数ev 只是方便接收这第一个参数
+    //console.log(arguments);
+  	//console.log(arguments[0]);//MouseEvent {isTrusted: true,  …}
+   	//console.log(arguments[0]===ev);//true
+    //console.log('inner');
+   	aa = ev;
+    console.log('inner', ev);
+  };
+
+
+```
+
+阻止事件冒泡传播
+
+```javascript
+//在目标（想要触发绑定事件的元素身上）阻止
+inner.onclick=function(ev){
+  ev=ev||window.event;
+  ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = true;
+}
+```
+
+#### 4.5.5 事件委托
+
+利用`事件冒泡机制`与`event.target`，只需把监听函数绑定在父容器上即可，根据事件源的不同，执行不同的操作
+
+```html
+	<p>1</p>
+  <p>2</p>
+  <p>3</p>
+  <p>4</p>
+  <p>5</p>
+<script>
+  function changeColor(e) {
+    var target = e.target || e.srcElement;
+    //根据事件源做屏蔽处理，点到body上不变色
+    if(target.nodeName=="BODY"){
+      console.log(1);
+      return;
+    }
+  	target.style.background = "red";
+    //e.currentTarget.style.visibility = "hidden";
+    // e.target.style.visibility = "hidden";
+    //e.target.style.background = "red";
+    //console.log(i);
+    //for循环如果使用var i变量 ls.length  //用的是window.i
+    //for循环如果使用let i变量  i is not defined // 
+    //console.log(e.currentTarget);
+    // 该函数用作事件处理器时: this === e.currentTarget
+  }
+
+  let ps = document.getElementsByTagName('p');
+
+  // for (let i = 0; i < ps.length; i++) {
+  //   // console: 打印被点击的p元素
+  //   ps[i].addEventListener('click', hide, false);
+  // }
+  // console: 打印body元素
+  document.body.addEventListener('click', changeColor, false);
+</script>
+```
+
+
+
+#### 4.5.6 事件池机制
+
+浏览器默认创建一个事件池
+
+1. 按照顺序往事件池中增加事件行为（函数）【oDiv.addeventListener('click',fn1,false)】
+2. 如果增加的事件的事件类型，事件名，事件阶段（冒泡捕获）与之前添加的对应事件都相同，事件池会忽略这次添加（简单理解为去重）
+3. 事件池的执行：按照添加顺序执行
 
 
 
@@ -2732,6 +3092,7 @@ g：global 全局匹配
 ```
 
 **【常用的元字符】**
+
 > [量词元字符]  
 > +：让前面的元字符出现一到多次   
 >  ?：出现零到一次   
@@ -2755,10 +3116,15 @@ g：global 全局匹配
 > ()：正则的小分组，匹配一个小分组（小分组可以理解为大正则中的一个小正则）  
 >
 > ^：以某一个元字符开始  
-> $：以某一个元字符结束  
+>
+> $：以某一个元字符结束
+>
 > ?:：只匹配不捕获   
+>
 > ?=：正向预查  
+>
 > ?!：负向预查   
+>
 > ……
 
 > [普通元字符]
@@ -2959,7 +3325,8 @@ function getAllReg(reg,str){
 	while(arr){//如果不为null，就继续         
 		result.push(arr[0]);         
 		arr=reg.exec(str);     
-	}     return result;   
+	}     
+    return result;   
 } 
  
 let reg =/\d+/g; 
@@ -3085,6 +3452,7 @@ console.log(arr1);//["liukai789", "789", index: 18, input: "liukai123li ukai456l
 #### 5.3.5 正则捕获`replace`
 
 `str.replace(a,b)的原理`
+
 ```javascript
 //str.replace(a,b)的原理     
 //把字符串str中a样式的字符串用b替换掉-------他只替换一次     
@@ -3113,6 +3481,7 @@ console.log(result);//B哈哈gSp哈哈nach love program
 ### 5.4 正则的一些应用场景
 #### 5.4.1  `replace中使用匿名函数操作str`
 **`【replace的关键点】`**
+
 > 1. function()函数执行几次取决于字符串中的字符跟正则匹配成功了几次   
 > 2. function()中的arguments输出的结果跟 reg.exec捕获到的结果非常的相似，   即使正则分组，我们也可以通过arguments获取到分组捕获的内容   
 > 3. 在function中的return，return的是啥，就表示用啥替换掉当前大正则所捕获到的内容
@@ -3174,14 +3543,15 @@ for (let key in obj) {
 console.log("多出现的字符是："+arr.toString()+";次数 是："+maxNum+"。"); 
 ```
 
-####5.4.3 replace 实现模板引擎的初步思想
+#### 5.4.3 replace 实现模板引擎的初步思想
 
 ```javascript
 let str ="My name is {0},我今年{1}岁,i love {2}。";       
 let reg = /{(\d+)}/g; 
 let arr=["刘凯", 26, "Program"]; 
-str = str.replace(reg,function(){     
+str = str.replace(reg,function(){   
 	return arr[arguments[1]];
+    //arguments[1]匹配到小正则中的内容 0 1 2
 	//return arr[RegExp.$1];//IE不兼容+Chrom也不行了   
 }); 
  
@@ -3191,7 +3561,7 @@ console.log(str); //My name is Program,我今年Program岁,i love Program。 //M
 #### 5.4.4 使用replace拆分url
 
 ```javascript
-let url = ''http://202.110.112.57/wgdcnccdn.inter.qiyi.comn?name=xx&age=12#ss'; 
+let url = 'http://202.110.112.57/wgdcnccdn.inter.qiyi.comn?name=xx&age=12#ss'; 
  
 //使用正则 
 let reg = /([^?=&#]+)=([^?=&#]+)/g; 
@@ -4658,7 +5028,7 @@ console.log(inst.bar_prop);
 
 
 
-##### 6.3.7.2 Object.create
+##### 6.3.7.2 Object.create（proto[,descriptors]）
 
 ```javascript
 function foo(){}
@@ -4697,6 +5067,21 @@ console.log(inst.bar_prop)
 优点：支持当前所有非微软版本或者 IE9 以上版本的浏览器。允许一次性地直接设置 `__proto__` 属性，以便浏览器能更好地优化对象。同时允许通过 `Object.create(null) `来创建一个没有原型的对象。
 
 缺点：不支持 IE8 以下的版本。然而，随着微软不再对系统中运行的旧版本浏览器提供支持，这将不是在大多数应用中的主要问题。 另外，这个慢对象初始化在使用第二个参数的时候有可能成为一个性能黑洞，因为每个对象的描述符属性都有自己的描述对象。当以对象的格式处理成百上千的对象描述的时候，可能会造成严重的性能问题。
+
+```javascript
+ var obj2 = Object.create(obj, {
+     sex: {
+       value: '男', // 修饰符
+       writable: true, // 可以被修改的
+       configurable: true,
+       enumerable: true
+     },
+     age: {
+       value: 43,
+       enumerable: true
+     }
+  });
+```
 
 
 
@@ -4870,7 +5255,29 @@ bind和call语法上基本一致，bind在于先绑定，不会自动执行，�
 
 
 
-#### 6.4.5 应用
+#### 6.4.5 箭头函数中的this
+
+> this指向上级作用域中的this
+>
+> 
+
+
+
+#### 6.4.6 括号表达式中的this
+
+```javascript
+let obj = {
+	fn:function(){
+		console.log(this);
+    }
+};
+obj.fn();//this=>obj
+;(1,2,3,obj.fn());//this=>window
+```
+
+
+
+#### 6.4.7 应用
 
 
 
@@ -5246,8 +5653,311 @@ httpRequest.onreadystatechange =function(){
 
 
 
+#### 9.3 ajax 常用方法
+
+```javascript
+console.dir(new XHLHttpRequest());
+/*
+	onabort: null
+  onerror: null
+  onload: null
+  onloadend: null
+  onloadstart: null
+  onprogress: null
+  onreadystatechange: null
+  ontimeout: null
+  readyState: 0
+  response: ""
+  responseText: ""
+  responseType: ""
+  responseURL: ""
+  responseXML: null
+  status: 0
+  statusText: ""
+  timeout: 0
+  __proto__: XMLHttpRequest
+      DONE: 4
+      HEADERS_RECEIVED: 2
+      LOADING: 3
+      OPENED: 1
+      UNSENT: 0
+      abort: ƒ abort()			//中断
+      getAllResponseHeaders: ƒ getAllResponseHeaders()//获取所有响应头信息
+      getResponseHeader: ƒ getResponseHeader()//获取对应响应头的信息
+      onabort: (...)			//
+      onerror: (...)
+      onload: (...)
+      onloadend: (...)
+      onloadstart: (...)
+      onprogress: (...)
+      onreadystatechange: (...)
+      ontimeout: (...)
+      open: ƒ open() 		//打开xhr
+      overrideMimeType: ƒ overrideMimeType()  //重写MIME类型
+      readyState: (...)
+      response: (...)
+      responseText: (...)
+      responseType: (...)
+      responseURL: (...)
+      responseXML: (...)
+      send: ƒ send()			//向服务器发送ajax请求
+      setRequestHeader: ƒ setRequestHeader()
+      status: (...)
+      statusText: (...)
+      timeout: (...)
+      upload: (...)
+      withCredentials: (...)
+      constructor: ƒ XMLHttpRequest()
+      Symbol(Symbol.toStringTag): "XMLHttpRequest"
+      get onreadystatechange: ƒ onreadystatechange()
+      set onreadystatechange: ƒ onreadystatechange()
+      get readyState: ƒ readyState()
+      get response: ƒ response()
+      get responseText: ƒ responseText()
+      get responseType: ƒ responseType()
+      set responseType: ƒ responseType()
+      get responseURL: ƒ responseURL()
+      get responseXML: ƒ responseXML()
+      get status: ƒ status()
+      get statusText: ƒ statusText()
+      get timeout: ƒ timeout()
+      set timeout: ƒ timeout()
+      get upload: ƒ upload()
+      get withCredentials: ƒ withCredentials()
+      set withCredentials: ƒ withCredentials()
+      __proto__: XMLHttpRequestEventTarget
+
+*/
+```
 
 
-## 10 
+
+
+
+
+
+## 10.  js中的异步编程
+
+1. 事件绑定
+2. 定时器
+3. ajax
+4. 回调函数
+5. promise
+
+浏览器 的同步异步机制
+
+浏览器是多线程，js是单线程
+
+js实现异步主要靠 浏览器的主任务队列和等待任务队列
+
+**一般js代码执行是在主任务队列中按顺序执行，遇到异步执行代码会将异步代码放到等待任务队列中**
+
+
+
+
+
+
+
+
+
+### 10.1 Promise的基本概念
+
+通过promise设计模式来管理js中的异步编程
+
+`Promise`对象有以下两个特点。
+
++ 对象的状态不受外界影响。`Promise`对象代表一个异步操作，有三种状态：`pending`（进行中）、`fulfilled`（已成功）和`rejected`（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是`Promise`这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
++ 一旦状态改变，就不会再变，任何时候都可以得到这个结果。`Promise`对象的状态改变，只有两种可能：从`pending`变为`fulfilled`和从`pending`变为`rejected`。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对`Promise`对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+
+
+
+**`Promise`本身是同步的，它可以管理异步操作的代码**
+
+```javascript
+ new Promise(() => {
+//=>执行一个异步的任务（new Promise的时候，创建Promise的一个实例，立即会把当前函数体中的异步操作执行） =>“Promise是同步的，它可以管理异步操作”
+	setTimeout(() => {
+    	//... 
+    }, 1000);
+    console.log(1);//=>先输出1
+}).then();
+console.log(2);//=>再输出2
+```
+
+
+
+
+
+###  10.2 promise的使用
+
+```javascript
+let pro = new Promise((resolve, reject) => {
+    //=>执行一个异步操作
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'data.json', true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let val = xhr.responseText;
+            resolve(val);
+        }
+        if (xhr.status !== 200) {
+            //=>失败
+            reject();
+        }
+    };
+    xhr.send(null);
+});
+pro.then((res) => {
+    console.log(res);
+    //=>数据绑定
+    return 100;//=>它返回的结果传递给第二个THEN,通过形参
+}, () => {
+    console.log('no');
+}).then((res) => {
+    //=>当第一个THEN中的函数执行完，会执行第二个
+    console.log(res);//100
+}, () => {
+
+}).then(() => {
+    //=>当第二个THEN中的函数执行完，会执行第三个
+}, () => {
+
+});
+```
+
+
+
+
+
+### 10.3 Promise深入
+
+`Promise`是ES6中新增加的内置类：目的是为了管理异步操作的
+
+1. new Promise() 创建类的一个实例，每一个实例都可以管理一个异步操作
+
+   - 必须传递一个回调函数进去（回调函数中管理你的异步操作）,不传递会报错
+
+   - 回调函数中会有两个参数
+
+     - resolve：异步操作成功做的事情（代指成功后的事件队列 =>成功后要做的所有的事情都存放到成功这个事件队列中）
+     - reject：异步操作失败做的事情（代指失败后的事件队列）
+
+   - new Promise的时候立即把回调函数执行了（Promise是同步的）
+
+
+
+2. 基于Promise.prototype.then方法（还有catch/finally两个方法）向成功队列和失败队列中依次加入需要处理的事情
+
+3. 如果是多个`then`调用，不是像我们想象的依次把增加的方法执行
+
+   + 异步操作成功或者失败，先把第一个THEN中的方法执行，每当执行一个THEN会返回一个新的Promise实例，这个实例管控的是第一个THEN中方法执行的是成功还是失败
+
+```javascript
+let promise1 = new Promise((resolve, reject) => {
+    $.ajax({
+        url: 'json/data2.json',
+        success(result) {
+            resolve(result);
+        },
+        error(msg) {
+            reject('no');
+        }
+    });
+});
+promise1.then(
+    result => {
+        console.log('THEN1 OK', result);
+        return 100;
+    },
+    msg => {
+        console.log('THEN1 NO', msg);
+        return 100;
+    }
+).then(
+    result => {
+        console.log('THEN2 OK', result);
+    },
+    msg => {
+        console.log('THEN2 NO', msg);
+    }
+);
+```
+
+
+
+```javascript
+//=>建议不要使用THEN中的第二个参数（这样看起来很乱），而是建议我们使用Promise.prototype.catch来管理失败的情况
+let promise1 = new Promise((resolve, reject) => {
+    $.ajax({
+        url: 'json/data2.json',
+        success(result) {
+            resolve(result);
+        },
+        error(msg) {
+            reject('no');
+        }
+    });
+});
+promise1.then(result => {
+    console.log('THEN1 OK', result);
+    100();
+    return 100;
+}).catch(msg => {
+    //=>第一个CATCH
+    //1.异步请求失败会执行它
+    //2.第一个THEN方法失败也会执行它
+    console.log('CATCH1', msg);
+}).then(result => {
+    console.log('THEN2 OK', result);
+}).catch(msg => {
+    console.log('CATCH2', msg);
+});
+
+//=>JS中的异常捕获（目的：把抛出异常的错误捕获到，不让其阻断浏览器的继续执行）
+/*
+try {
+    //=>正常执行的JS代码(可能会报错)
+    1();
+} catch (e) {
+    //=>TRY中的代码报错了会执行CATCH
+    console.log(e.message);
+} finally {
+    //=>不管TRY中的代码成功还是失败都会执行
+}
+*/
+```
+
+
+
+`Promise`管控异步操作，解决回调地狱
+
+```javascript
+let A = function A() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+    });
+};
+
+let B = function B() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+    });
+};
+
+let promise = A();
+promise.then(() => {
+    console.log(1);
+    return B();//=>如果方法中返回的一个具体值，而且执行中没有错误异常，会立即执行下一个THEN中的方法（不写RETURN也是返回的了具体值：undefined），但是如果返回的是一个PROMISR实例（并且管控了一个异步操作），只能等PROMISE完成，把成功后的结果当做具体的值返回，才能进入下一个函数执行
+}).then(() => {
+    console.log(2);
+});
+
+```
+
+
 
 ## 11

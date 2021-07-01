@@ -7,7 +7,7 @@ function randomStrCode(n,str){
   //初始化n和str
   n=n||4;
   str=str||'0123456789qwertyuiopasdfghjklzxcvbnmQAZXSWEDCVFRTGBNHYUJMKIOLP';
-  targetStr='';
+  let targetStr='';
 
   //循环，获取一个随机索引值，与目标字符串拼接  n为字符串长度条件
   for(let i=0;i<n;i++){

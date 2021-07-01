@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- .
+    1. over属于滑过(覆盖)事件，从父元素进入到子元素，属于离开了父元素，会触发父元素的out，触发子元素的over
+      enter属于进入，从父元素进入子元素，并不算离开父元素，不会触发父元素的leave，触发子元素的enter
+ 
+    2.enter和leave阻止了事件的冒泡传播，而over和out还存在冒泡传播的
+  -->
+
+
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+  <p>4</p>
+  <p>5</p>
+
+
+</body>
+<script>
+  function changeColor(e) {
+    var target = e.target || e.srcElement;
+    console.dir(e);
+    //根据事件源做屏蔽处理，点到body上不变色
+    if(target.nodeName=="BODY"){
+      console.log(1);
+      return;
+    }
+  	target.style.background = "red";
+    //e.currentTarget.style.visibility = "hidden";
+    // e.target.style.visibility = "hidden";
+    //e.target.style.background = "red";
+    //console.log(i);
+    //for循环如果使用var i变量 ls.length  //用的是window.i
+    //for循环如果使用let i变量  i is not defined // 
+    //console.log(e.currentTarget);
+    // 该函数用作事件处理器时: this === e.currentTarget
+  }
+
+  let ps = document.getElementsByTagName('p');
+
+  // for (let i = 0; i < ps.length; i++) {
+  //   // console: 打印被点击的p元素
+  //   ps[i].addEventListener('click', hide, false);
+  // }
+  // click事件全部委托到body上代理，根据事件源的不同执行不同的操作
+  document.body.addEventListener('click', changeColor, false);
+</script>
+
+</html>

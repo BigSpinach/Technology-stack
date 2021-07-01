@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #outer{
+      width: 200px;
+      height: 200px;
+      background-color: aquamarine;
+      margin: 50px auto;
+    }
+    #inner{
+      width: 100px;
+      height: 100px;
+      background-color:red;
+      margin: 50px;
+    }
+    .clearfix{
+      content: '';
+      display: block;
+      overflow: hidden;
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outer" class="clearfix">
+    <div id="inner"></div>
+  </div>
+</body>
+<script>
+  window.onclick=function(ev){
+    console.log('window');
+  };
+  document.onclick=function(ev){
+    console.log('document');
+  };
+  document.documentElement.onclick=function(ev){
+    console.log('documentElement');
+  };
+  document.body.onclick=function(ev){
+    console.log('body');
+  };
+  outer.onclick=function(ev){
+    console.log('outer');
+  };
+  inner.onclick=function(ev){
+    console.log(arguments[0]===ev);//true
+    console.log('inner');
+  };
+</script>
+</html>

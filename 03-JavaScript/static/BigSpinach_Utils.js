@@ -132,13 +132,54 @@ window.BigSpinach_Utils = (function () {
   };
 
 
-  
+  /**
+   * checkoutType
+   * @desc 检测目标对象的数据类型，基于Object.prototype.toString 方法
+   * @param {target}
+   */
+  function checkoutType(target) {
+    return Object.prototype.toString.call(target).slice(8, -1);
+  }
+
+  /**
+   * clone
+   * @desc 深克隆一个对象或数组
+   * @param {target}
+   */
+ function clone(target) {
+    let result; //返回的最终的结果（对象或数组）
+    //类型检测，初始化result 的数据类型
+    let checkType = checkoutType(target);
+    if (checkType === 'Object') {
+      result = {};
+    } else if (checkType === 'Array') {
+      result = [];
+    } else {
+      //return result=target;
+      return target;
+    }
+
+    //基于 for...in 进行拷贝
+    for (let item in target) {
+      //target[item] 是当前对象或数组对应的key的value
+      if (checkoutType(target[item]) === 'Object' || 'Array') {
+        result[item] = clone(target[item])
+      } else {
+        result[item] = target[item];
+      }
+    }
+    return result;
+  }
+
+
   return {
     likeAryTo: likeAryToArray,
     jsonTo: JSONStringToJSONObject,
     css,
     offset,
     setScroll,
+    checkoutType,
+    clone
 
   }
 })();

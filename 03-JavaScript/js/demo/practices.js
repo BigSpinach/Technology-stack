@@ -43,7 +43,7 @@ function fn3() {
 fn3();
 
 /*打印三位数位上有m或者n的数字 */
-function fn4() {
+function fn4(m,n) {
   let arr=[];
   for (let i = 100; i < 1000; i++) {
     let numStr = i + '';
@@ -53,7 +53,7 @@ function fn4() {
   }
   return arr;
 }
-fn3();
+console.log(fn4(1,2));
 
 /*计算100的阶乘 1*2....*100    */
 function fn5(n) {

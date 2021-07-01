@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="myInput">
+</body>
+<script>
+
+  //需求：最多输入8个字符
+  let myInput = document.getElementById('myInput');
+  myInput.onkeydown = function(ev){
+    ev = ev||window.event;
+    //获取输入框的值，并去除输入框中的值的首尾空格
+    let val = this.value.replace(/^ +| +  $/g,'');
+    if(val.length>=8){
+      this.value = val.substr(0,8);
+      //阻止输入文字到输入框的默认行为
+      //加以判断,输入的字符不能是 上下左右箭头 delete back-space
+      let code = ev.which|| ev.keyCode;
+      if(!/^(46|8|37|38|39|40)$/.test(code)){
+        return ev.preventDefault?ev.preventDefault():ev.returnValue=false;
+      }
+    }
+  }
+
+</script>
+</html>
