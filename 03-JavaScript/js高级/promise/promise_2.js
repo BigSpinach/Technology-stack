@@ -8,6 +8,9 @@
 //   resolve(value);
 //   reject(reason);
 // });
+const PENDING = 'PENDING';
+const REJECTED = 'REJECTED';
+const FULFILLED = 'FULFILLED';
 
 class Promise {
   constructor(executor) {

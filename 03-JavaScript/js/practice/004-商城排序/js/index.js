@@ -35,8 +35,6 @@ getProducts();
 //根据价格实现排序
 let flag = 0; // 0表示升序，1表示降序
 function sortPrice(data) {
-
-
   if (flag == 0) {
     data.sort((a, b) => {
       return a.price - b.price;
@@ -74,7 +72,6 @@ function sortHot(data) {
 
 //根据发布时间 进行排序
 function sortTime(data) {
- 
   if (flag == 0) {
     data.sort((a, b) => {
       return timeStringToNumber(a.time) - timeStringToNumber(b.time);
@@ -101,10 +98,10 @@ linkList[1].onclick = () => {
 };
 linkList[2].onclick = () => {
 
-   //排序
-   sortPrice(productData);
-   //重新添加到页面
-   bindHTML(productData);
+  //排序
+  sortPrice(productData);
+  //重新添加到页面
+  bindHTML(productData);
 };
 
 
@@ -145,8 +142,6 @@ function bindHTML(data) {
   }
 }
 bindHTML(productData);
-
-
 
 //把时间字符串转为纯数字串
 //2017-08-08  =>   20170808

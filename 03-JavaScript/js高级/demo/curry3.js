@@ -14,7 +14,7 @@ const currying = (fn,arr=[])=>{
 const add = (a,b,c)=>{
   return a*b*c;
 }
-//currying(add)
+currying(add)(1,2,3)
 
 
 const checkType=(type,context)=>{

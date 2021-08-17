@@ -2135,7 +2135,8 @@ console.log(getNumberWithRecursion(1));
 
 ```
 
-###3.4 插入排序
+### 3.4 插入排序
+
 > 有一个已经有序的数据序列，要求在这个已经排好的数据序列中插入一个数，但要求插入后此数据序列仍然有序，这个时候就要用到一种新的排序方法——插入排序法,插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n^2)。是稳定的排序方法。插入算法把要排序的数组分成两部分：第一部分包含了这个数组的所有元素，但将最后一个元素除外（让数组多一个空间才有插入的位置），而第二部分就只包含这一个元素（即待插入元素）。在第一部分排序完成后，再将这个最后元素插入到已排好序的第一部分中。
 > 插入排序的基本思想是：每步将一个待排序的记录，按其关键码值的大小插入前面已经排序的文件中适当位置上，直到全部插入完为止。
 
@@ -2229,6 +2230,7 @@ Node.prototype.queryElementsByClassName = function queryElementsByClassName() {
 > `[context].querySelector()` 在指定的上下文中基于选择器（类似于CSS选择器）获取到指定的元素对象（获取的是一个元素，哪怕选择器匹配了多个，我们只获取第一个）
 
 **`querySelectorAll`**---->不兼容IE6~8 ------>没有DOM映射
+
 > 在querySelector的基础上，获取到选择器匹配到的所有元素，结果是一个节点集合（NodeList）
 
 `获取浏览器一屏幕的宽度和高度（兼容所有的浏览器）`
@@ -2302,7 +2304,7 @@ nodeType：8
 nodeName：'#comment'
 nodeValue：注释内容
 
-`文档节点`
+​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               `文档节点`
 nodeType：9
 nodeName：'#document'
 nodeValue：null
@@ -2311,9 +2313,11 @@ nodeValue：null
 #### 4.2.2 描述节点之间关系的属性
 
 **`parentNode`**
+
 > 获取当前节点唯一的父亲节点
 
 **`childNodes`**
+
 > 获取当前元素的所有子节点
 > - 子节点：只获取儿子级别的
 > - 所有：包含元素节点、文本节点等
@@ -2331,16 +2335,19 @@ nodeValue：null
 > previousElementSibling：获取上一个哥哥元素节点（不兼容IE6~8）
 
 **`nextSibling`**
+
 > 获取当前节点的下一个弟弟节点 
 >
 > nextElementSibling：下一个弟弟元素节点（不兼容）
 
 **`firstChild`**
+
 > 获取当前元素的第一个子节点（可能是元素或者文本等）
 >
 > firstElementChild
 
 **`lastChild`**
+
 > 获取当前元素的最后一个子节点
 >
 > lastElementChild
@@ -2460,7 +2467,13 @@ oBox.removeAttribute('myColor'); //=>删除
 
 
 
-innerHTML 与 appendChild+
+innerHTML 与 appendChild
+
+> + innerHTML是直接改变DOM的innerHTML，实际上是浏览器先销毁DOM里的子DOM然后重绘DOM，之前对DOM里的对象的引用都将失效。
+>
+>   
+>
+> +  appendChild就是在对象的层次上修改对象，并不会破坏源对象。
 
 
 

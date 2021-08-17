@@ -121,7 +121,7 @@ window.BigSpinach_Utils = (function () {
    * @param {attr, value} 要设置的属性=值
    */
   //=>操作浏览器盒子模型属性的
-  let setScroll = function (attr, value) {
+  let winHandler = function (attr, value) {
     if (typeof value !== 'undefined') {
       //=>设置盒子模型属性值:SCROLL-TOP/LEFT
       document.documentElement[attr] = value;
@@ -146,7 +146,7 @@ window.BigSpinach_Utils = (function () {
    * @desc 深克隆一个对象或数组
    * @param {target}
    */
- function clone(target) {
+  function clone(target) {
     let result; //返回的最终的结果（对象或数组）
     //类型检测，初始化result 的数据类型
     let checkType = checkoutType(target);
@@ -172,12 +172,13 @@ window.BigSpinach_Utils = (function () {
   }
 
 
+
   return {
     likeAryTo: likeAryToArray,
     jsonTo: JSONStringToJSONObject,
     css,
     offset,
-    setScroll,
+    winHandler,
     checkoutType,
     clone
 

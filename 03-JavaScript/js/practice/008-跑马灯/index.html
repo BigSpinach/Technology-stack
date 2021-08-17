@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跑马灯效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .marquee {
+      position: relative;
+      margin: 50px auto;
+      width: 600px;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .wrapper li {
+      float: left;
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .wrapper li:nth-child(3n+1) {
+      background-color: aquamarine;
+    }
+
+    .wrapper li:nth-child(3n+2) {
+      background-color: chartreuse;
+    }
+
+    .wrapper li:nth-child(3n+3) {
+      background-color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="marquee">
+    <ul class="wrapper">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+    </ul>
+  </div>
+</body>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.3/jquery.js"></script> -->
+<script src="../../../static/BigSpinach_Utils.js"></script>
+<script>
+  // jQuery(($)=>{
+  //   let $wrapper = $('.wrapper');
+  // });
+  //1.获取元素  wrapper 并修改其内容和长度
+  let wrapper = document.querySelector('.wrapper');
+  wrapper.innerHTML += wrapper.innerHTML;
+  BigSpinach_Utils.css(wrapper, 'width', BigSpinach_Utils.css(wrapper, 'width') * 2);
+  //console.log(BigSpinach_Utils.css(wrapper,'width'));
+
+  //设置动画
+  setInterval(() => {
+    //获取wrapper的左偏移 left
+    let curLeft = BigSpinach_Utils.css(wrapper, 'left');
+    curLeft -= 3;
+    //设置新的值
+    // BigSpinach_Utils.css(wrapper,'left',curLeft);
+    BigSpinach_Utils.css(wrapper, {
+      left: curLeft
+    });
+
+    //3. 边界判断
+    //当移动的curLeft >= wrapper.width/2 的时候，设置为起始位置
+    // console.log(Math.abs(BigSpinach_Utils.css(wrapper, 'left')));
+    if (Math.abs(BigSpinach_Utils.css(wrapper, 'left')) >= BigSpinach_Utils.css(wrapper, 'width') / 2) {
+      //设置为起始位置
+      BigSpinach_Utils.css(wrapper, 'left', 0)
+    }
+  }, 17);
+</script>
+
+</html>

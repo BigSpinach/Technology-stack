@@ -1,13 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
 
 </body>
-</html>
+<script>
+  console.log(0.1 + 0.2 == 0.3);
+  console.log(Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSILON)
 
+  //   var o = {
+  //     valueOf: () => {
+  //       console.log("valueOf");
+  //       return {}
+  //     },
+  //     toString: () => {
+  //       console.log("toString");
+  //       return {}
+  //     }
+  //   }
+  //   o * 2
+  //   valueOf
+  // VM203:7 toString
+  // VM203:11 Uncaught TypeError: Cannot convert object to primitive value
+  //     at <anonymous>:11:5
+
+
+  // var o = {
+  //   valueOf: () => {
+  //     console.log("valueOf");
+  //     return {}
+  //   },
+  //   toString: () => {
+  //     console.log("toString");
+  //     return {}
+  //   }
+  // }
+  // String(o) 
+  // toString 
+  // valueOf 
+  // TypeError
+
+
+  var o = {
+    valueOf: () => {
+      console.log("valueOf");
+      return {}
+    },
+    toString: () => {
+      console.log("toString");
+      return {}
+    }
+  }
+  o[Symbol.toPrimitive] = () => {
+    console.log("toPrimitive");
+    return "hello"
+  }
+  console.log(o + "") // toPrimitive // hello
+  
+</script>
+
+</html>

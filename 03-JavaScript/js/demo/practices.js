@@ -64,3 +64,13 @@ function fn5(n) {
   return target;
 }
 fn5(100);
+
+let fn6=(num,arr=[])=>{
+  for(let i=1;i<=num;i++){
+    arr.push(i);
+  }
+  return arr.reduce((prev,next)=>{
+    return prev*next;
+  })
+}
+console.log(fn6(10));

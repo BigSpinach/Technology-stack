@@ -6,19 +6,37 @@
 
 //aop
 //在执行一个方法前先执行其他的操作
-Function.prototype.aop = function(fn){
-  return (...args)=>{
+Function.prototype.aop = function (fn) {
+  return (...args) => {
     fn();
     this(...args);
   }
 }
 
-const sayHello = ()=>{
+
+Function.prototype.before = (beforeFn) => {
+  return (...args) => {
+    beforeFn();
+    this(...args);
+  }
+}
+
+let say = (...args) => {
+  console.log('say', args);
+}
+//目的
+say.before(() => {
+  //在执行say先执行此函数
+  console.log('before');
+})(123);
+
+const sayHello = () => {
   console.log('hello');
 }
 
 //在执行sayHello前先执行aop函数
 //sayHello.aop(callback)(123);
 //aop干了啥呢？ 让callback(), 让调用aop的函数执行并传参
-sayHello.aop(()=>{console.log('aop');})(123);
-
+sayHello.aop(() => {
+  console.log('aop');
+})(123);

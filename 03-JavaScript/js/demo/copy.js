@@ -25,6 +25,11 @@
 
 
 console.log('---------------- 定义检测数据类型的方法 ------------------------');
+// 1) 怎么判断数据的类型
+// typeof object Array
+// Object.prototype.toString.call()
+// instanceof 可以判断类型 判断是谁的实例
+// constructor 构造函数
 
 // function checkoutType(target) {
 //   return Object.prototype.toString.call(target).slice(8, -1);
@@ -161,35 +166,72 @@ console.log('-----------------');
 function checkoutType(target) {
   return Object.prototype.toString.call(target).slice(8, -1);
 };
-function clone(target){
-  let result;//返回的最终的结果（对象或数组）
+
+function clone(target) {
+  let result; //返回的最终的结果（对象或数组）
   //类型检测，初始化result 的数据类型
   let checkType = checkoutType(target);
-  if(checkType === 'Object'){
+  if (checkType === 'Object') {
     result = {};
-  }else if(checkType === 'Array'){
+  } else if (checkType === 'Array') {
     result = [];
-  }else{
+  } else {
     //return result=target;
     return target;
   }
-
   //基于 for...in 进行拷贝
-  for(let item in target){
+  for (let item in target) {
     //target[item] 是当前对象或数组对应的key的value
-    if(checkoutType(target[item])==='Object'||'Array'){
+    if (checkoutType(target[item]) === 'Object' || 'Array') {
       result[item] = clone(target[item])
-    }else {
+    } else {
       result[item] = target[item];
     }
   }
   return result;
 }
-let obj={name:'zsf',age:18,hobby:['eat','drink','play','enjoy','sleep']};
+let obj = {
+  name: 'zsf',
+  age: 18,
+  hobby: ['eat', 'drink', 'play', 'enjoy', 'sleep']
+};
 let obj2 = clone(obj);
-console.log(obj,obj2);
+console.log(obj, obj2);
+
+console.log('-----深拷贝-----');
+
+const deepClone = (value, hash = new WeakMap) => {
+  if (value == null) return value; // 排除掉null 和undefine 的情况
+  if (typeof value !== 'object') return value; // 这里包含了函数类型
+  if (value instanceof RegExp) return new RegExp(value);
+  if (value instanceof Date) return new Date(value);
+  // .....
+  // 拷贝的人可能是一个对象 或者是一个数组 (循环)  for in 
+  let instance = new value.constructor; // 根据当前属性构造一个新的实例
+  if (hash.has(value)) { // 先去hash中查看一下是否存在过 ，如果存在就把以前拷贝的返回去 
+    return hash.get(value); // 返回已经拷贝的结果
+  }
+  hash.set(value, instance); // 没放过就放进去
+  // 用一个对象来记忆
+  for (let key in value) { // 一层
+    if (value.hasOwnProperty(key)) { // 将hash 继续向下传递 保证这次拷贝能拿到以前拷贝的结果
+      // instance[key] =value[key];
+      instance[key] = deepClone(value[key], hash); // 产生的就是一个新的拷贝后的结果
+    } // 过滤掉原型链上的属性
+  }
+  return instance
+};
 
 
-
-
-
+const obj = {
+  name: 'BigSpinach',
+  age: 28,
+  hobbies: ['eat', 'drink', 'play', 'enjoy', 'sleep']
+};
+const copyObj = deepClone(obj);
+//modified...
+copyObj.name = 'TIKI';
+obj.hobbies[0] = '吃吃吃';
+//Modifications do not affect each other
+console.log(obj);
+console.log(copyObj);

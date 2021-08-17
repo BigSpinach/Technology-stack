@@ -25,4 +25,4 @@ let add = (a, b, c, d, e, f) => {
 
 //用currying包装这个函数
 // console.log(currying(add)(1, 2)(2, 5));
-console.log(currying(add)(1, 2)(2, 5)(2, 5)(2));
+console.log(currying(add)(1, 2)(2, 5)(2, 5));
