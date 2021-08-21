@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用全局组件 -->
+    <my-component></my-component>
+    <hr>
+
+
+    <blog-post v-for="(item ,index) in posts" :key="item.id" :title=item.title>
+
+    </blog-post>
+  </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+<script>
+  //注册全局组件
+  Vue.component('my-component', {
+    //配置对象
+    data() {
+      return {
+        count: 0
+      }
+    },
+    template: `<P>{{count}}</P>`
+  });
+
+  Vue.component('blog-post', {
+    props: ['title'],
+    template: `<div><h4>{{ title }}</h4><my-component></my-component></div>`
+  })
+  
+
+  let app = new Vue({
+    data() {
+      return {
+        posts: [{
+            id: 1,
+            title: 'My journey with Vue'
+          },
+          {
+            id: 2,
+            title: 'Blogging with Vue'
+          },
+          {
+            id: 3,
+            title: 'Why Vue is so fun'
+          }
+        ]
+      }
+    }
+  });
+
+  
+  app.$mount('#app');
+</script>
+
+</html>

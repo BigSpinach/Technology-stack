@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-component</title>
+</head>
+
+<body>
+  <div id="app">
+    hello component
+    <button-counter></button-counter>
+
+    <blog-post v-for="(item ,index) in posts" :key="item.id" :title=item.title>
+
+    </blog-post>
+  </div>
+
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.0-beta.6/vue.global.js"></script>
+<script>
+ 
+
+  const App = {
+  data() {
+    return {
+      posts: [
+        { id: 1, title: 'My journey with Vue' },
+        { id: 2, title: 'Blogging with Vue' },
+        { id: 3, title: 'Why Vue is so fun' }
+      ]
+    }
+  }
+}
+ // 创建一个Vue 应用
+  // const app =Vue.createApp({});
+  const app = Vue.createApp(App);
+
+  //全局组件
+  // 定义一个名为 button-counter 的新全局组件
+  app.component('button-counter', {
+    data() {
+      return {
+        count: 0
+      }
+    },
+    template: `
+    <button @click="count++">
+      You clicked me {{ count }} times.
+    </button>`
+  });
+
+  // 定义一个名为 blog-post 的新全局组件
+  app.component('blog-post', {
+    props: ['title'],
+    template: `<h4>{{ title }}<button-counter></button-counter></h4>`
+  })
+
+  
+  
+ 
+
+  //将vue实例挂载到页面
+  app.mount('#app')
+</script>
+
+</html>
