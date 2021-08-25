@@ -1,12 +1,11 @@
-<template>
-  <!-- <div class="footer">Footer page</div> -->
+<template >
   <div class="todo-footer">
     <label>
-      <input type="checkbox" v-model="isCheckedAll"/>
+      <input type="checkbox" v-model="isCheckAll"/>
     </label>
-    <span> <span>已完成{{finishSize}}</span> / 全部{{todos.length}} </span>
-    
-     <button class="btn btn-danger" v-show="finishSize>0" @click="finishComplateTodo">清除已完成任务</button>
+    <span> <span>已完成{{finishSize}}</span> / 全部{{todos.length}}</span>
+
+    <button class="btn btn-danger" v-show="finishSize>0" @click="removeFinishItem">清除已完成任务</button>
   </div>
 </template>
 
@@ -17,31 +16,29 @@
 export default {
   data(){
     return {
-     
     }
   },
-  props:['todos','checkALL','clearFinishTodo'],
+  // props:['todos','deletFinishItem','checkedAllItem'],
+  props:['todos'],
   computed:{
     finishSize(){
-      //只需要get
-      //通过计算 todos中 complate 为 true的项的个数
-      return this.todos.reduce((prev,next)=>prev+(next.complate?1:0),0)
-      
+      return this.todos.reduce((prev,next)=>prev+(next.complate?1:0),0);
     },
-    isCheckedAll:{
+    isCheckAll:{
       get(){
-        return this.todos.length === this.finishSize && this.finishSize>0
+        return this.todos.length === this.finishSize && this.finishSize>0;
       },
       set(val){
-        //修改todos中每一项的complate =val
-        this.checkALL(val);
+        // console.log(val);
+        // this.checkedAllItem(val);
+        this.$localEventBus.$emit('checkedAllItem',val);
       }
     }
   },
   methods:{
-    finishComplateTodo(){
-     //修改父组件数据 ： 删除掉complate=true的项
-     this.clearFinishTodo();
+    removeFinishItem(){
+      // this.deletFinishItem()
+      this.$localEventBus.$emit('deletFinishItem',val)
     }
   }
 };
@@ -76,6 +73,5 @@ export default {
   float: right;
   margin-top: 5px;
 }
-
 </style>
 

@@ -1,31 +1,28 @@
 <template >
-  <ul class="todo-main">
-    <Item v-for="(todo ,index) in todos" 
-    :key="index" 
-    :todo="todo" 
-    :index="index"
-    :removeTodo="removeTodo"
-    :undateTodoComplate="undateTodoComplate"
-    />
+
+  <ul class="todo-main" >
+    <Item v-for="(todo,index) in todos" :key="index" :todo="todo" :index="index"
+    :deleteItem="deleteItem"
+    :upDateTodos="upDateTodos"
+    ></Item>
   </ul>
+  
+
 </template>
 
 
 
 
 <script>
+//1. 引入局部组件
 import Item from "./Item.vue";
 
-export default   {
-  name: "Main",
-  data() {
-    return {};
+export default {
+  components:{
+    Item
   },
-  props: ['todos','removeTodo','undateTodoComplate'],
-  components: {
-    Item,
-  },
-};
+  props:['todos','deleteItem','upDateTodos']
+}
 </script>
 
 

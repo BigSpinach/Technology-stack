@@ -1,10 +1,13 @@
-<template >
-  <li>
+  <template>
+  <li @mouseenter="handsEnter(true)" @mouseleave="handsEnter(false)">
     <label>
+      <!-- <input type="checkbox" v-model="todo.complate"/> -->
       <input type="checkbox" v-model="isChecked" />
       <span>{{ todo.title }}</span>
     </label>
-    <button class="btn btn-danger" @click="deleteItem">删除</button>
+    <button class="btn btn-danger" v-show="isShow" @click="removeItem">
+      删除
+    </button>
   </li>
 </template>
 
@@ -15,27 +18,42 @@
 export default {
   data() {
     return {
-      //isChecked:false 计算属性：由 todos 中每一项的 complate的值决定
+      isShow: false,
     };
   },
-  props: ["todo", "index", "removeTodo", "undateTodoComplate"],
+  props: {
+    todo: Object,
+    index: Number,
+    deleteItem: Function,
+    upDateTodos: Function,
+  },
   methods: {
-    deleteItem() {
-      this.removeTodo(this.index);
+    handsEnter(isShow) {
+      this.isShow = isShow;
+    },
+    removeItem() {
+      this.deleteItem(this.index);
     },
   },
   computed: {
     isChecked: {
       get() {
+        //获取当前项的 todo.complate的值
+        //console.log(this.todo.complate);
         return this.todo.complate;
       },
       set(val) {
-        this.undateTodoComplate(this.todo, val);
+        //修改 当前项 todo.complate的值
+        //更新todos的数据
+        this.upDateTodos(this.todo, val);
       },
     },
   },
 };
 </script>
+
+
+
 
 
 <style  scoped>

@@ -1,10 +1,8 @@
-<template>
+<template >
   <div class="todo-header">
-    <input
-      type="text"
-      placeholder="请输入你的任务名称，按回车键确认"
-      @keyup.enter="addItem"
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" 
       v-model="title"
+      @keyup.enter="addItem"
     />
   </div>
 </template>
@@ -13,36 +11,44 @@
 
 
 <script>
-export default {
-  data() {
-    return {
-      title: "",
-    };
-  },
-  props: ["todos", "addTodo"],
-  methods: {
-    addItem() {
-      //优化：不能添加空内容
-      let str =this.title.trim();
-      if(!str){
-        alert('不能添加空内容');
-        return
+  export default {
+    data(){
+      return {
+        title:'',
       }
-      //设计数据
-      let item = {
-        id: new Date(),
-        title:str,
-        complate: false,
-      };
-
-      //调用父组件的方法，增添 item
-      this.addTodo(item);
-      //清除输入框
-      this.title='';
     },
-  },
-};
+    mounted(){
+      console.log(this);
+    },
+    // props:['todos','addTodo'],
+    methods:{
+      addItem(){
+        if(!this.title.trim()){
+          alert('不能提交空内容');
+          return
+        }
+        //设计要增加的元素
+        let item = {
+          id:new Date(),
+          title:this.title,
+          complate:false
+        }
+        //console.log(item);
+        //调用父组件新增元素的方法
+        //分发事件（执行对应自定义事件所绑定的回调）
+        // this.$emit('addTodo',item);
+        //通过this.$on 绑定事件的方式，执行（分发）对应的回调
+        this.$emit('addTodo2',item);
+        // this.addTodo(item);
+
+        this.title=''
+      }
+    }
+  }
 </script>
+
+
+
 
 <style  scoped>
 .todo-header input {
