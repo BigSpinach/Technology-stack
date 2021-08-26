@@ -18,7 +18,7 @@
       }
     },
     mounted(){
-      console.log(this);
+      //console.log(this);//VueComponent {...}
     },
     // props:['todos','addTodo'],
     methods:{

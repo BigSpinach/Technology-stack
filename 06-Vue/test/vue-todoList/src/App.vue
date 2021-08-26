@@ -1,22 +1,9 @@
 <template>
   <div class="todo-container">
-    <div class="todo-wrap">
-      <!-- <Header  :addTodo="addTodo"></Header> -->
-      <!-- 通过自定义事件 -->
-      <!--  自定义事件名=“对应的回调” -->
-      <!-- <Header  @addTodo="addTodo"></Header> -->
-      <!-- 通过函数的方式绑定自定义事件 -->
-      <Header ref="xxx" />
-      <Main
-        :todos="todos"
-        :removeTodo="removeTodo"
-        :undateTodoComplate="undateTodoComplate"
-      ></Main>
-      <Footer
-        :todos="todos"
-        :deletFinishItem="deletFinishItem"
-        :checkedAllItem="checkedAllItem"
-      ></Footer>
+    <div v-if="!repoName">loading...</div>
+    <div v-else>
+      更新页面:更新内容是
+      <a :href="repoUrl">{{ repoName }}</a>
     </div>
   </div>
 </template>
@@ -25,111 +12,85 @@
 
 
 <script>
-//1.引入局部组件
-import Header from "./components/Header.vue";
-import Main from "./components/Main.vue";
-import Footer from "./components/Footer.vue";
-
-//移入工具函数
-import {saveTodos,getTodos} from './utils/storageUtils'
-
+//引入axios
+import axios from "axios";
 export default {
   name: "App",
   data() {
     return {
-      todos: [],
-      //  todos: [
-      //   { id: 1, title: "吃吃吃", complate: false },
-      //   { id: 4, title: "啦啦啦", complate: false },
-      //   { id: 3, title: "喝喝喝", complate: false },
-      // ],
+      repoName: "",
+      repoUrl: "",
     };
   },
-  beforeCreate(){
-    //console.log('app:',this );//VueComponent
-    // this.__proto__ 指向VueComponent 的原型对象 VueComponent.proptotype
-    //注意：VueComponent 属于vue内置对象，对外不能调用
-    this.__proto__.aaa=100;
-    //this.__proto__.__proto__ 指向Vue.prototype
-     this.__proto__.__proto__.bbb=500;
-    //this.prototype['ccc']=6666;//vue不允许操作 prototype
+  mounted() {
+    //使用vue-resource 发送ajax请求
+    /*
+   this.$http
+      .get("https://api.github.com/search/repositories2?q=v&sort=stars")
+      .then((response) => {
+        // console.log(response.data);
+        //传统http请求会直接将请求回来的内容渲染至页面，
+        //ajax请求会存放到这个（XMLHttpRequest）对象中
 
-    //VueComponent.prototype.__proto__ 指向Vue.prototype
-
-    
-  },
-  mounted(){
-    //给xxx这个元素绑定了一个 名为 addTodo2 ，对应的回调函数为 addTod的自定义事件
-    this.$refs.xxx.$on('addTodo2',this.addTodo);
-    //在挂载完成后就可以绑定各种自定义事件了
-    this.$localEventBus.$on('deletFinishItem');
-    this.$localEventBus.$on('checkedAllItem');
-
-
-
-    //页面挂载完成后加载数据
-    setTimeout(()=>{
-      this.todos = getTodos();
-      },500)
-  },
-  components:{
-    Header,Footer,Main
-  },
-  methods:{
-    //新增 todo
-    addTodo(todo){//
-      this.todos.unshift(todo);
-    },
-    //删除todo
-    removeTodo(index){
-      this.todos.splice(index,1);
-    },
-    //更新todos中每一项的状态
-    undateTodoComplate(todo,value) {
-      todo.complate = value
-    },
-    //删除已完成的项
-    deletFinishItem(){
-      this.todos = this.todos.filter(item=>!item.complate)
-    },
-    //是否全选
-    checkedAllItem(value){
-      this.todos.forEach(item=>{
-        item.complate=value;
+        //处理请求回来的结果
+        const result = response.data.items;
+        //const repo = result[0].name;
+        //const repo_url =result[0].html_url;
+        //取数据
+        const { name, html_url } = result[0];
+        //将取出的数据挂载到当前vue实例的属性上
+        this.repoName = name;
+        this.repoUrl = html_url;
       })
-    }
-  },
-  watch:{
-    todos:{
-      deep:true,
-      handler:saveTodos
-    }
-  },
-  beforeDestroy(){
-    this.$refs.xxx.$off('addTodo2');
-  }
+      .catch((e) => {
+        alert(e);
+      });
+      */
 
-
-  
+    //使用axios 发送ajax请求
+    /*
+    axios
+      .get("https://api.github.com/search/repositories?",{
+        params:{
+          // ?q=v&sort=stars
+          q:'j',
+          sort:'stars'
+        }
+      })
+      .then((response) => {
+        //console.log(response);//一个包含了数据的XMLHttpRequest 对象
+        const result = response.data;
+        const { name, html_url } = result.items[0];
+        this.repoName = name;
+        this.repoUrl = html_url;
+      })
+      .catch((e) => {
+        alert(e);
+      });
+      */
+     //解决跨域
+     
+     //'https://localhost:6000/tets/v'  是启动的服务器的地址
+     //会报错：Access to XMLHttpRequest at 'http://localhost:6060/test/vue' from origin 'http://localhost:8989' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+     //跨域问题
+     //get的路径path 一定要跟 dev-server中配置的 proxy 属性名对应
+     // http://localhost:6060/test/vue
+      axios.get("/api/test/h")
+      .then((response) => {
+        const result = response.data;
+        const { name, html_url } = result.data;
+        this.repoName = name;
+        this.repoUrl = html_url;
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  },
 };
 </script>
 
-<style  scoped>
-/* .app {
-  margin: 50px auto;
-  border: 10px solid #888;
-  width: 500px;
-} */
 
-/*app*/
-.todo-container {
-  width: 600px;
-  margin: 0 auto;
-}
-.todo-container .todo-wrap {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+
+<style  scoped>
 </style>
 

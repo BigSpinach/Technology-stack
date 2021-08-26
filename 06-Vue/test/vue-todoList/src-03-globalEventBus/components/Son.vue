@@ -1,5 +1,12 @@
 <template>
-  <div class="son"></div>
+  <div class="son">
+    <slot name="=name1"></slot>
+    <slot name="=name2">默认值</slot>
+    <!--默认插槽-- 没有名字的插槽只能写一个 -->
+    <slot ></slot>
+    
+
+  </div>
 </template>
 
 

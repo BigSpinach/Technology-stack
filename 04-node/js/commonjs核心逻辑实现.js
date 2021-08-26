@@ -38,6 +38,9 @@ Module.prototype.load =function(){
   let script = fs.readFileSync(this.id,'utf8');
   let str = wrapper[0]+script+wrapper[1];
   let fn = vm.runInThisContext(str);
+  //console.log(fn.toString());
+  //function(exports,module,require){module.exports=123;}
+  console.dir(module);
   fn(module,this);
 }
 
