@@ -1,4 +1,7 @@
 {
-  "presets":["@babel/preset-env"],
+  "presets":[["@babel/preset-env",{
+    "useBuiltIns":"usage",
+    "corejs":2
+  }]],
   "plugins": []//这里可以 配置 其他的解析高级语法的插件 例如 @babel/plugin-proposal-class-properties  
 }
