@@ -11,6 +11,8 @@ import MessageDetail from '../pages/MessageDetail.vue';
 Vue.use(VueRouter);
 
 export default new VueRouter({
+  // mode:'hash',//默认模式  特点,地址栏带# ：http://localhost:8989/#/home
+  mode:'history',//特点，地址栏不带#，  缺点：刷新页面 ，会404
   routes:[
     {
       path:'/',

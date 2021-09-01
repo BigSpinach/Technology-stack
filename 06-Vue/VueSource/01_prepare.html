@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+  <div id="test">文本内容</div>
+
+  <div id="demo">
+    <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+    </ul>
+  </div>
+
+
+
+
+
+  <!--
+1. [].slice.call(lis): 将伪数组转换为真数组
+2. node.nodeType: 得到节点类型
+3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+-->
+
+  <script type="text/javascript">
+    console.log('1. 将伪数组转换为真数组(3种)');
+    // 1. [].slice.call(lis): 将伪数组转换为真数组
+    const demo = document.getElementById('demo');
+    const lis = demo.getElementsByTagName('li'); //lis是一个 类数组对象（有length，有index）
+    //lis.foreach()//lis.forEach is not a function
+    console.log(lis.foreach); //undefined
+    //将类数组转化为数组  3种
+    //1) Array.from()   
+    const lis_arrayFrom = Array.from(lis);
+    console.log(lis_arrayFrom); //[li, li, li]
+    //2) [].slice.call()
+    const lis_sliceCall = Array.prototype.slice.call(lis);
+    console.log(lis_sliceCall); //[li, li, li]
+    //3) [...lis]   spread 传播；伸展  展开运算符
+    const lis_spread = [...lis]
+    console.log(lis_spread); //[li, li, li]
+
+
+    console.log('2. 节点、节点类型');
+    // 2. node.nodeType: 得到节点类型
+    /*
+      抽象Node概念
+      子类型 Document  Element  Text Attr  DocumentFragment...
+    */
+    // <div id="test">文本内容</div>
+    //获取test 的元素节点对象
+    const testNode = document.getElementById('test');
+    //获取 test的属性节点对象
+    const testAttr = testNode.getAttributeNode('id');
+    //获取test 的文本节点对象
+    const testText = testNode.firstChild;
+    // console.log(testText.data);
+    console.log(testNode.nodeType, testAttr.nodeType, testText.nodeType); //1,2,3
+
+
+    console.log('3. 给对象添加属性(指定描述符)');
+    // 3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+    let p = {
+      firstName: 'A',
+      lastName: 'B'
+    };
+    //实现自动 fullName  A-B
+    Object.defineProperty(p, 'fullName', { //配置对象--属性描述符
+      //访问器属性--数据描述符
+      configurable: false, //'fullName' 这个属性 是否可以重新定义
+      enumerable: false, //for...in  /keys()
+      // value:'初始默认值',
+      // writable:true,  //value 是否可修改 
+      //访问器属性--存取描述符
+      get() {
+        return this.firstName + '-' + this.lastName
+      },
+      set(val) { //xxA-Byy
+        //根据 - 切割
+        //对firstName  和 lastName重新赋值
+        const arr = val.split('-');
+        this.firstName = arr[0];
+        this.lastName = arr[1];
+
+      }
+    })
+    p.fullName = "abc-efg";
+    console.log(p); //{firstName: "abc", lastName: "efg"}
+
+
+    console.log('4. 获取对象自身可枚举属性组成的数组（Object.keys(obj)）');
+    // 4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+    let p_arr = Object.keys(p);
+    console.log(p_arr); // ["firstName", "lastName"]
+
+    console.log('5. 判断prop是否是obj自身的属性');
+    // 5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+    console.log('p对象是否有（firstName）这个属性' + p.hasOwnProperty('firstName'));
+    console.log('p对象是否有（fullName）这个属性' + p.hasOwnProperty('fullName'));
+    console.log('p对象是（fullName）这个属性是否可枚举' + p.propertyIsEnumerable('fullName'));
+    console.dir(p);
+
+
+    console.log('6.  文档碎片(高效批量更新多个节点)');
+    // 6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+    //只存在于内存中的节点容器，它自身进入不了页面
+    //test--实现所有li中文本的替换
+    //传统，遍历每一个li，更新 innerHtml 
+    /*
+    const fragment = document.createDocumentFragment();
+    const div = document.getElementById('demo');
+    //将div中的所有子节点搞到 fragment中
+    let child;
+    while(child = div.firstChild){
+      fragment.appendChild(child);
+    }
+    //处理 fragment中的所有 li
+    //fragment.children[0]// ul
+    //fragment.children[0].children //lis
+    const lis3 = Array.prototype.slice.call(fragment.children[0].children);
+    lis3.forEach(item=>{
+      // console.log(item);
+      item.innerHTML = '替换文本内容';
+    })
+    console.dir(fragment);
+    //将fragment 插入到页面
+    div.appendChild(fragment)
+    */
+
+    //字符串拼接：不够动态
+    // const div2 = document.getElementById('demo');
+    // let str = div2.innerHTML;
+    /* <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+    </ul>*/
+
+  </script>
+</body>
+
+</html>

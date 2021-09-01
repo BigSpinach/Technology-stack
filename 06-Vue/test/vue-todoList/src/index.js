@@ -1,18 +1,20 @@
+//可以在index.js这里 直接引入 @babel/polyfill 用以解决es的新api
+//但是这样子并不好，它会引入所有的api，包含了项目中没有使用到的
+//所以一般会在webpack 的配置文件中按需配置 这个包
+//useBuiltIns:"usage"
+// import  '@babel/polyfill';
 import Vue from 'vue';
-import App from "./App.vue";
+import App from './App.vue';
 
-//引入路由器
-// import VueRouter from "vue-router";
-import router from "./router/index";
-//安装路由器
-// Vue.use(VueRouter);
+import store from './store/index.js';
+
 
 new Vue({
   el:'#root',
   render:h=>h(App),
   beforeCreate(){
-    Vue.prototype.$bus = this;
+    Vue.prototype.$eventBus = this;
   },
-  //注册使用路由器
-  router
-});
+  store,
+})
+

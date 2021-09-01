@@ -1,5 +1,5 @@
 {
-  "name": "vue-todoList",
+  "name": "vue-UI-test",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack server --env development --config ./build/webpack.base.js",

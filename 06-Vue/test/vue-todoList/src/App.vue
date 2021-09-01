@@ -1,49 +1,21 @@
 <template>
-  <div class="container clearfix">
-    <div class="l nav-list" >
-      <div>
-      <!-- 声明式使用路由 -->
-        <!-- <button>About</button> -->
-        <router-link to="/about">About</router-link>
-      </div>
-      <div>
-        <!-- 声明式使用路由 -->
-        <!-- <button>Home</button> -->
-        <router-link to="/home">Home</router-link>
-      </div>
-    </div>
-
-    <div class="r main-content">
-      <router-view></router-view>      
-      <!-- 
-        <About></About>
-        <Home></Home>
-      -->
-    </div>
+  <div class="container">
+    <Search></Search>
+    <Main></Main>
   </div>
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
+import Search from "./components/Search.vue";
+import Main from "./components/Main.vue";
 
-export default {};
+// import { defineComponent } from "@vue/composition-api";
+
+export default {
+  components: { Search, Main },
+};
 </script>
 
 
-<style  scoped>
-.container {
-  width: 400px;
-  border: 1px solid slategrey;
-  border-radius: 5px;
-  /* height: 800px; */
-}
-.nav-list{
-  width: 100px;
-  background-color: steelblue;
-}
-.main-content{
-  width: 280px;
-  background-color:salmon ;
-  height: 100%;
-}
+<style   scoped>
 </style>

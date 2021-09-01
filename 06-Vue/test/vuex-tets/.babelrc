@@ -13,8 +13,8 @@
     [
       "babel-plugin-component",
       {
-        "libraryName": "mint-ui",
-        "style": true
+        "libraryName": "mint-ui",//针对mint-ui实现按需打包引入
+        "style": true//自动打包组件对应的样式
       }
     ]
   ]
