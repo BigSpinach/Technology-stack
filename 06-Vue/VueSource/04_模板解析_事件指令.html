@@ -7,4 +7,16 @@
 <body>
 
 </body>
+<script>
+  function fn(){
+    console.log(this.a);
+  }
+  const obj={a:1};
+  let return_fn_bind = fn.bind(obj);
+  return_fn_bind();//1
+  //bind(obj) 
+  // 返回一个新函数，
+  //bind内部干了啥
+ 
+</script>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弹性布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul {
+      width: 1000px;
+      /* height: 300px; */
+      /*父元素不设置高度，子元素浮动，父元素高度塌陷*/
+      border: 2px solid #000;
+      /* 设置弹性盒子 */
+      display: flex;
+      justify-content: space-between;
+      /*  弹性项的对齐方式
+          flex-start
+          flex-end
+          center
+          space-between
+          space-around
+          space-evenly 
+      */
+
+      /* justify-content: space-evenl; */
+      flex-flow:cow warp;/*主轴是cow，弹性项过多换行显示*/
+
+    }
+
+    li {
+      width: 100px;
+      height: 100px;
+      /*让li水平排列*/
+      /* float: left;高度塌陷的问题 */
+      /* flex:1 1 100px; */
+    }
+
+    li:nth-child(3n+1) {
+      background-color: red;
+    }
+
+    li:nth-child(3n+2) {
+      background-color: green;
+    }
+
+    li:nth-child(3n+3) {
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+  </ul>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>替换型元素</title>
+</head>
+
+<body>
+
+  <!-- 使用 sizes 和 srcset 设置响应式图像
+       作用：在不同的屏幕大小和特性下，使用不同的图片源 -->
+
+  <!-- <img srcset="elva-fairy-320w.jpg 320w,
+               elva-fairy-480w.jpg 480w, 
+               elva-fairy-800w.jpg 800w"
+    sizes="(max-width: 320px) 280px, 
+           (max-width: 480px) 440px, 
+           800px" 
+           src="elva-fairy-800w.jpg"
+    alt="Elva dressed as a fairy"> -->
+
+  <!-- picture元素可以根据屏幕的条件为其中的img元素提供不同的源 -->
+  <picture>
+    <source srcset="https://img2.baidu.com/it/u=2534473183,1666218163&fm=26&fmt=auto&gp=0.jpg"
+      media="(min-width: 600px)">
+    <img src="https://img2.baidu.com/it/u=2534473183,1666218163&fm=26&fmt=auto&gp=0.jpg">
+  </picture>
+  <picture>
+    <source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
+    <source media="(min-width: 800px)" srcset="elva-800w.jpg">
+    <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+  </picture>
+  <!-- video标签 -->
+  <!-- video标签可以使用source标签来指定接入多个视频源。 -->
+  <video controls="controls">
+    <source src="movie.webm" type="video/webm">
+    <source src="movie.ogg" type="video/ogg">
+    <source src="movie.mp4" type="video/mp4"> You browser does not support video.
+  </video>
+
+
+  <!-- audio标签 -->
+  <audio controls>
+    <source src="song.mp3" type="audio/mpeg">
+    <source src="song.ogg" type="audio/ogg">
+    <p>You browser does not support audio.</p>
+  </audio>
+
+  <!-- iframe标签 -->
+  <iframe src="http://time.geekbang.org"></iframe>
+  <iframe src="https://www.baidu.com"></iframe>
+  <!-- iframe的新定义 sandbox srcdoc -->
+  <!-- 在新标准中，为iframe加入了sandbox模式和srcdoc属性 -->
+  <iframe sandbox srcdoc="<p>Yeah, you can see it 
+                  <a href='/gallery?mode=cover&amp;amp;page=1'>in my gallery</a>
+                  </p>.">
+  </iframe>
+</body>
+<script type="text/javascript">
+  console.log("Hello world!");
+  let arr = Array.prototype.map.call(document.querySelectorAll(".element"), e => e.innerText);
+  console.log(arr);
+  let arr2 = [
+    "Categories:\nNone.\nContexts in which this element c…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…MLElement {\n  [HTMLConstructor] constructor();\n};",
+    "Categories:\nMetadata content.\nContexts in which th…();\n\n  [CEReactions] attribute DOMString text;\n};",
+    "Categories:\nMetadata content.\nContexts in which th…f;\n  [CEReactions] attribute DOMString target;\n};",
+    "Categories:\nMetadata content.\nIf the element is al…te members\n};\nHTMLLinkElement includes LinkStyle;",
+    "Categories:\nMetadata content.\nIf the itemprop attr…MString media;\n\n  // also has obsolete members\n};",
+    "Categories:\nMetadata content.\nContexts in which th…e members\n};\nHTMLStyleElement includes LinkStyle;",
+    "Categories:\nSectioning root.\nContexts in which thi…};\n\nHTMLBodyElement includes WindowEventHandlers;",
+    "Categories:\nFlow content.\nSectioning content.\nPalp…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nSectioning content.\nPalp…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nSectioning content.\nPalp…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nSectioning content.\nPalp…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nHeading content.\nPalpabl…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nHeading content.\nPalpabl…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nContexts in which this e…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPalpable content.\nContex…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nSectioning root.\nPalpabl…eElement interface is also used by the q element.",
+    "Categories:\nFlow content.\nIf the element's childre…OMString type;\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nIf the element's childre…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nIf the element's childre…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…te long value;\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nIf the element's childre…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nSectioning root.\nPalpabl…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIf the…AnchorElement includes HTMLHyperlinkElementUtils;",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…plementers.\nDOM interface:\nUses HTMLQuoteElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…);\n\n  [CEReactions] attribute DOMString value;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…\n  [CEReactions] attribute DOMString dateTime;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…for implementers.\nDOM interface:\nUse HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…MLElement {\n  [HTMLConstructor] constructor();\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nContex…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nContex…or implementers.\nDOM interface:\nUses HTMLElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…implementers.\nDOM interface:\nUses HTMLModElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nContex…implementers.\nDOM interface:\nUses HTMLModElement.",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…MLElement {\n  [HTMLConstructor] constructor();\n};",
+    "Categories:\nNone.\nContexts in which this element c… [CEReactions] attribute unsigned long height;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…ned> decode();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…SVGDocument();\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…ment, the node may also support other interfaces.",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…element, the node also supports other interfaces.",
+    "Categories:\nNone.\nContexts in which this element c…MString value;\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…  [CEReactions] attribute boolean playsInline;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nEmbedd…iaElement {\n  [HTMLConstructor] constructor();\n};",
+    "Categories:\nNone.\nContexts in which this element c…yState;\n\n  readonly attribute TextTrack track;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nPalpab…ject] readonly attribute HTMLCollection areas;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nContex…MLAreaElement includes HTMLHyperlinkElementUtils;",
+    "Categories:\nFlow content.\nPalpable content.\nContex…w(long index);\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…constructor();\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…ned long span;\n\n  // also has obsolete members\n};",
+    "Categories:\nNone.\nContexts in which this element c…ableColElement, as defined for colgroup elements.",
+    "Categories:\nNone.\nContexts in which this element c…erface is also used for thead and tfoot elements.",
+    "Categories:\nNone.\nContexts in which this element c…bleSectionElement, as defined for tbody elements.",
+    "Categories:\nNone.\nContexts in which this element c…bleSectionElement, as defined for tbody elements.",
+    "Categories:\nNone.\nContexts in which this element c…l(long index);\n\n  // also has obsolete members\n};",
+    "Categories:\nSectioning root.\nContexts in which thi…llElement interface is also used for th elements.",
+    "Categories:\nNone.\nContexts in which this element c…HTMLTableCellElement, as defined for td elements.",
+    "Categories:\nFlow content.\nPalpable content.\nContex…n checkValidity();\n  boolean reportValidity();\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIntera…or;\n  readonly attribute HTMLElement? control;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIf the…ng direction);\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIntera…error);\n\n  readonly attribute NodeList labels;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIntera…error);\n\n  readonly attribute NodeList labels;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nContex…ct] readonly attribute HTMLCollection options;\n};",
+    "Categories:\nNone.\nContexts in which this element c…ed;\n  [CEReactions] attribute DOMString label;\n};",
+    "Categories:\nNone.\nContexts in which this element c…MString text;\n  readonly attribute long index;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nIntera…igned long end, optional DOMString direction);\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nListed…error);\n\n  readonly attribute NodeList labels;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nLabela…osition;\n  readonly attribute NodeList labels;\n};",
+    "Categories:\nFlow content.\nPhrasing content.\nLabela…optimum;\n  readonly attribute NodeList labels;\n};",
+    "Categories:\nFlow content.\nSectioning root.\nListed … undefined setCustomValidity(DOMString error);\n};",
+    "Categories:\nNone.\nContexts in which this element c…Element? form;\n\n  // also has obsolete members\n};",
+    "Categories:\nFlow content.\nSectioning root.\nInterac…or();\n\n  [CEReactions] attribute boolean open;\n};",
+    "Categories:\nNone.\nContexts in which this element c…or implementers.\nDOM interface:\nUses HTMLElement.", …
+  ]
+</script>
+<!-- <script type="text/javascript" src="my.js"></script> -->
+
+</html>

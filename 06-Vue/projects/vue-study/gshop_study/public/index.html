@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- 脚手架生成 viewport：做的是将设备宽度作为网页宽度，不缩放，进制用户缩放 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="./css/reset.css">
+  <!-- 引入字体图标 -->
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2787513_f7ks17v5g18.css">
+
+  <title>基本路由搭建</title>
+
+</head>
+
+<body>
+
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+ <!-- <script>
+  // px em rem概念
+  // px ：css像素
+  // em ： 相对父级元素的字体大小
+  // rem 相对于根节点元素的字体大小
+
+  function remRefresh() {
+    //1. 获取设备的宽度
+    let clientWidth = document.documentElement.clientWidth;
+    //2. 将屏幕的宽度等分，便于换算，提高精确度
+    let rem = clientWidth / 10;
+    // 假如 设备分辨率：500*1200  则对应的 1rem = 50px
+    //3. 设置根节点元素的字体大小
+    document.documentElement.style.fontSize = rem + 'px';
+    //优化：设置body字体的默认大小
+    document.body.style.fontSize = "16px";
+  }
+
+  window.addEventListener('pageshow', () => {
+    remRefresh();
+  })
+  window.addEventListener('resize', () => {
+    //防抖：重置多次大小最终只执行一次 计算
+    let timeoutId;
+    timeoutId && clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      console.log(111);
+      remRefresh();
+    }, 2000)
+  })
+</script>  -->
+
+
+<!-- <script>
+  //窗口适配
+  function remRefresh() {
+    //获取当前设备的窗口宽度
+    //将当前设备窗口等分，划分出 1em的大小
+    //设置 根节点元素的字体大小
+    let clientWidth = document.documentElement.clientWidth;
+    let rem = clientWidth / 10;
+    document.documentElement.style.width = rem + 'px';
+    //优化body字体的大小
+    document.body.style.width = '16px';
+  }
+
+  //页面加载时执行一次计算
+  window.addEventListener('pageshow',()=>{
+    remRefresh();
+  })
+  //页面大小发生改变的时候再次计算视口的大小，从而确定1rem  的大小
+  //注意 防抖： 页面最终确定大小后再去计算
+  let timeoutId;
+  window.addEventListener('resize',()=>{
+    timeoutId && clearTimeout(timeoutId);
+    timeoutId = setTimeout(()=>{
+      console.log('test');
+      remRefresh();
+    },2000);
+  })
+</script> -->
+
+</html>
