@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* 设置外部容器的大小 */
+    .nav-wrapper{
+      width: 100%;
+      display: flex;
+      /*设置方向和换行*/
+      flex-flow: row wrap;
+      /* 设置弹性项的对齐方式 */
+      /* justify-content: space-around; */
+    }
+
+    /* 设定图片容器的 */
+    .nav-inner{
+      /* width: 20%;父元素宽度的20%，一行显示5个 */
+      width: calc(20% - 10px);
+      /* 设置外边距，把减去的10px占满，这样就父容器就不会换行了 */
+      padding: 0 5px;
+      text-align: center;
+    }
+
+    /* 设置图片的大小 */
+    .nav-inner img{
+      width: 100%;/* 图片大小跟容器大小一样大*/
+    }
+
+    /* 设置字体大小 */
+    .nav-inner span{
+      font-size: 12px;
+      
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- 创建外部容器 -->
+  <div class="nav-wrapper">
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/1.png" alt="">
+      </a>
+      <span>天猫</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/2.png" alt="">
+      </a>
+      <span>领金币</span>
+    </div>
+    
+
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/3.png" alt="">
+      </a>
+      <span>拍卖</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/4.png" alt="">
+      </a>
+      <span>外卖</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/5.png" alt="">
+      </a>
+      <span>超市</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/6.png" alt="">
+      </a>
+      <span>充值</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/7.png" alt="">
+      </a>
+      <span>聚划算</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/8.png" alt="">
+      </a>
+      <span>进口国际</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/9.png" alt="">
+      </a>
+      <span>飞猪旅行</span>
+    </div>
+    <div class="nav-inner">
+      <a href="javascript:;">
+        <img src="imgs/tb/10.png" alt="">
+      </a>
+      <span>拍卖分类</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -68,14 +68,16 @@ let config = process.argv.slice(2).reduce((memo,current,index,input)=>{
   }
   return memo;
 },{})
+//使用 commander包
 
 //使用命令执行当前文件  
 //node 01.config.js --prot 6666 --env production  --config xx/x
 console.log(config);//{ port: '6666', env: 'production', config: 'xx/x' }
 
 
-//3) pid : 进程id  可以通过这个pid 中止进程
+//3) pid : 当前进程的id  可以通过这个pid 中止当前的进程
 //4) chdir 和 cwp（current working directory）
-//5) memoryUsage 
+
+//5) memoryUsage   查看 node内存使用
 //6) env：环境变量
 //7) nextTick  node中的微任务

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .a.b {
+      color: red;
+    }
+
+    .a .b {
+      /* 选中.a包含块中所有的有用 .b样式名的元素 */
+    }
+
+    .a>.b {
+      /* 选中所有“具有class为a的子节点 中，class为b的节点”。 */
+    }
+
+    /* “>” ：子代，表示选中符合条件的子节点，例如“ .a>.b ”表示：选中所有“具有class为a的子节点 中，class为b的节点”。 */
+
+    .a~.b {
+      /* 表示选中所有具有class为a的后继中，class为b的节点。 */
+    }
+
+    .a+.b {
+      /* 表示选中所有具有class为a的下一个class为b的节点 */
+    }
+
+    .x, .z {/*10,10  分别计算优先级，所以还是10*/ 
+      color: red;
+    }
+
+    .y {/*10*/
+      color: lightgreen;
+    }
+
+
+    /*  */
+    /* div::first-line {
+      color: blue;
+    }
+
+   
+
+    div>p#a {
+      color: yellow;
+    } */
+
+   
+  </style>
+</head>
+
+<body>
+  <div id="my" class="x y z">text</div>
+    <!-- <div class="a b">
+      红字
+    </div> -->
+
+    <hr>
+    <div>
+      <p id=a>First paragraph</p>
+      <p>Second paragraph</p>
+    </div>
+</body>
+
+</html>
