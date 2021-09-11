@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    a: {{insertValue}}
+
+    修改a的值 <input type="text" v-model="insertValue">
+
+
+    只渲染一次的a的值<b v-once style="color: red;">{{insertValue}}</b>
+
+    <hr>
+    <span v-html='tmp'></span>
+    <!-- 不要将用户输入的内容显示到页面上，xss攻击 -->
+    <input type="text" v-model='tmp' width="500px">
+
+
+    <hr>
+    <!-- v-for的使用 -->
+    <!-- <div v-for="cat in cats">
+      <li>{{cat.name}}</li>
+      <li>{{cat.age}}</li>
+    </div> -->
+    <!-- 空标签template的使用 -->
+    <!-- <div>
+      <template  v-for="cat in cats">
+        <li>{{cat.name}}</li>
+        <li>{{cat.age}}</li>
+      </template>
+    </div> -->
+
+    <div>
+      <template  v-for="(cat,index) in cats">
+        <li :key="`name_${index}`">{{cat.name}}</li>
+        <li :key="`age_${index}`">{{cat.age}}</li>
+      </template>
+    </div>
+  </div>
+
+  <hr>
+  <!-- v-model是value 和 @input的语法糖 -->
+  <input type="text" :value="val" @input="e=>val =e.target.value">
+  <input type="text" :value="val" @input="fn($event)">
+
+<span>{{val}}</span>
+  
+
+</body>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data() {
+      return {
+        insertValue: 1,
+        tmp: `<h1>js is so easy!</h1>`,
+        cats:[{name:'TiKi',age:3},{name:'tiger',age:2}],
+        val:''
+        /*
+        fn(){
+          //这里的this指向window
+          // console.log(this);
+        }
+        */
+      }
+    },
+    methods:{
+      //这个里边的所有的this都指向 vm
+      //如果这里的方法想要复用，不好意思，不行
+      fn(e){
+        console.log(this);
+        this.value = e.target.value;
+
+      },
+    }
+  })
+</script>
+
+</html>

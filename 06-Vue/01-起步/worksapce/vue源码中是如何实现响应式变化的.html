@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{a}}---{{arr}} -->
+    {{arr[0].n}}---{{arr[1]}}----{{arr}}
+
+  </div>
+
+</body>
+<script>
+  let vm = new Vue({
+    el: '#app', //vue中通过querySelector('#app')来得到根元素
+    data() {
+      // return {
+      //   a:111,
+      //   arr:[1,2,3]
+      // }
+      return {
+        arr: [{
+          n: 100
+        }, 2]
+      }
+    }
+  });
+
+  //修改普通值
+  //vm.a=666;//666---[ 1, 666, 3 ]
+  //修改引用类型的值
+  //vm.arr[1]=666;//666---[ 1, 666, 3 ]
+
+
+  //3.数组里套对象 对象是支持响应式变化的
+  vm.arr[0].n=899;
+  vm.arr[1]=[1,2,3];
+  vm.arr[1][1]=222;
+
+  //修改数组的索引或长度
+  // vm.arr.length=3;
+
+
+
+  // 特点： 使用对象的时候 必须先声明属性 ，这个属性才是响应式的
+  // 1.增加不存在的属性 不能更新视图 （vm.$set）
+  // 2。默认会递归增加 getter和setter
+  // 3.数组里套对象 对象是支持响应式变化的，如果是常量则也有效果
+  // 4.修改数组索引和长度 是不会导致视图更新的
+  // 5.如果新增的数据 vue中也会帮你监控（对象类型）
+</script>
+
+<script>
+  //vue响应式数据原理 Object.defineProperty()
+
+  function observer(obj) {
+    if (typeof obj !== 'object' || obj == null) {
+      return obj
+    }
+    //循环遍历obj中的每一个属性
+    for (let key in obj) {
+      defineReactive(obj, key, obj[key]);
+    }
+  }
+
+  function defineReactive(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      get() {
+        return value;
+      },
+      set(newValue) {
+        obj.key = newValue;
+        console.log('更新视图');
+      }
+    })
+  }
+
+  let obj = {
+    name: 'TiKi'
+  };
+</script>
+
+</html>

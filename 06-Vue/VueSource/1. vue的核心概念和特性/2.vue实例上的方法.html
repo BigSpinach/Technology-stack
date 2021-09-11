@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{a}}---{{arr}} -->
+    <!-- {{arr[0].n}}---{{arr[1]}}----{{arr}} -->
+    {{a}}----{{b}}
+  </div>
+
+</body>
+
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data() {
+      return {
+        a: 1
+      }
+    }
+  })
+
+  //1.) $el 指的是真实的dom元素
+  //vue的特点： 不会再本轮代码执行的时候去重新渲染DOM，
+  //而是在下一事件环中更新（promise.then  mutationObserver setImmediate setTimeout）*---记住 ，渲染的过程是在下一队列中执行
+  //vm.a = 250;
+  //渲染后的真实dom
+  //console.log(vm.$el); // <div id="app">1</div>  
+  // debugger;
+  //更改了 a的值，但是本轮 vm.$el 还是之前的 <div id="app">1</div>
+
+
+
+  //2.) 监控实例上的属性的变化 
+  //watch会等待数据更新后，再去调用回调函数---延迟更新
+  //视图是异步更新的----watch中的回调函数会等待当前事件环中执行完毕才会执行
+  vm.$watch('a', (newValue, oldValue) => {
+    console.log(newValue, oldValue,'异步方法，后打印');
+  })
+  //多次修改，只会在下一事件环中执行一次监视，
+  //所以多次修改只执行一次或者0次watch方法
+  //vm.a = 250;
+  //vm.a = 666; //666 1
+  /*
+  //渲染后的真实dom,下一事件环中才会更新
+  console.log(vm.$el.innerHTML,'先打印');//  1  
+  //watch的回调函数是异步的，它在 vm.$el 之后才执行
+  */
+  vm.a = 250;
+  vm.a = 666;
+  //数据更新后会有一个新的队列，将watch的callback放到这个任务队列中，$nextTick 会添加到这个队列的微任务队列中
+  //  为了能拿到最新的DOM数据（渲染后的结果），一般都放到 $nextTick 中
+  vm.$nextTick(() => {
+    console.log(vm.$el.innerHTML,'添加到微任务队列中'); //   666
+  })
+
+  //3.) vm.$nextTick()
+
+
+  //4.) vm.$data //代表当前实例的数据
+  console.log( vm.$data);//{__ob__: Observer}  
+  console.log( vm.$options);//vm的options：{components: {…}, directives: {…}, filters: {…}, el: "#app", _base: ƒ, …}
+
+// 5.) vm.$set  vm.$delete   帮帮我们更新属性---这俩方法已被废弃
+//作用：例如》新增的属性不会导致视图更新，更改数组索引也不会更新视图
+// 页面中使用未提前声明的变量 b {{b}}
+vm.$set(vm.data,'b',999);//原理就是Object.defineProperty
+
+</script>
+
+</html>
