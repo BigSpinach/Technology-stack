@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{a}}
+  </div>
+
+  <script>
+    let vm = new Vue({
+      // el:'#app',
+      data: {
+        a: 1,
+      },
+      //当前这个实例 他的父亲是谁，儿子是谁， 有一套发布订阅 $on $emit 
+      beforeCreate() { //钩子函数
+        //创建之前
+        console.log('before create');
+        //console.log(this);
+        //在这里可以做什么？
+        // 混合、给每个组件添加一些特定的属性
+        // 业务逻辑基本上不会用到做个钩子函数
+        //debugger;
+      },
+      created() {
+        //当前这个组件已经实现了数据劫持， 把方法 数据，计算属性等已挂载到了实例上
+        //但是 真实dom元素还没有创建
+        console.log(' created');
+        //console.log(this);
+        //debugger;
+      },
+      //template: `<div>hello</div>`,
+      // render() {
+      //   //如果有了render 就不会使用template
+      //   console.log('render');
+      // },
+      beforeMount() {
+        //在挂载之前会调用render方法
+        // 没有写render方法会报错
+        /*vue.js:634 [Vue warn]: Failed to mount component: template or render function not defined.(found in <Root>)*/
+        console.log(' before mounted');
+        //console.log(this);
+        //debugger;
+      },
+      mounted() {
+        //当前组件挂载完成
+        //可以拿到真实DOM元素  即$el 
+        console.log('mounted');
+        //console.log(vm.$el);
+        //一般会将ajax的操作放在这里，因为页面中已经有了真实DOM
+        //如果 获取的ajax数据不需要操作DOM，那么也可以将 发送ajax的行为放在 created钩子中
+      },
+      beforeUpdate() { // 数据是应用到视图上
+        console.log('更新之前'); // 可以在这里，增加一些数据更新，不会导致视图多次更新
+      },
+      updated() { // 不要再去更新数据  可能会发生死循环
+        //this.a = Math.random(); // 不要在这里改数据
+        console.log('更新完成')
+      },
+      beforeDestroy() {
+        // 销毁前 // 事件的移除 清空定时器
+        console.log('销毁前')
+      },
+      destroyed() {
+        console.log('销毁后')
+      }
+
+
+    })
+
+    //1.
+    // vm.$mount(); //不填写实参，是将模板渲染到 内存中
+    //---vm.$el 即存储的渲染好的真实dom
+    //可以将渲染好的元素插入到任意的节点中
+    //console.log(vm.$el);
+    //document.body.appendChild(vm.$el);
+
+    //2.
+    vm.$mount('#app'); //填写querySelector 的选择器，会将渲染好的元素插入到这个指定的元素的位置
+
+
+    // 手动移除组件 路由切换
+    vm.$destroy(); // 移除所有的观察者，移除监听事件
+    console.log(vm);//vm指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁，但是渲染好的页面还在
+  </script>
+
+
+</body>
+
+</html>

@@ -39,20 +39,28 @@
     </div> -->
 
     <div>
-      <template  v-for="(cat,index) in cats">
+      <template v-for="(cat,index) in cats">
         <li :key="`name_${index}`">{{cat.name}}</li>
         <li :key="`age_${index}`">{{cat.age}}</li>
       </template>
     </div>
+
+
+    <hr>
+    <!-- v-model是value 和 @input的语法糖 -->
+    <h3>v-model是value 和 @input的语法糖</h3>
+    <input type="text" :value="val1" @input="inputFn">
+    <input type="text" :value="val2" @input="fn($event)">
+    <span>{{val1}}</span>
+    <br>
+    <span>{{val2}}</span>
+    <input v-model="val3"  />
+    <p>{{ val3 }}</p>
+  
+  
   </div>
 
-  <hr>
-  <!-- v-model是value 和 @input的语法糖 -->
-  <input type="text" :value="val" @input="e=>val =e.target.value">
-  <input type="text" :value="val" @input="fn($event)">
 
-<span>{{val}}</span>
-  
 
 </body>
 <script>
@@ -62,8 +70,16 @@
       return {
         insertValue: 1,
         tmp: `<h1>js is so easy!</h1>`,
-        cats:[{name:'TiKi',age:3},{name:'tiger',age:2}],
-        val:''
+        cats: [{
+          name: 'TiKi',
+          age: 3
+        }, {
+          name: 'tiger',
+          age: 2
+        }],
+        val1: '',
+        val2: '',
+        message:''
         /*
         fn(){
           //这里的this指向window
@@ -72,14 +88,19 @@
         */
       }
     },
-    methods:{
+    methods: {
       //这个里边的所有的this都指向 vm
       //如果这里的方法想要复用，不好意思，不行
-      fn(e){
-        console.log(this);
-        this.value = e.target.value;
+      fn(e) {
+        // console.log(this);
+        this.val2 = e.target.value;
 
       },
+      inputFn(e) {
+        this.val1 = e.target.value;
+
+        console.log(555);
+      }
     }
   })
 </script>

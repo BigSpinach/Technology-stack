@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    watch1: {{watch1}}---watch2: {{watch2}}
+  </div>
+
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: '墩子',
+          a: 1,
+          b: 2,
+          watch1: 0,
+          watch2: 0,
+        }
+      },
+      // watch: {
+      //   // watch的作用：当依赖的属性值发生改变，可以做一件事（执行handler）
+      //   //watch1        
+      //   /*写法1*/
+      //   watch1(newValue) {
+      //     //默认页面第一次渲染的时候 不执行
+      //     console.log(newValue);
+
+      //   },
+
+      //   /*写法2*/
+      //   watch2: {
+      //     handler(newValue) {
+      //       console.log(newValue);
+      //     },
+      //     immediate: true,
+      //     deep: true,
+      //     lazy: true, //加上这个属性，就是computed的实现
+      //   }
+      // },
+      computed: {
+        fullname() {
+          //return this.name + '-TiKi'
+        }
+      }
+    });
+
+
+    /*模拟watch*/
+    // function initWatch(watch) {
+    //   for (let key in watch) {
+    //     vm.$watch(key, watch[key]);
+    //   }
+    // }
+
+    // initWatch({
+    //   watch1() {
+    //     console.log('watch1');
+    //     return this.a + this.b;
+    //   },
+    //   watch2() {
+    //     console.log('watch2');
+    //     return this.a + this.b;
+    //   }
+    // })
+
+
+    /*模拟computed*/
+    /*
+        let dirty=true;
+        function initComputed2(key, handler) {
+          let value;
+          Object.defineProperty(vm, key, {
+            get() {
+              //取值的时候将 dirty改为false
+              // debugger;
+              if (dirty) {
+                console.log('更新');
+                value = handler();
+                dirty=false
+              }
+              return value;
+            },
+            set(newValue) {
+              //改值的时候将 dirty改为 true
+              if (newValue) {
+                dirty = true;
+              }
+              return newValue;
+            }
+          })
+        }
+
+        initComputed2('fullname', () => {
+          return vm.name + 'Tiger';
+        })
+
+        //多次获取 fullname 只执行一次 更新操作 
+        vm.fullname;
+        vm.fullname;
+        //设置新的 fullname  ，修改标识符 dirty为true，再次执行获取操作，可以进入get 的if判断，执行更新操作和handler的执行
+        vm.fullname='xxx';
+        vm.fullname;
+    */
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 指令有几部分组成 v-model.a.b.c="abc" -->
+    <!-- 指令名model  指令修饰符.a .b .c 指令值abc -->
+    <input type="text" v-focus.color="'red'">
+  </div>
+
+
+
+</body>
+<script>
+  // Vue.directive('focus',callback);
+  // Vue.directive('focus',{
+  //   // inserted(){},
+  //   // bind(){},
+  //   // update(){},
+  //   // unbind(){},
+  // });
+
+  // 注册一个全局自定义指令 `v-focus`
+  Vue.directive('focus', {
+    // 当被绑定的元素插入到 DOM 中时……
+    inserted: function (el, bindings, vnode) {
+      // el代表当前指令元素
+      // bindings绑定属性 
+      // vnode 虚拟节点 context上下文，当前指令所在的上下文
+      // bind inserted -> update -> unbind
+      
+      //console.log(el, bindings, vnode);
+      //console.log(bindings);
+      /*
+        def: {inserted: ƒ}
+        expression: "'color'"  //表达式
+        modifiers: {color: true} //指令修饰符
+        name: "focus"
+        rawName: "v-focus.color"
+        value: 'red'//值 ，也就是表达式 所表示的值 
+      */
+      // 聚焦元素
+      el.focus()
+      //更改背景颜色颜色为传入的颜色（表达式）
+      //el.style.backgroundColor = binding.value;
+      let color = bindings.modifiers.color;
+      if (color) {
+        el.style.boxShadow = `1px 1px 2px ${bindings.value}`
+      }
+    },
+    unbind() { // 指令销毁的时候 会触发此函数
+    }
+  })
+
+
+  let vm = new Vue({
+    el: "#app",
+    data() {
+      return {}
+    },
+  })
+</script>
+
+</html>
