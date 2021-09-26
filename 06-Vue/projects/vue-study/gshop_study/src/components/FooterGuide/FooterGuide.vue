@@ -5,7 +5,8 @@
       @click="goPath('/msite')"
       class="guideItem"
     >
-      <i class="iconfont icon-shouye"></i><span>首页</span>
+      <i class="iconfont icon-shouye"></i>      
+      <span>首页</span>
     </div>
     <div
       :class="{ active: $route.path === '/search' }"

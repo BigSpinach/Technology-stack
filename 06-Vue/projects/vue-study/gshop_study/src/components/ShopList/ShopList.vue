@@ -1,7 +1,7 @@
 <template>
   <div class="shop_container">
     <ul class="shop_list">
-      <li class="shop_li border-1px" v-for="shop in shoplist" :key="shop.id">
+      <li @click="toShop" class="shop_li border-1px" v-for="shop in shoplist" :key="shop.id">
         <a>
           <div class="shop_left">
             <img
@@ -71,6 +71,11 @@ export default {
       shoplist: (state) => state.shoplist,
     }),
   },
+  methods:{
+    toShop(){
+      this.$router.push('/shop');
+    }
+  }
 };
 </script>
 

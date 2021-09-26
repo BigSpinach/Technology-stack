@@ -398,7 +398,7 @@ DNS及HTTP通信方式的优化
 
 #### 4.2、HEAD
 
-向服务器索与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以再不必传输整个响应内容的情况下，就可以获取包含在响应小消息头中的元信息。
+向服务器索与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以再不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。
 
 #### 4.3、GET
 
@@ -406,7 +406,7 @@ DNS及HTTP通信方式的优化
 
 ```javascript
 let xhr= new XMLHttpRequest();
-xhr.open('GET','www.github.con/BigSpinach?name=LIU&age=28'，false);//默认true  表示异步
+xhr.open('GET','www.github.con/BigSpinach?name=LIU&age=28',false);//默认true  表示异步
 xhr.onreadystatechange=()=>{
   if(xhr.readyState===4&&xhr.status==200){
     return xhr.responseText;

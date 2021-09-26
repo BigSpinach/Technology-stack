@@ -20,6 +20,7 @@
       </div>
       <div class="login_content">
         <form>
+          <!-- 手机号验证码登陆 -->
           <div :class="{ on: !isUserNameLogin }">
             <section class="login_message">
               <input
@@ -33,10 +34,11 @@
               <span style="color: red" v-show="errors.has('phone')">{{
                 errors.first("phone")
               }}</span>
-              <!-- :disabled="!rightPhoneNumber || countDown>0" -->
+              <!-- :disabled="rightPhoneNumber && countDown > 0"
+                -->
               <button
                 @click="getCode"
-                :disabled="rightPhoneNumber && countDown > 0"
+                :disabled="!rightPhoneNumber || countDown > 0"
                 class="get_verification"
                 :class="{
                   rightPhone: rightPhoneNumber,
@@ -49,6 +51,7 @@
             </section>
             <section class="login_verification">
               <input
+                v-model="code"
                 name="code"
                 v-validate="'required|code'"
                 type="tel"
@@ -64,10 +67,12 @@
               <a href="javascript:;">《用户服务协议》</a>
             </section>
           </div>
+          <!-- 用户名密码登陆 -->
           <div :class="{ on: isUserNameLogin }">
             <section>
               <section class="login_message">
                 <input
+                  v-model="username"
                   name="username"
                   v-validate="'required'"
                   type="tel"
@@ -80,6 +85,7 @@
               </section>
               <section class="login_verification">
                 <input
+                  v-model="pwd"
                   name="pwd"
                   v-validate="'required'"
                   :type="isShowPwd ? 'tel' : 'password'"
@@ -105,6 +111,7 @@
               </section>
               <section class="login_message">
                 <input
+                  v-model="captcha"
                   name="captcha"
                   v-validate="'required'"
                   type="text"
@@ -136,6 +143,13 @@
 </template>
 
 <script>
+import {
+  sendCode,
+  loginWithUserName,
+  loginWithPhoneNumber,
+} from "../../api/index.js";
+// console.log(sendCode);
+
 export default {
   data() {
     return {
@@ -143,6 +157,10 @@ export default {
       isShowPwd: false,
       phoneNumber: "",
       countDown: 0,
+      username: "",
+      pwd: "",
+      captcha: "",
+      code: "",
     };
   },
   methods: {
@@ -154,29 +172,78 @@ export default {
         "http://localhost:4000/captcha?time=" + Date.now();
     },
     //获取短信验证码
-    getCode() {
+    async getCode() {
       //console.log('获取验证码...');
       this.countDown = 5;
       let timerId = setInterval(() => {
         this.countDown--;
         this.countDown === 0 && clearInterval(timerId);
       }, 1000);
+
+      //发送请求验证码的操作
+      //http://localhost:4000/sendcode
+      //需要拿到返回的数据吗？ 不需要
+      //所以可以直接在这里发ajax
+      let result = await sendCode(this.phoneNumber);
+      if (result.code === 0) {
+        //成功
+        alert("短信发送成功");
+      } else {
+        //失败
+        alert(result.msg);
+      }
     },
     //登陆
-    async login(){
+    async login() {
       //1.前端验证
-      let {isUserNameLogin} = this;
-      let names = isUserNameLogin?['username','pwd','captcha']:['phone','code'];
+      let { isUserNameLogin, phoneNumber, username, pwd, captcha, code } = this;
+      let names = isUserNameLogin
+        ? ["username", "pwd", "captcha"]
+        : ["phone", "code"];
       // const success = await this.$validator.validateAll() // 对所有表单项进行验证
-      const success = await this.$validator.validateAll(names) // 对指定的所有表单项进行验证
-      if(success){//前端验证成功
-        //2.后端验证
-        console.log(success);
-      }else{
+      const success = await this.$validator.validateAll(names); // 对指定的所有表单项进行验证
+      if (success) {
+        // console.log("前端验证成功");
+        // 后端验证
+        let result;
+        if (isUserNameLogin) {
+          //用户名密码登陆
+          // debugger;
+          result = await loginWithUserName({ username, pwd, captcha });
+          // console.log(result);
+          if (result.code === 1) {
+            //登录失败
+            alert("登录失败！验证码、密码、用户名不正确");
+            //刷新验证码
+            this.getCaptcha();
+            //清空验证码输入框
+            this.captcha = "";
+          }
+        } else {
+          //手机号验证码登陆
+          result = await loginWithPhoneNumber({ phoneNumber, code });
+          if (result.code === 1) {
+            //登录失败
+            alert("登录失败！请输入正确的验证码");
+            //刷新验证码
+            this.getCode();
+            //清空验证码输入框
+            this.code = "";
+          }
+        }
+
+        //统一验证登陆成功要做的事
+        if (result.code === 0) {
+          //切换到个人中心页
+          this.$router.replace("/profile");
+          //存储用户信息
+          this.$store.dispatch('getUserInfoAction',result.data);
+        }
+      } else {
         //前端验证失败
-        console.log('前端登陆失败');
+        console.log("前端验证失败，登陆失败");
       }
-    }
+    },
   },
   computed: {
     rightPhoneNumber() {

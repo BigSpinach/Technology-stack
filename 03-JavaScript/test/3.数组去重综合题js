@@ -1,0 +1,81 @@
+//数组去重
+let arr = [
+  { name: 1, age: 2, number: 1, son: 'son1'},
+  { name: 1, age: 23,number: 2, son: 'son2'},
+  { name: 2, age: 23,number: 3, son: 'son3'},
+  { name: 2, age: 42,number: 4, son: 'son4'},
+  { name: 1, age: 2, number: 5, son: 'son5'},
+  { name: 2, age: 2, number: 6, son: 'son6'},
+]
+
+//去重后的结果为
+let result = [{
+    name: 1,
+    list: [
+      { number: 1,son: 'son1' },
+      { number: 2,son: 'son2' },
+      { number: 5,son: 'son5' }
+    ]
+  },
+  {
+    name: 2,
+    list: [
+      { number: 3,  son: 'son3'}, 
+      { number: 4,  son: 'son4'},
+      { number: 6,  son: 'son6'}
+    ]
+  }
+]
+
+
+let aryListPush=(arr,cur)=>{
+  arr.forEach(item=>{
+    item.list.push(cur)
+  })
+}
+
+let fn = (arr) => {
+  let ary = [];
+  //遍历获取 所有name 的值，用于去重 
+  let r = [];
+  arr.forEach(item => {
+    for (let key in item) {
+      if (key === 'name') {
+        r.push(item[key]);
+      }
+    }
+  })
+  //对r 进行去重，得到 {name:1} {name:2} 这样的对象
+  let newR = Array.from(new Set([...r])); //newR = [1,2]
+  //遍历newR，将其作为每一个obj的name的值
+  newR.forEach(item => {
+    let obj = {};
+    obj.name = item;
+    obj.list = arr;
+    ary.push(obj);
+  })
+  //此时 ary =[{name:1},{name:2}]
+  return ary;
+}
+ let newArr = fn(arr);
+//  console.log(newArr);
+
+let deleteRepetition = (arr)=>{
+  //删除重复项
+  arr.forEach(item=>{
+    for(let i=0;i<item.list.length;i++){
+      let name = item.name;
+      let cur = item.list[i];
+       console.log(cur.name);
+      if(cur.name!==name){
+      //  console.log( item.list);
+        // item.list.splice(i,1);        
+        // i--;
+      }
+    }
+  })
+  return arr;
+}
+console.log( deleteRepetition(newArr));
+// console.log(fn(arr));
+// fn(arr)
