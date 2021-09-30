@@ -107,8 +107,11 @@ export const test = () => ajax({
 //而此时 发送的 请求地址中不含有 /api 
 //所以
 // 所以   需要使用 ajax('/api/test') 的方式拦截
+//也就是说在 mock中 Mock.mock(url,result)  url中需要 拼上 /api/
 
 //mock数据
+//z这里ajax 世界上发送的 请求地址是 /api/getMockDatas
+//所以 对应的在Mock.mock('/api/getMockDatas',result);
 export const mockDatas =()=>ajax({
   url:'getMockDatas'
 })

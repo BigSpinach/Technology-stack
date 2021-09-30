@@ -50,9 +50,7 @@ export default {
 
 
   /*获取登陆的用户信息 */
-  async getUserInfoAction({
-    commit
-  }, user) {
+  async getUserInfoAction({commit }, user) {
     commit(SAVE_TOKEN, user.token);
     //将token存储到本地localStorage
     localStorage.setItem('token_key',user.token);

@@ -28,7 +28,8 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  productionSourceMap:false//不生成souse Map文件
 
 
 }

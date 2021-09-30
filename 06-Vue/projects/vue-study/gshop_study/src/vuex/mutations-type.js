@@ -19,4 +19,10 @@ export const ADD_FOOD_COUNT = 'add_food_count';
 
 export const DEL_FOOD_COUNT = 'del_food_count';
 
+export const EMPTY_CART_ITEMS = 'empty_cart_items';
+
+export const SAVE_CARTITEMS = 'save_cartitems';
+
+
+
 

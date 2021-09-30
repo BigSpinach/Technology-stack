@@ -4,14 +4,18 @@
       <ul class="navlist" ref="leftUl">
         <li
           @click="changeNavIndex(index)"
-         :class="{active:navIndex===index}"
-         v-for="(good, index) in goods" :key="index">{{ good.name }}</li>
+          :class="{ active: navIndex === index }"
+          v-for="(good, index) in goods"
+          :key="index"
+        >
+          {{ good.name }}
+        </li>
       </ul>
     </div>
     <div class="rightContainer">
       <div class="foods-wrapper">
         <ul ref="rightUl">
-          <li           
+          <li
             class="food-list-hook"
             v-for="(good, index) in goods"
             :key="index"
@@ -46,11 +50,13 @@
         </ul>
       </div>
     </div>
+    <ShopCart></ShopCart>
   </div>
 </template>
 
 <script>
 import CartControl from '../../../components/CartControl/CartControl.vue';
+import ShopCart from '../../../components/ShopCart/ShopCart.vue';
 import BScroll from "better-scroll";
 // let navlist = document.querySelector('.navlist')
 // let scroll = new BScroll(navlist)
@@ -64,7 +70,8 @@ export default {
     };
   },
   components:{
-    CartControl
+    CartControl,
+    ShopCart
   },
   async mounted() {
     // new BScroll('.leftContainer',{
@@ -89,7 +96,12 @@ export default {
   },
   methods: {
     _initScroll() {
-      this.scrollLeft = new BScroll(".leftContainer", {
+      if(this.scrollLeft||this.scrollRight){
+        //判断BScroll实例是否存在，如果存在就刷新
+        this.scrollLeft.refresh();
+        this.scrollRight.refresh();
+      }else{
+        this.scrollLeft = new BScroll(".leftContainer", {
         scrollY: true,
         click:true,//better-sroll 默认进制click事件
       });
@@ -100,6 +112,7 @@ export default {
         click:true,
         // '2' 当惯性滑动结束后 重新计算ScrollY的值
       });
+      }
       //给scroll实例对象绑定事件
       // this.scrollRight.on("scroll", (position) => {
       //   console.log(position.x, position.y);
@@ -193,7 +206,7 @@ export default {
 #goodContainer
   display: flex
   overflow: hidden
-  height: calc(100vh - 250px)
+  height: calc(100vh - 298px)
   .leftContainer
     width: 80px
     background: #f3f5f7
@@ -211,8 +224,8 @@ export default {
         text-align: center
         line-height: 50px
         &.active
-          background #fff
-          color $color
+          background: #fff
+          color: $color
         &::after
           content: ''
           width: 80%
