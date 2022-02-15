@@ -30,5 +30,6 @@
   "stylusSupremacy.insertSemicolons": false,
   "stylusSupremacy.insertBraces": false,
   "stylusSupremacy.insertNewLineAroundImports": false,
-  "stylusSupremacy.insertNewLineAroundBlocks": false
+  "stylusSupremacy.insertNewLineAroundBlocks": false,
+  "editor.fontFamily": "’PingFang Medium‘，Consolas, 'Courier New', monospace"
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+//   function fn(a,b){
+//     this.xxx=666;
+//     console.log(a,b,this);
+//   }
+
+//   fn(1,2);
+//   console.log(xxx);//3  fn执行，this指向window this.xxx =3 即window.xxx=3
+
+//   let obj = {
+//     name:'Tiki'
+//   };
+
+// fn.call(obj,12,34);// 让fn执行，并让函数中的this指向obj ,后边传递的是执行fn传递的实参
+// fn.apply(obj,[1,3]);// 跟call基本一致，传递实参的方式不一样
+
+// //特殊的情况 this指向window
+// fn.call(null,1,2); // this指向window
+// fn.call(undefined,1,2); //this指向window
+
+
+// //bind
+// console.log('---------bind----------');
+// fn.bind(obj)(1,3);//fn.bind(obj)  返回一个新函数
+// //1 3 {name: "Tiki", xxx: 666}
+
+
+// fn.bind(obj,3)(4,5);//3 4 {name: "Tiki", xxx: 666}
+
+// fn.bind(obj,8,9)(100,200);//8 9 {name: "Tiki", xxx: 666}
+
+
+
+  
+
+</script>
+<script src="./1.call、apply、bind的实现.js"></script>
+</html>
