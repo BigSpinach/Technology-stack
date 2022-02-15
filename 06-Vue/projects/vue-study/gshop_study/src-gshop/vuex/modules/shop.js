@@ -81,7 +81,7 @@ const mutations = {
       //什么时候把这个food从 cartItems中删除掉？  count<=0的时候
       if (food.count === 0) {
         //删除的是 cartItems中的某一项，
-        state.cartItems.splice(state.cartItems.indexOf(food), 1);
+        //state.cartItems.splice(state.cartItems.indexOf(food), 1);
 
         //如果说不对cartItems数组中的元素进行删除操作，这样比较解约性能
         //因为数组的数据结构 增，查，改，方便， 删除操作需要修改后续索引，所以最好不要操作数组的删除操作   

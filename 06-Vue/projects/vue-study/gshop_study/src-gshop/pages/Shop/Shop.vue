@@ -84,7 +84,7 @@ export default {
   beforeDestroy(){
     //不刷新，直接返回上一级路由 ，此时vuex中的数据没有了
     //所以在销毁这个组价之前（路由切换），需要将最新的数据存储到sessionStorage中
-    console.log('beforeDestory');
+    // console.log('beforeDestory');
     sessionStorage.setItem('shopData_key',JSON.stringify(this.shopData));
     //提问：刷新页面也会销毁当前组件，为什么不直接在销毁这里写一个存储到sessionStorage的行为即可？
     //答：因为beforeDestory属于vue的生命周期钩子，而刷新的行为属性浏览器的行为，所以不能用vue的钩子函数替代浏览器的行为，

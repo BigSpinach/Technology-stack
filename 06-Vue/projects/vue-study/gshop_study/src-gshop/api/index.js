@@ -110,7 +110,7 @@ export const test = () => ajax({
 //也就是说在 mock中 Mock.mock(url,result)  url中需要 拼上 /api/
 
 //mock数据
-//z这里ajax 世界上发送的 请求地址是 /api/getMockDatas
+//z这里ajax 实际上发送的 请求地址是 /api/getMockDatas
 //所以 对应的在Mock.mock('/api/getMockDatas',result);
 export const mockDatas =()=>ajax({
   url:'getMockDatas'

@@ -153,7 +153,7 @@ export default {
       this.tops = tops;
     },
     changeNavIndex(index){
-      console.log(index);
+      // console.log(index);
       // this.navIndex=index; //navIndex 没有设置setter 回调
       // 要想更改 nvaIndex 其实可以通过 修改 scrollY的值来改变
       this.scrollY = this.tops[index];

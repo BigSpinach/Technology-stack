@@ -20,7 +20,6 @@ export default {
   },
   [SAVE_USER](state, user) {
     state.user = user;
-
   },
   [SAVE_TOKEN](state, token) {
     state.token = token;

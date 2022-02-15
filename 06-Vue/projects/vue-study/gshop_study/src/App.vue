@@ -1,30 +1,64 @@
 <template>
   <div class="appContainer">
-    <router-view></router-view>
-    <FooterGuide v-show="$route.meta.isShowFooter"/>
+    <div class="tabsContainer">
+      <button @click="currentTabComponent = 'Home'">Home</button>
+      <button @click="currentTabComponent = 'Posts'">Posts</button>
+      <button @click="currentTabComponent = 'Archive'">Archive</button>
+    </div>
+    <keep-alive>
+      <component :is="currentTabComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-// import { autoLogin } from './api';
-import {SAVE_USER} from './vuex/mutations-type';
-import FooterGuide from './components/FooterGuide/FooterGuide.vue';
+import Vue from "vue";
+//异步组件
+Vue.component("asyncComponent", function (resolve, reject) {
+  setTimeout(function () {
+    // 向 `resolve` 回调传递组件定义
+    resolve({
+      template: "<div>异步组件!</div>",
+    });
+  }, 1000);
+});
 
+import Home from "./components/Home.vue";
+import Posts from "./components/Posts.vue";
+import Archive from "./components/Archive";
 
 export default {
   name: "App",
-  components:{FooterGuide},
-  async mounted(){
-    // let result =await autoLogin();
-    let result =await this.$API.autoLogin();
-
-    //将解析后的token存入vuex中
-    //console.log(result.data);
-    this.$store.commit(SAVE_USER,result.data);
-  }
+  components: {
+    Home: (resolve, reject) => {
+      setTimeout(() => {
+        resolve(Home);
+      }, 1000);
+      //发送ajax请求 异步获取组件
+    },
+    Posts,
+    Archive,
+  },
+  data() {
+    return {
+      currentItem: 0,
+      currentTabComponent: "Home",
+    };
+  },
 };
 </script>
 
 <style lang="stylus"  >
-
+.appContainer
+  .tabsContainer
+    display: flex
+    position: fixed
+    width: 100%
+    left: 0
+    top: 0
+    button
+      // width  33.3333%
+      height: 50px
+      flex: auto
+  
 </style>
