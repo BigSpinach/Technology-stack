@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  
+</body>
+<script>
+  function log(msg) {
+    console.log(msg);
+  }
+
+  function logCoords(coords) {
+    log(`经度：${coords.longitude}`);
+    log(`纬度：${coords.latitude}`);
+    log(`海拔高度：${coords.altitude}`);
+    log(`位置精度：${coords.accuracy}`);
+    log(`海拔精度：${coords.altitudeAccuracy}`);
+    log(`方向：${coords.heading}`);
+    log(`速度：${coords.speed}`);
+  }
+  //获取geolocation
+  var geoloc = navigator.geolocation;
+  //获取一次设备的位置
+  geoloc.getCurrentPosition(
+    function (position) {
+      var coords = position.coords;
+      var timestamp = position.timestamp;
+      logCoords(coords);
+      log(`获取时间：${new Date(timestamp).toLocaleString()}`);
+    }
+  );
+</script>
+
+</html>

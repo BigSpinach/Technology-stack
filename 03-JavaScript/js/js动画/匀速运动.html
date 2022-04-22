@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>匀速运动</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <script>
+    //目标效果：实现id=box的元素 匀速运动
+    //分解： 匀速：一个方向的匀速
+    //  核心：控制left或top 每隔10mm 运动多少距离
+    //  使用到技术 DOM提供的定时器
+    let box = document.getElementById('box');
+
+    let step=10;    
+    //边界
+    let maxLeft = document.documentElement.clientWidth-box.offsetWidth;
+    let minLeft =0;
+
+    let intervalTimer = window.setInterval(function(){
+      let left = box.offsetLeft + step;
+      left+=step;
+      if(left>maxLeft){
+        left = maxLeft;
+        step*=-1;
+      }else if(left <minLeft){
+        left=minLeft;
+        step*=-1;
+      }
+      box.style.left = left + 'px';
+    },10)
+
+  
+  </script>
+</body>
+
+
+</html>

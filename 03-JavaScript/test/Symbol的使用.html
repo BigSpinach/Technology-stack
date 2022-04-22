@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //Symbol 常用作内部属性的封装
+  function Book(name,price,profit){
+    var price_s = Symbol();
+    var profit_s = Symbol();
+    this.name=name;
+    this[price_s]= price;
+    this[profit_s]= profit;
+    this.getPrice=function(){
+      return this[price_s]+this[profit_s];
+    }
+  }
+
+  var 金瓶梅 = new Book('金瓶梅',88,20);
+  console.log(金瓶梅.name);
+  console.log(金瓶梅.price);//undefined
+  console.log(金瓶梅.profit);//undefined
+  console.log(金瓶梅.getPrice());
+  console.log(金瓶梅.profit);//undefined
+  console.log(金瓶梅.profit_s);//undefined
+  console.log(金瓶梅.price_s);//undefined
+  
+  console.log(金瓶梅[Symbol('price')]);//undefined
+  console.log(金瓶梅[price_s]);//Uncaught ReferenceError: price_s is not defined
+
+  
+  
+</script>
+</html>

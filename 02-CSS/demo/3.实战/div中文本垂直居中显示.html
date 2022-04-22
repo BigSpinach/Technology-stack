@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: aquamarine;
+      text-align: center;
+      /* line-height: 200px; */
+    }
+    .box span{
+      /*让span垂直居中*/
+       display: block; 
+       /* margin: 0 auto; */
+       /* line-height: 200px; *//*直接设置这个会高处div中文本的高度,可以使用calc动态减去div中文本的高度*/       /* line-height: 150px; */
+       /*还可以通过计算span的位置*/
+      /* margin-left: 100px; */
+      /* padding-top: 100px; */
+      margin-top: 50px;/*这个高度也需要计算的出*/
+
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    123
+    <span>span456</span>
+  </div>
+</body>
+</html>

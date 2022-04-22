@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .fixed {
+      width: 200px;
+    }
+
+    .outer{
+      font-size: 0;
+    }
+
+    .fixed,
+    .auto {
+      font-size: 1rem;/*外层父级容器设置了fontsize:0，导致所有的字体大小都为0*/
+      height: 300px;
+      outline: solid 1px blue;
+    }
+
+    .fixed {
+      display: inline-block;
+      background-color: aqua;
+      vertical-align: top;
+    }
+
+    .auto {
+      display: inline-block;
+      margin-left: -200px;
+      width: 100%;
+      vertical-align: top;
+      padding-left: 200px;
+      box-sizing: border-box; 
+      /*  缺点：如果.auto部分 有background，会遮盖住.fixed的部分  */
+      /* background-color: blue; */
+      background-color: rgba(22,23,24,0.5);
+      
+    }
+  
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <div class="fixed">fixed盒子</div>
+    <div class="auto">auto盒子</div>
+  </div>
+
+</body>
+
+</html>

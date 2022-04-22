@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .outer {
+      width: 1000px;/*精度问题，兼容一些其他浏览器*/
+      font-size: 0;/*消除inline盒会占据位置，导致页面有空白显示*/
+    }
+    .inner {
+      width: 33.33%;
+      height: 300px;
+      display: inline-block;
+      outline: solid 1px blue;
+      background-color: aqua;
+    }
+
+    .inner:last-child {
+      margin-right: -5px;/*兼容老浏览器换行显示*/
+    }
+
+    .outer {
+      /* width: 1000px; */
+      font-size: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <div class="inner"></div>
+    <div class="inner"></div>
+    <div class="inner"></div>
+  </div>
+</body>
+
+</html>

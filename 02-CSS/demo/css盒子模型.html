@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>css盒子模型</title>
   <style>
-    .box{
+    .box {
       width: 300px;
       height: 300px;
-      color:yellow;
+      color: yellow;
       background-color: aqua;
       margin: 50px;
       padding: 10px;
-      border:  solid ; /*不指定宽度，边框也会有一个默认宽度 一般3px*/
+      border: solid;
+      /*不指定宽度，边框也会有一个默认宽度 一般3px*/
       /*不指定颜色，不指定border会默认使用字体颜色*/
-      
     }
+    .box2{
+      width: 300px;
+      height: 300px;
+      color: green;
+      background-color: pink;
+      /* margin: 50px; */
+      /* 
+        浮动元素顶部跟当前行内级上下文边缘对齐
+        所以排列显示会有向左上角移动50px的偏移
+      */
+      padding: 10px;
+    }
+    .l{
+      float: left;
+    }
+
   </style>
 </head>
+
 <body>
+  <h1>css盒子模型（3种情况）</h1>
+  <h3>1.块级盒模型</h3>
   <div class="box">
-   
   </div>
+
+  <hr>
+  <h3>2.行级/文字盒模型</h3>
+  <span>span元素</span>
+  <a href="#">a元素</a>
+  文字文字文本abc
+
+  <hr>
+  <h3>3.float盒模型</h3>
+  <div class="box2 l" >左浮动盒子box2</div>
+  <div class="box">块级盒子box</div>
+
+  <div class="box2 l" >左浮动盒子box2</div>
+  文本123456abcdefgh
+
+
 </body>
+
 </html>

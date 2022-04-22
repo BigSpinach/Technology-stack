@@ -14,18 +14,20 @@
 
     /*设定导航条*/
     .nav{
-      width: 1000px;
+      width: 1210px;
       /*高度由内容撑开*/
       margin: 20px auto;
       background-color: #E8E7E3;
+      /* background-color: rab(232, 231, 227); */
+      
     }
     
     .navmenu li{
       float: left;
-      
+      background-color: #E8E7E3;
     }
     /*设置浮动，子元素脱离文档流，父元素高度塌陷*/
-    .nav::after{
+    .nav::before{
       display: block;
       content: '';
       overflow: hidden;
@@ -45,7 +47,7 @@
     }
 
     .navmenu li a:hover{
-      background-color: black;
+      background-color: #3f3f3f;
       color: white;
     }
 

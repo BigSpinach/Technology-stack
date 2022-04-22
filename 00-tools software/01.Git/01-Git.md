@@ -37,7 +37,7 @@
 > touch a.txt 创建**a.txt**文件
 >
 > touch .lc 创建**.lc**这样的无文件名文件
-
+c
 `echo` 创建文件并向文件中插入内容
 
 > echo hello world > a.txt 向**a.txt**文件中插入**hello world**这句话

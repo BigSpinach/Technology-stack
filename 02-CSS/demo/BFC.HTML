@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BFC</title>
   <style>
-    ul,ol{
+    ul,
+    ol {
       list-style: none;
     }
-    div{
+
+    div {
       width: 200px;
       height: 200px;
       background-color: pink;
-      
+
     }
 
-    span{
+    span {
       line-height: 200px;
       text-align: center;
       display: inline-block;
@@ -24,9 +27,15 @@
 
     }
 
-
+    .clearfix::before,
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
   </style>
 </head>
+
 <body>
 
   <h3>BFC是css元素的一个隐藏属性</h3>
@@ -43,4 +52,5 @@
 
   <p></p>
 </body>
+
 </html>

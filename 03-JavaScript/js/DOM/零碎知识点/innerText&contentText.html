@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <ul class="listBox">
+    <li>1asdasda</li>
+    <li>2qweqweqw</li>
+    <li>qweqwe3</li>
+  </ul>
+  <p style="visibility: hidden;">哈哈</p>
+  <script>
+    let pList = document.getElementsByTagName('p');
+    console.log(pList[0].innerText); //拿不到隐藏元素的内容
+    console.log(pList[0].textContent); //哈哈
+    /*
+    
+    - Node.textContent 
+      拿到的是html转为DOM对象的初始值，非“渲染后” 
+    - Element.innerHTML
+      innerHTML 属性可以用来检查当前页面自最初加载到当前的 HTML 源码的变化。
+    - HTMLElement.innerText 
+      属性表示一个节点及其后代的“渲染”文本内容
+
+    
+    innerText 可操作已被渲染的内容， 
+    而 textContent 则不会.
+
+
+    HTMLElement接口继承于Element接口
+    HTMLElement是DOM中的HTML标准
+
+    
+    */
+  </script>
+</body>
+<script>
+  let ulNode = document.querySelector('.listBox');
+  //let ulNode = document.getElementsByClassName('listBox');
+
+  //通过给父元素绑定事件
+
+  let getInto = (event) => {
+    event = event || window.event;
+    let targetEle = event.target || event.srcElement;
+    targetEle.style.backgroundColor  ='red';
+    
+  }
+
+  let goOut = (event) => {
+    event = event || window.event;
+    let targetEle = event.target || event.srcElement;
+    targetEle.style.backgroundColor = 'transparent';
+    
+  }
+
+//  ulNode.addEventListener('mouseenter', getInto, false);
+//  ulNode.addEventListener('mouseleave', goOut, false);
+//遍历ulNode，给每一个li绑定事件
+// console.log(ulNode);
+
+let lis = ulNode.getElementsByTagName('li');
+
+for(let i=0;i<lis.length;i++){
+  lis[i].addEventListener('mouseenter', getInto, false);
+  lis[i].addEventListener('mouseleave', goOut, false);
+}
+
+
+</script>
+
+</html>
