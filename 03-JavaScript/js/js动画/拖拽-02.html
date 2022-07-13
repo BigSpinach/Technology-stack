@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖拽</title>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: darkblue;
+      border-radius: 50%;
+      cursor: move;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <div id="box" style="left: 50%;top:50%"></div>
+
+
+</body>
+
+
+
+</html>
+<script>
+  //拖拽方法抽离
+  let dragMove = function (targetEle) {
+    targetEle.canMove = true;
+    //记录targetEle的初始位置
+    let calcStartPlace = function (event) {
+      event.preventDefault();
+      targetEle.startX = event.clientX - targetEle.offsetLeft;
+      targetEle.startY = event.clientY - targetEle.offsetTop;
+    
+    }
+    document.addEventListener('mousedown', calcStartPlace);
+
+    let moveTo = function (event) {
+      targetEle.style.left = event.clientX - targetEle.startX + 'px';
+      targetEle.style.top = event.clientY - targetEle.startY + 'px';
+      console.log('嘎嘎嘎');
+    }
+    document.addEventListener('mousemove', moveTo);
+
+    let clearMove = function () {
+      // document.addEventListener('mousedown', calcStartPlace);
+      // document.addEventListener('mousemove', moveTo);
+
+      document.removeEventListener('mousemove', moveTo);
+      document.removeEventListener('mouseup', clearMove);
+      targetEle.canMove = false;
+      // if(targetEle.canMove){
+      //   console.log(targetEle.canMove);
+      //   document.removeEventListener('mousemove', moveTo);
+      //   document.removeEventListener('mouseup', clearMove);  
+      //   }
+    }
+    document.addEventListener('mouseup', clearMove);
+  }
+
+  let box = document.getElementById('box');
+  dragMove(box);
+</script>

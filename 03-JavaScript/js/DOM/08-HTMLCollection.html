@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- HTMLCollection 的作用：表示HTML中相同类型节点的集合 
+    类似于NodeList,但不是NodeList,跟NodeList没有任何关系
+    
+    HTMLCollection有三个属性（方法）
+    * length
+    * item(index)
+    * namedItem(name)
+
+    NodeList的属性（2个）
+    * length
+    * item(index)
+    
+
+  
+  
+  -->
+  <ul id="ulBox">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+  </ul>
+
+
+  <div id="a">textA</div>
+  <div id="b" name="db">textB</div>
+  <p>1</p>
+  <p>2</p>
+  <script>
+    //HTMLCollection的获取
+    let ul_lis = ulBox.children; // 得到的是一个HTMLCollection的集合
+    console.log(ul_lis); // 
+     //HTMLCollection的获取
+    var divCollection = document.getElementsByTagName("div");
+    console.log(divCollection instanceof HTMLCollection); //true
+    console.log(divCollection instanceof NodeList); //false
+    console.dir(divCollection); //
+    console.log(divCollection.length); //2
+    console.log(divCollection.item(0).textContent); //textA
+    console.log(divCollection.namedItem("db").textContent); //textB
+
+
+    var pList = document.getElementsByTagName("p");
+    console.dir(pList); //
+
+
+    //NodeList的获取
+    let ul_child = ulBox.childNodes; // 得到的是一个NodeList的集合
+    console.log(ul_child); //获取到的是所有后代节点对象的集合
+  </script>
+
+
+</body>
+
+</html>

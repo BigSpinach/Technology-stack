@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      padding: 10px 80px;
+      background-color: red;
+      box-sizing: border-box;
+    }
+
+    .inlineBox {
+      background-color: aqua;
+      padding: 50px;
+    }
+
+    .father {
+      width: 300px;
+      /* height: 300px; */
+      background-color: aquamarine;
+    }
+
+    .son {
+      margin: 0 -20px;
+      background-color: gray;
+    }
+
+    .box2{
+      width: 300px;
+      margin: 0 -20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>padding对block-level元素的影响</h3>
+  <div class="box">文本文本文本</div>
+
+
+  <h3>padding对inline-level元素的影响</h3>
+  <span class="inlineBox">文本文本</span>
+
+  <!-- <div style="height: 300px; width:200px"></div> -->
+
+  <div class="father">
+    <div class="son"></div>
+  </div>
+
+  <div class="box2"></div>
+
+</body>
+
+
+
+</html>

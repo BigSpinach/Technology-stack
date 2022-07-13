@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>拖拽</title>
+
+
   <style>
     * {
       margin: 0;
@@ -25,48 +27,53 @@
   </style>
 </head>
 
+
+
 <body>
-  <div id="box" style="left: 0;top:0"></div>
+  <div id="box" style="left: 50%;top:50%"></div>
+
+
 </body>
+
+
 
 </html>
 <script>
-  let move = function (event) {
-    
-    this.style.left = event.pageX + this.startOffsetLeft - this.startX +'px';
-    this.style.top = event.pageY + this.startOffsetTop - this.startY +'px';
-    console.dir(this);
-  }
-
   let box = document.getElementById('box');
-  //鼠标按下
-  //记录鼠标的坐标和元素的偏移量
   box.onmousedown = function (event) {
-    //直接将初始位置以属性的方式添加到元素身上
-    // this就指的是当前元素    
+    /*
+     *   问题：如何保持鼠标指针和被拖拽的元素相对位置不变
+     *
+     *   当我们选中文字，并进行拖拽时，浏览器默认会尝试将文字在搜索引擎中搜索，
+     *       这是浏览器的默认行为，这个行为的存在会影响到拖拽的功能
+     * */
+    event.preventDefault();
+    // 计算水平方向的偏移
+    let left = event.clientX - box.offsetLeft;
+    // 计算垂直方向的偏移
+    let top = event.clientY - box.offsetTop;
 
-    this.startX = event.pageX;
-    this.startY = event.pageY;
-    this.startOffsetLeft = parseFloat(this.style.left);
-    this.startOffsetTop = parseFloat(this.style.top);
-    this.canMove = true;
-  }
+    // 解决鼠标丢失的问题 1、this.setCapture() IE 火狐 有这个方法；谷歌没有
+    // 把move 事件绑定到 根节点上；
+    document.onmousemove  = function (event) {
+      box.style.left = event.clientX - left  +'px';
+      box.style.top = event.clientY - top +'px';
+    };
 
-  //鼠标移动
-  //计算元素的新的偏移量
-  box.onmousemove = function (event) {
-    if (!this.canMove) {
-      return;
+    document.onmouseup = function () {
+      // 取消鼠标移动的相关事件
+      document.onmousemove = null;
+      document.onmouseup = null;
     }
-    move.call(box, event);
   }
 
-  //鼠标抬起
-  //停止移动
-  box.onmouseup = function () {
-    this.canMove = false;
-  }
 
-  // 解决鼠标丢失的问题   1、this.setCapture() IE 火狐 有这个方法；谷歌没有
-  // 把move 事件绑定到 根节点上；
+
+
+  /*
+  拖拽的工作原理： 根据鼠标坐标值 更改更改目标元素的 left和top值
+  由此可知， 目标元素需要绝对定位
+
+
+  */
 </script>

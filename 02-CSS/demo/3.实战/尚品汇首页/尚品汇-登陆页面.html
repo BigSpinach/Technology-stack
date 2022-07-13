@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>尚品汇-登陆页面</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    /*公共样式*/
+
+    .clearfix::before,
+    .clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .w {
+      /* 定宽 */
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .l {
+      float: left;
+    }
+
+    .r {
+      float: right;
+    }
+
+    /*绘制 |  管道操作符 pipe operator*/
+    .pipe {
+      content: "";
+      font-size: 0;
+      padding: 10px 3px 1px;
+      margin-left: 6px;
+      border-left: 1px solid gray;
+    }
+
+
+    body {
+      font: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+      color: #333;
+      background-color: #fff;
+      min-width: 1226px;
+    }
+
+
+    /* 1. 顶部快捷导航 */
+    .shortcut {
+      line-height: 32px;
+      background-color: #eaeaea;
+    }
+
+    .shortcut a {
+      text-decoration: none;
+    }
+
+    .shortcut a:hover {
+      text-decoration: none;
+      color: red;
+    }
+
+    .topbar {
+      float: right;
+
+    }
+
+    .topbar li {
+      float: left;
+    }
+
+    .topbar li::after {
+      content: "";
+      font-size: 0;
+      padding: 10px 3px 1px;
+      margin-left: 6px;
+      border-left: 1px solid gray;
+    }
+
+    /*去除掉最后一个伪元素，让其隐藏*/
+    .topbar>a:last-child ::after {
+      display: none;
+    }
+
+
+
+    /* 2. 头部搜索框区域 */
+    .header {
+      /* height: 100px; */
+      background-color: red;
+      height: 100px;
+    }
+
+    .header .logoBox{
+      /* height: 100%; */
+      /* height默认是auto,由子元素高度决定。 */
+      font-size: 0;
+    }
+
+    .header a {
+      display: inline-block;
+      height: 100px;
+      
+    }
+
+    .header a img {
+      /*img 是一个替换元素*/
+      /*
+      替换元素的尺寸规则
+        固有尺寸  难以改变--就是img图片的原始尺寸
+        HTML尺寸  
+        css尺寸      
+      */
+      height: 100%;
+      /* object-fit: fill; */
+    }
+
+
+    /* 3. 主体内容区域 */
+    .main {
+      height: 100px;
+      background-color: #ffffff;
+    }
+
+    /* 4. 页面底部 */
+    .footer {
+      height: 100px;
+
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="shortcut">
+      <div class="w clearfix">
+        <div class="l">
+          <a href=""><span>尚品汇欢迎您！</span></a>
+          <a href=""> <span>请 登陆</span> </a>
+          <i class="pipe"></i>
+          <a href="">
+            <span>免费注册</span> </a>
+        </div>
+        <div class="r">
+          <ul class="topbar">
+            <a href="">
+              <li>我的订单</li>
+            </a>
+            <a href="">
+              <li>我的购物车</li>
+            </a>
+            <a href="">
+              <li>我的尚品汇</li>
+            </a>
+            <a href="">
+              <li>尚品汇会员</li>
+            </a>
+            <a href="">
+              <li>企业采购</li>
+            </a>
+            <a href="">
+              <li>关注尚品汇</li>
+            </a>
+            <a href="">
+              <li>合作招商</li>
+            </a>
+            <a href="">
+              <li>商家后台</li>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="header">
+      <div class="w clearfix">
+        <div class="">
+          <div class="l logoBox">
+            <a href="">
+              <img src="./img/logo.gif" alt="">
+            </a>
+          </div>
+          <div class="r">
+            <input type="text">sas
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="main">3</div>
+    <div class="footer">4</div>
+  </div>
+</body>
+
+</html>

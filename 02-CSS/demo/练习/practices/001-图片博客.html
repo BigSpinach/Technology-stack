@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul,
+    ol,
+    a {
+      list-style: none;
+      text-decoration: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      margin: 0 auto;
+      width: 238px;
+      border: 1px solid #d9e0ee;
+      border-top: 5px solid #ff8500;
+    }
+
+
+    h3 {
+      border-bottom: 1px solid #d9e0ee;
+      /* margin-left: 10px; */
+      /*不能使用margin，不然影响border的设置 */
+      padding: 5px 0;
+      padding-left: 10px;
+      font-size: 16px;
+      /*h3标签有默认margin，需要手动清除*/
+      margin-top: 0;
+      margin-bottom: 0;
+
+    }
+
+
+    .imgBox {
+      /* width: 180px;不设置width，默认由浏览器计算得到。流动性表现为自适应父元素的宽度。 */
+      margin: 7px 10px 0px;
+      background-color: antiquewhite;
+      text-align: center;
+    }
+
+    .imgBox a {
+      display: block;
+      font-size: 0;
+    }
+
+    .imgBox a img {
+      display: inline-block;
+      margin-top: 0;
+      padding-top: 0;
+      width: 100%;
+
+    }
+
+    .imgBox a span {
+      width: 100%;
+      display: inline-block;
+      font-size: 10px;
+      background-color: black;
+
+
+    }
+
+    .list {
+      margin-top: 10px;
+      /* background-color: #ff8500; */
+    }
+
+    .list li {
+      background: url(./img/dian.png) no-repeat 9px center;
+      font-size: 14px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .list li a {
+      margin-left: 20px;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <h3><a href="">图片博客</a></h3>
+
+    <div class="imgBox">
+      <a href="##">
+        <img src="./img/banner.jpg" alt="">
+        <span>小母牛上天了哈哈哈</span>
+      </a>
+    </div>
+    <ul class="list">
+      <li>
+        <a href="##">高考15分爸爸教四岁女儿学数学</a>
+      </li>
+      <li>
+        <a href="##">高考15分爸爸教四岁女儿学数学</a>
+      </li>
+    </ul>
+
+  </div>
+</body>
+
+</html>

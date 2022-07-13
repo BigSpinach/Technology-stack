@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 200px;
+      margin: 0 -20px;
+    }
+
+    .son {
+      margin: 0 -50px;
+    }
+
+
+   
+  </style>
+</head>
+
+<body>
+  <blockquote>
+    以下仅☞ writing-mode为默认值
+
+    <!-- css3:
+
+    writing-mode:horizontal-tb;//默认:水平方向，从上到下
+    writing-mode: vertical-rl;//垂直方向，从右向左
+    writing-mode: vertical-lr;//垂直方向，从左向右
+    ie私有属性:
+    主要的:
+    writing-mode: lr-tb ;//从左到右，从上到下。默认
+    writing-mode: tb-rl;//从上到下，从右向左
+    writing-mode:tb-lr (IE8+);//水平方向，从上到下，从左到右 -->
+  </blockquote>
+  <hr>
+
+  <h1>元素定宽 width=200px</h1>
+  <div class="father"></div>
+  <p>1. margin 与 offsetWidth</p>
+  <p>2. margin 与 clientWidth</p>
+  <p>3. margin 与 【marginWidth】DOM中没有这个说法</p>
+
+
+  <hr>
+  <h1>元素宽度未指定 width由浏览器计算得到</h1>
+  <div class="father">
+    <div class="son"></div>
+  </div>
+  <p>1. margin 与 offsetWidth</p>
+  <p>2. margin 与 clientWidth</p>
+  <p>3. margin 与 【marginWidth】DOM中没有这个说法</p>
+</body>
+
+</html>

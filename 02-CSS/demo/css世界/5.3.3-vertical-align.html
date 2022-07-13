@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      line-height: 32px;
+      font-size: 24px;
+      /*div 的实际高度表现大于 32px*/
+      /*要让div的实际高度 = 32px 就得重新计算line-height的高度*/
+      /* 
+        div和span前边有个strut占位元素,这个32px的行高就是给这个strut元素设置的
+        然而后边的span的font-size是24px,span的默认line-height是 1.5或者其他
+        此时，span的line-height计算得到就是  1.5*24 = 36px
+        块级元素的高度由 较高的内联级元素的高度决定，所以 div的高度展示为36px(或者说大于32px)
+        要想改变div的高度就得给span指定line-height的值
+        具体计算如下 
+        32/24=1.33333
+        所以，给span加上 line-height=1.33334即可 （css需要向上取值）      
+
+        或者就将div的字体设置的跟span的一样大，其实就是strut基线位置和span的基线位置一样
+
+        再或者就是改变 vertical-align的对齐方式 不为baseline即可
+
+      */
+    }
+    div>span{
+      font-size: 24px;      
+      /* 浏览器默认会给span一个line-height */
+      /* line-height: 1.5;  */
+
+      /* vertical-align:top; */
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span>xxx</span>
+  </div>
+</body>
+</html>

@@ -108,3 +108,11 @@
       //log(n)//7
   
 }
+
+function sayHi() {
+  console.log(name);
+  console.log(age);
+  var name = "Lydia";
+  var age = 21;
+ }
+ sayHi();

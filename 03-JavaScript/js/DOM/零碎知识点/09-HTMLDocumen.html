@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <body onload=reWrite()>
+    <div name="msg">123</div>
+    <div name="msg">456</div>
+    <script>
+      function reWrite() {
+        var msgs = document.getElementsByName("msg");
+        console.log(msgs.length); //2
+        var newDoc = document.open();
+        newDoc.write("<html><head><title></title></head><body><span name = \"msg\">新内容，哈哈/span></body></html>");
+        newDoc.close();
+        msgs = document.getElementsByName("msg");
+        console.log(msgs.length); //1
+        console.log(msgs.item(0).nodeName); //SPAN
+        console.log(msgs.item(0).textContent); //新内容，哈哈
+      }
+
+     
+    </script>
+  </body>
+
+</html>

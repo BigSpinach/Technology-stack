@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Node总节点对象下的子类型 Element
+    Element是HTML中所有标签的总接口
+    tagName
+    attributes
+    attributeNode
+    getElementsByTagName()
+  
+    增删改查方法
+  ❑ hasAttribute(name)：判断是否包含指定名称的节点属性。
+  ❑ getAttribute(name)：获取节点属性的值。
+  ❑ setAttribute(name, value)：设置节点属性的值。
+  ❑ removeAttribute(name)：删除指定名称的节点属性。
+  ❑ getAttributeNode(name)：按名称获取指定属性节点
+  ❑ setAttributeNode(newAttr)：设置新属性节点。
+  ❑ removeAttributeNode(oldAttr)：删除属性节点。 -->
+
+  <div id="div_a" name="hah">123</div>
+  <script>
+    //console.log(div_a.getAttributeNode('name'));//name="hah"
+    // console.log(div_a.getAttribute('name'));// hah
+
+    console.log("----------");
+    console.log(div_a.attributes);
+    console.dir(div_a);
+    // let divs = document.getElementsByTagName('div');
+    //console.log(divs);
+  </script>
+
+
+</body>
+
+</html>

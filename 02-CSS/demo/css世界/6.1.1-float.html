@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 200px;
+      border: 1px solid black;
+      box-sizing: border-box;
+    }
+
+    .f{
+      float: left;
+    }
+
+    img {
+      width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="father">
+    <div class="f">
+      <!-- 文本表现为 min-content -->
+      <img src="./img/1.jpg" alt="">文本文本文本文本文本文本文本文本文本文本文本文本
+      <!-- 文本表现为 max-content 
+        表现为 .f 的div的实际宽度为max-content
+      -->
+      <!-- <img src="./img/1.jpg" alt="">qwqeqweqwojepwqoeoqwpeu -->
+    </div>
+  </div>
+</body>
+
+</html>

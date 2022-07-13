@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* inline元素 */
+    i{
+      margin: 1000px 0;
+      /* 不支持设置  */
+      /*原因是: inline元素的高度由 line-height决定,baseline决定了,baseline又由元素的font-size和font-family决定
+      行高 = 1.5*字体大小
+      1.5一般是设置的。 
+      所以
+        要想改变内联元素的高度,可以通过三个方向下手
+        - font-size 或 font-family
+        - baseline的位置
+        - line-height
+      */
+      background-color: red;
+    }
+    
+    span{
+      display: inline-block;
+      background-color: aqua;
+      margin: 100px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- inline元素的垂直外边距  -->
+  <i>123</i>
+  <!-- inline-block的垂直外边距 -->
+  <br>
+  <span>xxxxxXXXXxxx</span>
+</body>
+</html>
