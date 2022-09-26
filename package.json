@@ -3,5 +3,21 @@
   "version": "1.0.0",
   "author": "BigSpinach",
   "email": "821133937@qq.com",
-  "description": "learning record"
+  "description": "learning record",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigSpinach/Technology-stack.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BigSpinach/Technology-stack/issues"
+  },
+  "homepage": "https://github.com/BigSpinach/Technology-stack#readme",
+  "dependencies": {
+    "mongoose": "^6.6.1"
+  }
 }
