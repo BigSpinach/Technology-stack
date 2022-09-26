@@ -22,6 +22,7 @@
 //使得数据可以与计算机硬件直接交流
 //以达到操作文件的（即将文件转为二进制数据）的目的。
 
+
 //创建buffer实例的方式（4种）
 //
 
@@ -55,4 +56,33 @@ console.log(buffer4);
 let buffer5 = Buffer.from('我有4只猫！');
 console.log(buffer5);//<Buffer e6 88 91 e6 9c 89 34 e5 8f aa e7 8c ab ef bc 81>
 console.log(buffer5.toString());//我有4只猫！
+
+
+
+//Buffer的size指的是什么？  size指的是1byte
+let buf = new Buffer(10)
+console.log(buf)//<Buffer 00 00 00 00 00 00 00 00 00 00>
+
+let buf2 = new Buffer(1)
+console.log(buf2)//<Buffer 00>
+console.log(buf2.length);//1
+console.log('𠮷'.length);//2  在浏览器环境的v8引擎环境下，'𠮷'.length=3
+//给只有一个byte的buf2缓存器存放超过一个字节的字符，超出一个字节的部分会被舍弃
+buf2.fill('𠮷');
+console.log(buf2);//<Buffer f0>
+console.log(buf2.toString())//�
+
+
+
+
+let buf3=Buffer.alloc(1);
+buf3.fill('𠮷');
+console.log(buf3)//<Buffer f0 a0 ae>
+console.dir(buf3.toString())//�
+
+
+let buf_size3=Buffer.alloc(3);
+buf_size3.fill('𠮷');
+console.log(buf_size3)//<Buffer f0 a0 ae>
+console.dir(buf_size3.toString())//
 

@@ -1,4 +1,4 @@
-const { log } = require('console');
+
 const http = require('http');
 //http.createServer(callback) 创建一个服务器对象
 let server = http.createServer(function(request,response){
