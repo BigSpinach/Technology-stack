@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">点我-客户端定义函数，服务端传递数据</button>
+  <br>
+  <hr>
+  <button id="btn2">点我-服务端定义函数并传递数据，客户端接收数据</button>
+</body>
+
+
+<script>
+  //客户端负责接收服务端返回的数据
+  let btn = document.getElementById('btn');
+  btn.onclick = function () {
+    //1.提前定义好一个函数---------------------------客户端定义函数
+    //2.创建script节点
+    //3.指定script的src（即向服务器发请求）【指定了src会自动向src所在地址发请求】
+    //--------------------------------服务端调用客户端函数并传参（数据）
+    //4.将script节点插入页面
+    window.demo = function (a) {
+      console.log(a);
+    }
+    let scriptNode = document.createElement('script');
+    scriptNode.src = 'http://127.0.0.1:3000/test';
+    document.body.appendChild(scriptNode);
+  }
+</script>
+
+
+
+<script>
+  /*为啥使用jsonp？ 为了跨源拿服务端的数据
+  两种方式：
+    1.客户端定义函数，服务器端调用函数并传参
+    2.服务端定义函数并传参 ，客户端调用
+  */
+  let btn2 = document.getElementById('btn2');
+  btn2.onclick = function () {
+    let scriptNode = document.createElement('script');
+    scriptNode.src = 'http://127.0.0.1:3000/test2';
+    document.body.appendChild(scriptNode);
+
+    console.log(window.abc);
+  }
+</script>
+
+
+<script>
+  //完善版的jsonp
+  
+
+</script>
+
+</html>
