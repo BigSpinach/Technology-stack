@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+  const p = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      reject(-1);
+    })
+  });
+
+  p.then(
+    value=>{
+      console.log('成功了1',value);
+      return 'b'
+    },
+    reason=>{
+      console.log('失败了1',reason);
+      return '-2'
+    }
+  )
+  .then(
+    value=>{
+      console.log('成功了2',value);
+      return 'c'
+    },
+    reason=>{
+      console.log('失败了1',reason);
+      return '-3'
+    }
+  )
+  .catch(
+    reason=>{console.log('失败了',reason);}
+  )
+
+  //如果 每一个then中都指定了reject的回调函数，那么最后边的catch方法不会被触发。
+*/
+
+
+console.log('---------------------');
+/*
+const p2 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve('ok');
+    })
+  });
+
+  p2.then(
+    value=>{
+      console.log('成功了1',value);
+      return Promise.reject(-999);
+    }   
+  )
+  .then(
+    //上一个then明确返回一个rejected状态的promise，所以省略不写回调函数
+  )
+  .catch(
+    reason=>{console.log('失败了',reason);}
+  )
+*/
+
+//加上catch后，底层逻辑是对每一个then函数中未做rejected状态处理的回调函数，默认为其补充一个  reason=>{throw reason},
+//所以 错误就可以穿透了
+//如下
+const p3 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      reject('-666');
+    })
+  });
+
+  p3.then(
+    value=>{
+      console.log('成功了1',value);
+      return Promise.reject(-888);
+    },
+    reason=>{throw reason}//这句是加上catch的链式调用底层自动加上的
+  )
+  .then(
+    undefined,
+    reason=>{throw reason}////这句是加上catch的链式调用底层自动加上的
+  )
+  .catch(
+    reason=>{console.log('失败了',reason);}
+  )
+
+
+</script>
+</html>

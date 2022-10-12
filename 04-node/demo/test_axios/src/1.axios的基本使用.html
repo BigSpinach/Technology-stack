@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" src="./js/axios.min.js"></script>
+</head>
+
+<body>
+  <!-- 
+				1.axios调用的返回值是Promise实例。
+				2.成功的值叫response，失败的值叫error。
+				3.axios成功的值是一个axios封装的response对象，服务器返回的真正数据在response.data中
+				4.携带query参数时，编写的配置项叫做params
+				5.携带params参数时，就需要自己手动拼在url中
+		-->
+  <button id="btn1">点我获取所有人</button><br /><br />
+</body>
+<script>
+  const btn1 = document.getElementById('btn1');
+
+
+
+  btn1.onclick =()=>{
+    //完整版GET请求所有信息
+    /*
+    axios({
+      url:'http://localhost:5000/persons',
+      method:'GET'
+    }).then(
+      response=>{
+        console.log('获取成功',response);
+      },
+      err=>{
+        console.log('失败了',err);
+      }
+    );
+    */
+    //简写版GET请求所有信息
+    axios.get('http://localhost:5000/persons')
+    .then(
+      response=>{
+        console.log('获取成功',response);
+      },
+      err=>{
+        console.log('失败了',err);
+      }
+    );
+
+  }
+</script>
+
+</html>

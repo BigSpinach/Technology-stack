@@ -54,25 +54,25 @@ console.log(global.process); //
 
 /*
 2) argv: ---------代表用户传递的参数 //默认有两个值，这两个值没啥用
-   [ 'C:\\Program Files\\nodejs\\node.exe',   ---当前node的执行文件
-     'c:\\Users\\LIUKAI\\Desktop\\Technology-stack\\04-node\\demo\\tempCodeRunnerFile.js' ], ---当前执行的文件
+  [ 'C:\\Program Files\\nodejs\\node.exe',   ---当前node的执行文件
+    'c:\\Users\\LIUKAI\\Desktop\\Technology-stack\\04-node\\demo\\tempCodeRunnerFile.js' ], ---当前执行的文件
 一般执行node文件 使用1. run code   相当于  node 1.js   
 只能通过 命令+文件名 +各种参数     eg  --env=xxx    --config xxx/xx/x.x  --port 6666
 一般 使用个 process.argv(2)//去除掉前连个参数
 console.log(process.argv);//[--env,xxx,--config,xxx/xx/x.x,--prot,6666]
 //需求将 [--env,xxx,--config,xxx/xx/x.x,--prot,6666]转成对象的形式
 */
-let config = process.argv.slice(2).reduce((memo,current,index,input)=>{
-  if(current.includes('--')){
-    memo[current.slice(2)] = input[index+1];
+let config = process.argv.slice(2).reduce((memo, current, index, input) => {
+  if (current.includes('--')) {
+    memo[current.slice(2)] = input[index + 1];
   }
   return memo;
-},{})
+}, {})
 //使用 commander包
 
 //使用命令执行当前文件  
 //node 01.config.js --prot 6666 --env production  --config xx/x
-console.log(config);//{ port: '6666', env: 'production', config: 'xx/x' }
+console.log(config); //{ port: '6666', env: 'production', config: 'xx/x' }
 
 
 //3) pid : 当前进程的id  可以通过这个pid 中止当前的进程
