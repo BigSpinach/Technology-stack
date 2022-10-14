@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props的基本使用</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div id="container2"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <!-- 引入prop-types，用于制定对props限制的具体规则 -->
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+
+
+  <script type="text/babel">
+    //1.定义组件
+    class MyComponent extends React.Component{    
+      static propTypes = {
+        name:PropTypes.string,
+        age:PropTypes.number,
+        sex:PropTypes.string.isRequired,
+        address:PropTypes.string
+      }
+     
+      static defaultProps = {
+					address:'中国'
+			}
+
+      render(){               
+        return (
+          <ul>
+							<li>姓名：{this.props.name}</li>
+							<li>性别：{this.props.sex}</li>
+							<li>年龄：{this.props.age}</li>
+              <li>住址：{this.props.address}</li>
+						</ul>
+        )
+      }
+
+    }
+
+
+    //2.渲染组件到页面
+    ReactDOM.render(<MyComponent name="张三丰" age={15} sex="男" address="葫芦岛888号"/>,document.getElementById('container'));
+    //2.2渲染组件到页面
+    //数据
+    const obj = {
+				name:'程老师',
+				sex:'男',
+				age:18
+			}
+    ReactDOM.render(<MyComponent {...obj}/>,document.getElementById('container2'));
+    
+
+  </script>
+
+</body>
+
+</html>

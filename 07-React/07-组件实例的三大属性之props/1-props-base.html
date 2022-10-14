@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props的基本使用</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div id="container2"></div>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+
+  <script type="text/babel">
+    //1.定义组件
+    class MyComponent extends React.Component{    
+      
+      render(){               
+        return (
+          <ul>
+							<li>姓名：{this.props.name}</li>
+							<li>性别：{this.props.sex}</li>
+							<li>年龄：{this.props.age}</li>
+						</ul>
+        )
+      }
+
+    }
+
+
+    //2.渲染组件到页面
+    ReactDOM.render(<MyComponent name="张三丰" age="15" sex="男"/>,document.getElementById('container'));
+    //2.2渲染组件到页面
+    //数据
+    const obj = {
+				name:'程老师',
+				sex:'男',
+				age:18
+			}
+    ReactDOM.render(<MyComponent {...obj}/>,document.getElementById('container2'));
+    //  注意：这里的{...obj} 中的{} 是React取变量的写法，
+    //  ...obj 可以展开的原因是 在React+babel环境下， ...obj 仅仅在组件的属性的位置使用时可以做展开使用。
+
+  </script>
+
+</body>
+
+</html>

@@ -17,14 +17,40 @@
 				4.携带query参数时，编写的配置项叫做params
 				5.携带params参数时，就需要自己手动拼在url中
 		-->
-  <button id="btn1">点我获取所有人</button><br /><br />
+  <button id="btn1">获取所有人</button><br /><br />
+  <button id="btn2">获取指定id的人</button>
+  <input id="person_id" type="text" placeholder="请输入一个人的id"><br /><br />
+  <br /><br />
+  <button id="btn3">增添一个人的信息</button>
+  <input id="person_name" type="text" placeholder="请输入名字">
+  <input id="person_age" type="text" placeholder="请输入年龄">
+  <br /><br />
+  <button id="btn4">更新一个人</button>
+  <input id="person_update_id" type="text" placeholder="请输入一个人的id">
+  <input id="person_update_name" type="text" placeholder="请输入名字">
+  <input id="person_update_age" type="text" placeholder="请输入年龄"><br /><br />
+
+  <button id="btn5">点我删除一个人</button>
+  <input id="person_delete_id" type="text" placeholder="请输入删除的id">
 </body>
 <script>
-  const btn1 = document.getElementById('btn1');
+  //获取按钮
+  const btn1 = document.getElementById('btn1')
+  const btn2 = document.getElementById('btn2')
+  const btn3 = document.getElementById('btn3')
+  const btn4 = document.getElementById('btn4')
+  const btn5 = document.getElementById('btn5')
+  const personId = document.getElementById('person_id');
 
+  const personName = document.getElementById('person_name')
+  const personAge = document.getElementById('person_age')
+  const personUpdateId = document.getElementById('person_update_id')
+  const personUpdateName = document.getElementById('person_update_name')
+  const personUpdateAge = document.getElementById('person_update_age')
+  const personDeleteId = document.getElementById('person_delete_id')
 
-
-  btn1.onclick =()=>{
+  //获取所有人---发送GET请求---不携带参数
+  btn1.onclick = () => {
     //完整版GET请求所有信息
     /*
     axios({
@@ -41,16 +67,111 @@
     */
     //简写版GET请求所有信息
     axios.get('http://localhost:5000/persons')
-    .then(
-      response=>{
-        console.log('获取成功',response);
-      },
-      err=>{
-        console.log('失败了',err);
-      }
-    );
+      .then(
+        response => {
+          console.log('获取成功', response);
+        },
+        err => {
+          console.log('失败了', err);
+        }
+      );
 
   }
+
+  //获取所某个人---发送GET请求---携带query参数
+  btn2.addEventListener('click', async () => {
+    //完整版axios发请求
+    // axios({
+    //   url:'http://localhost:5000/person',
+    //   params:{
+    //     id:personId.value
+    //   }
+    // }).then(
+    //   response=>{
+    //     console.log(response);        
+    //   },
+    //   err=>{
+    //     console.log(err);
+    //   }
+    // )
+    //简写版
+    let result = await axios.get('http://localhost:5000/person', {
+      params: {
+        id: personId.value
+      }
+    });
+    console.log(result);
+  })
+
+
+  //添加一个人---发送POST请求---携带json编码参数 或 urlencoded编码
+  btn3.addEventListener('click', async () => {
+    //完整版axios发请求
+    // axios({
+    //   url:'http://localhost:5000/person',
+    //   method:'POST',
+    //   data:{
+    //     name:personName.value,
+    //     age:personAge.value
+    //   }
+    // }).then(
+    //   response=>{
+    //     console.log(response);        
+    //   },
+    //   err=>{
+    //     console.log(err);
+    //   }
+    // )
+    //简写版
+    let result = await axios.post('http://localhost:5000/person', {
+      name: personName.value,
+      age: personAge.value
+    });
+    console.log(result.data);
+  })
+  //更新一个人---发送PUT请求---携带json编码参数 或 urlencoded编码
+  btn4.addEventListener('click', async () => {
+    //完整版
+    // axios({
+    //   url:'http://localhost:5000/person',
+    //   method:'PUT',
+    //   data:{
+    //     id:personUpdateId.value,
+    //     name:personUpdateName.value,
+    //     age:personUpdateAge.value
+    //   }
+    // }).then(
+    //   response=>{
+    //     console.log(response.data);
+    //   },
+    //   err=>{
+    //     console.log(err);
+    //   }
+    // )
+    //简写版
+    const result = await axios.put('http://localhost:5000/person', {
+      id: personUpdateId.value,
+      name: personUpdateName.value,
+      age: personUpdateAge.value
+    });
+    console.log(result.data);
+  })
+  //删除一个人---发送DELETE请求---携带params参数[params只能带在url地址中]
+  btn5.addEventListener('click',async()=>{
+    // axios({
+    //   url:`http://localhost:5000/person/${personDeleteId.value}`,
+    //   method:'DELETE'       
+    // }).then(
+    //   response=>{
+    //     console.log(response.data);
+    //   },
+    //   err=>{
+    //     console.log(err);
+    //   }
+    // )
+    let result = await axios.delete(`http://localhost:5000/person/${personDeleteId.value}`);
+    console.log(result);
+  })
 </script>
 
 </html>

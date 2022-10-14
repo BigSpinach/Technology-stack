@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .testBox{
+      width: 300px;
+      line-height: 50px;
+      /* border: 2px solid red; */
+      background-color: aquamarine;
+    }
+    .hot{
+      border: 2px solid red;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <span style="color:red">"热炎|凉爽"</span>
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+
+  <script type="text/babel">
+    class MyComponent extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={isHot:true};
+        this.changeWeather = this.changeWeather.bind(this);
+
+      }
+      changeWeather(){
+        //MyComponent.prototype.changeWeather()
+        //console.log(this);//undefined this.changeWeather 是实例调用方法，但是在虚拟DOM中，{this.changeWeather} 这个变量拿到的是 changeWeather这个方法的定义， 当点击触发的时候，changeWeather这个函数所处的环境是全局，struct mode下this指向 undefined
+        //所以需要 如果需要这个函数是在实例调用的结果，则需要强制给这个方法绑定这个实例对象
+        //做法是，在 构造函数中，把这个方法复制一份到实例对象的自身属性上即可
+        //即 在constructor中， this.changeWeather = this.changeWeather.bind(this)
+        //  等号左边的this.changeWeather 中的this执行实例对象
+        //  等号右边 this.changeWeather.bind(this)  中的this都指向实例对象。
+        // this.status.isHot=!this.status.isHot;//该方式不能使React触发下边的render方法，需要借助React提供的触发数据变化的方法去修改数据，才能自动触发下边的render方法
+        /*这个方法在哪呢？  查看[[Prototype]]
+          在 React.Component.[[Prototype]]上有一个setState() 就可以修改数据了*/
+        
+        //this.setState({(this.state.isHot) : !(this.state.isHot)});
+        //为啥 上边的写法会报错？
+        //报错是因为对象的【属性名】 【默认会toString】,不能是一个变量，如果要是变量，需要用[xx]的方式
+        // this.setState() 方法中传递的是一个{}，或一个fun，并且这个fun返回一个{}
+        //这个{}种的this 指向谁呢？
+        this.setState(()=>{
+          //console.log('setState中的this:',this);//this指向组件的实例对象
+          // return {isHot : !(this.state.isHot)}
+          return {"isHot" : !(this.state.isHot)}
+        });
+        // const {isHot} = this.state;
+        // this.setState({isHot:!isHot});
+      }
+      render(){        
+        return <div className="testBox" onClick={this.changeWeather}>
+          今天很
+          <span className="hot">
+            {this.state.isHot?"炎热":"寒冷"}
+          </span>  
+        </div>
+      }
+
+
+    }
+
+
+    //2.渲染组件到页面
+    ReactDOM.render(<MyComponent/>,document.getElementById('container'));
+    
+  </script>
+
+</body>
+
+</html>

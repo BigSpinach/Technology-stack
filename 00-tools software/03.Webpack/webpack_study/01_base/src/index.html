@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h3>webpack-起步</h3>
+  <p>
+    webpack【5大】核心概念<br>
+      1. entry<br>
+      2. output<br>
+      3. loaders<br>
+      4. plugins<br>
+      5. mode  <br>
+  </p>
+  <hr>
+  <p>
+    <h2>webpack的概念解释</h2>
+    1. webpack基于node.js,所以webpack遵循CommonJS规范
+    <br>
+    2. webpack自身只能构建 js或者json格式的文件 (对于其他文件需要借助对应的loader或者plugin)
+    <br>
+    &nbsp;&nbsp;&nbsp;2.1 备注 ： 在es6的 模块化当中，如果引入的是一个json文件，这个json文件当默认导出使用
+    3. webpack自身只能构建 只能解析export import语法，其他es6语法不能解析
+    <br>
+<hr>
+<h2>测试</h2>
+<ol>
+  <li>
+    webpack自身的命令
+    ·webpack entryFilePath -o outputFilePath --mode=development[/production]·
+  </li>
+  <li>
+    只能解析export 和 import语法
+  </li>
+  <li>ES6模块化语法把json文件做默认导出使用</li>
+  <li>
+    不能解析其他格式文件
+  </li>
+</ol>
+
+  </p>
+</body>
+<script src="../dist/js/app.js"></script>
+</html>

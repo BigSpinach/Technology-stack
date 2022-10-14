@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" src="./js/axios.min.js"></script>
+</head>
+
+<body>
+  <button id="btn1">点我获取所有人</button><br /><br />
+  <button id="btn2">测试timeout</button><br /><br />
+
+</body>
+<script>
+  //获取按钮
+  const btn1 = document.getElementById('btn1')
+  const btn2 = document.getElementById('btn2')
+
+
+  //默认配置项（即每一个通过axios发送请求时都会使用的配置项）
+  axios.defaults.timeout = 2000;
+  axios.defaults.headers= {
+    name: 'BigSpinach'
+  };
+  axios.defaults.baseURL = 'http://localhost:5000';
+
+  //获取所有人
+  btn1.onclick = () => {
+    axios.get('/persons')
+      .then(
+        response => {
+          console.log('获取成功', response);
+        },
+        err => {
+          console.log('失败了', err);
+        }
+      );
+
+  }
+
+  //延迟3000ms后发请求，测试axios的timeout
+  btn2.addEventListener('click', async () => {
+    let result = await axios.get('/test1', {
+      params: {
+        delay: 3000
+      }
+    });
+    console.log(result);
+  })
+</script>
+
+</html>
