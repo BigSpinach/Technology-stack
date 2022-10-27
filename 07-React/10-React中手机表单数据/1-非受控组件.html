@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    //定义组件
+    //非受控组件
+    class Demo extends React.Component{
+      /* 
+				非受控组件
+        即 
+          组件中的数据是现用现取的
+        放到这个案例中就是： 当点击提交的时候，执行handleSubmit方法
+        然后React才会去查看当前组件实例身上的userNameNode，userAgeNode,userGenderNode这些属性，发现这些属性是ref获取的属性，然后再去表单中取得对应表单项的值。
+			*/
+      handleSubmit= (e)=>{
+          e.preventDefault();
+          console.log(this.userNameNode.value);
+          console.log(this.userAgeNode.value);
+          console.log(this.userGenderNode.value);
+        }
+
+
+      render(){      
+        return (
+          <div>
+							<form onSubmit={this.handleSubmit}>
+                姓名：<input ref={el=>this.userNameNode=el} type="text" placeholder="输入姓名"/>
+                年龄：<input ref={el=>this.userAgeNode=el} type="text" placeholder="输入年龄"/>
+                性别：<input ref={el=>this.userGenderNode=el} type="text" placeholder="输入姓别"/>
+                <button >提交</button>
+              </form>
+					</div>
+        )
+      }
+    }
+
+  //渲染组件
+  ReactDOM.render(<Demo />,document.getElementById('test'));
+
+
+
+  </script>
+
+</body>
+
+</html>

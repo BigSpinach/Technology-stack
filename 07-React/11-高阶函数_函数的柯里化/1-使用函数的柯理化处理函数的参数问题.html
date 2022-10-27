@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-受控组件</title>
+</head>
+
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    //定义组件
+    //受控组件
+    class Demo extends React.Component{
+      
+		
+      state={
+          userName:'',
+          userAge:'',
+          userGender:''
+        }
+
+      handlerSubmit=(e)=>{
+        console.log(this.state.userName,this.state.userAge,this.state.userGender);
+        e.preventDefault();
+      }
+
+      saveFormatData=(type)=>{
+        // console.log(type);
+        return (e)=>{
+          this.setState({
+            [type]:e.target.value
+          })
+        }
+      }
+
+      render(){      
+        return (
+          <div>
+							<form onSubmit={this.handlerSubmit}>
+                姓名：<input onChange={ this.saveFormatData('userName')} type="text" placeholder="输入姓名"/>
+                年龄：<input  onChange={this.saveFormatData('userAge')} type="text" placeholder="输入年龄"/>
+                性别：<input onChange={this.saveFormatData('userGender')}  type="text" placeholder="输入姓别"/>
+                <button type="submit">提交</button>
+              </form>
+					</div>
+        )
+      }
+    }
+
+  //渲染组件
+  ReactDOM.render(<Demo />,document.getElementById('test'));
+
+
+
+  </script>
+
+</body>
+
+</html>

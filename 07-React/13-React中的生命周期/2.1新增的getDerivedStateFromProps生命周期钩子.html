@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    //定义组件
+    class Sum extends React.Component{
+
+      //构造器----调1次
+      constructor(){
+        console.log('---constructor---');
+        super()
+        this.state = {count:0}
+      }
+
+      //加1的回调
+      add = ()=>{
+        const {count} = this.state
+        this.setState({count:count+1})
+      }
+
+      //卸载的回调
+      death = ()=>{
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+
+      //强制更新的回调
+      force = ()=>{
+        this.forceUpdate()
+      }
+
+      //getDerivedStateFromProps 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+      static getDerivedStateFromProps(a,b,c){
+        console.log('OK:',a,b,c);//OK: {} {count: 0} undefined
+        //props state 
+
+        // return 123;//
+        //返回一个与state对象的key一样的对象，可以锁住 某些state的值
+        //应用场景就是对 state中存储的值赋予一个默认值，因为该方法在render方法前执行。导致的后果就是state中的初始值无效
+        return {count:999}; //将state中的count值锁定为999
+      }
+    
+
+      getSnapshotBeforeUpdate(a,b,c){
+        //getSnapshotBeforeUpdate可以接收到getDerivedStateFromProps()的返回值。
+        console.log('OKOKOK:',a,b,c);
+        //setData执行一次，OKOKOK: {} {count: 0} undefined 
+        //setData再执行一次 OKOKOK: {} {count: 1} undefined
+        return null
+      }
+      componentDidUpdate(){}
+
+      //组件初次渲染+更新---调1+n次
+      render(){
+        console.log('---render---');
+        return(
+          <div>
+            <h2>当前求和为：{this.state.count}</h2>
+            <button onClick={this.add}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.force}>强制更新一下</button>
+          </div>
+        )
+      }
+    }
+    
+    //渲染组件
+    ReactDOM.render(<Sum prop="sumComponentElementNode"/>,document.getElementById('test'))
+  </script>
+
+</body>
+
+</html>

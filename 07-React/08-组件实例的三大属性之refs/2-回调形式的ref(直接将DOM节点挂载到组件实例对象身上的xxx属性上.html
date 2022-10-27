@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>1_字符串形式的ref</title>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+
+		<script type="text/babel"> 
+			class Demo extends React.Component{
+
+				showData = ()=>{
+					let {xxx} = this;//xxx属性是当前组件实例对象的一个属性，属性的值设置于ref所在标签的回调函数中
+					console.log(xxx.value);
+				}
+
+				showData2 = ()=>{
+					let {refs:{input2:{value}}} = this;
+					console.log(value);
+				}
+
+				render(){
+					/*
+						ref属性的值如果是一个函数，
+						则，React自动将该回调函数中的形参设置为 当前属性所在元素的DOM节点
+						//所以一般的操作就是 this.xxx= 形参（React传递的是当前ref所在真实DOM节点），  把这个真实的DOM节点挂载到当前组件的实例对象的xxx属性上
+						<input ref={(v)=>{console.log('回调函数中的this:',this,v);}} type="text" placeholder="点击按钮提示输入"/>&nbsp;
+					*/
+					return (
+						<div>
+							<input ref={v=>this.xxx=v} type="text" placeholder="点击按钮提示输入"/>&nbsp;
+							
+							<button onClick={this.showData}>点我提示数据</button>&nbsp;
+							<input ref="" onBlur={this.showData2} type="text" placeholder="失去焦点提示输入"/>
+						</div>
+					)
+				}
+			}
+			//渲染组件
+			ReactDOM.render(<Demo/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>

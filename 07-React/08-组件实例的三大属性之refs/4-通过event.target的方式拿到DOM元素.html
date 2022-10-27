@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    //定义组件
+    class Demo extends React.Component{
+      /* 
+					1.	通过onXxx属性指定事件处理函数(注意大小写)
+								1)React使用的是[自定义(合成)事件], 而不是使用的原生DOM事件 ———————— 为了更好的兼容性
+								2)React中的事件是通过[事件委托方式]处理的(委托给组件最外层的元素) ———————— 为了提高效率
+					2.	通过event.target得到发生事件的DOM元素对象
+          //event对象在不使用的情况下，所有的属性的值都是null
+          //event.target 这样算使用一个属性，此时这个属性的值就是当前元素的DOM对象了（React真细啊）
+			*/
+      render(){
+
+        this.showData=(e)=>{
+          // console.log(e);//拿到的event对象中的所有属性的值都是null
+          console.log(e.target.value);
+        }
+
+        return (
+          <div>
+							<input  type="text" placeholder="点击按钮提示输入"/>&nbsp;							
+              <button onClick={(e)=>{console.log(e.target);}}>点我提示数据</button>&nbsp;
+							<input  onChange={this.showData} type="text" placeholder="失去焦点提示输入"/>
+						</div>
+
+        )
+      }
+    }
+
+  //渲染组件
+  ReactDOM.render(<Demo />,document.getElementById('test'));
+
+
+
+  </script>
+
+</body>
+
+</html>
